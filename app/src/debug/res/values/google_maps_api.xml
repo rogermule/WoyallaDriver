@@ -1,0 +1,20 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=95:85:9F:22:5F:EF:A1:44:8B:2A:AE:71:E9:F4:5E:1A:FF:42:4B:37%3Bcom.brainup.woyalladriver
+
+    You can also add your credentials to an existing key, using this line:
+    95:85:9F:22:5F:EF:A1:44:8B:2A:AE:71:E9:F4:5E:1A:FF:42:4B:37;com.brainup.woyalladriver
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    key AIzaSyDaPXcWKfViH71hLmPyutQUft3wHKJnHXw
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyDaPXcWKfViH71hLmPyutQUft3wHKJnHXw</string>
+</resources>

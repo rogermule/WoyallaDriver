@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@android:drawable/ic_dialog_dialer"
+            android:title="Home" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@android:drawable/ic_dialog_info"
+            android:title="About" />
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@android:drawable/ic_lock_idle_charging"
+            android:title="Logout" />
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share App" />
+            <item
+                android:id="@+id/nav_rate"
+                android:icon="@android:drawable/star_big_off"
+                android:title="Rate App" />
+            <item
+                android:id="@+id/nav_comment"
+                android:icon="@android:drawable/ic_menu_edit"
+                android:title="Comment App" />
+
+            <item
+                android:id="@+id/nav_exit"
+                android:icon="@android:drawable/ic_delete"
+                android:title="Exit" />
+        </menu>
+    </item>
+
+</menu>
