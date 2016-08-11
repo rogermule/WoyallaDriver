@@ -32,9 +32,10 @@ public class MainActivity extends AppCompatActivity
 
     private GoogleMap mMap;
     SupportMapFragment mapFragment;
-
     Button showClient;
     Switch avaialbilitySwitch;
+    GPSTracker gps;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -58,13 +58,13 @@ public class MainActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
-
         //initialize availability switch button
         avaialbilitySwitch = (Switch) findViewById(R.id.availability);
 
-
         //initialize the show client button
         showClient = (Button) findViewById(R.id.showclient);
+
+        gps = new GPSTracker(MainActivity.this);
 
         handleAvailabilitySwitch();
         handleShowClientButton();
@@ -98,9 +98,51 @@ public class MainActivity extends AppCompatActivity
         showClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"This will check and view client address on the map",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this,"This will check and view client address on the map",Toast.LENGTH_SHORT).show();
+                showGPS();
             }
         });
+    }
+
+    public void showGPS(){
+
+        // check if GPS enabled
+        if(gps.canGetLocation()){
+
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
+            moveMap();
+            // \n is for new line
+            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
+        }else{
+            // can't get location
+            // GPS or Network is not enabled
+            // Ask user to enable GPS/network in settings
+            gps.showSettingsAlert();
+        }
+    }
+
+    private void moveMap() {
+        //String to display current latitude and longitude
+        String msg = gps.getLatitude() + ", "+gps.getLongitude();
+
+        //Creating a LatLng Object to store Coordinates
+        LatLng latLng = new LatLng(gps.getLatitude(), gps.getLongitude());
+
+        //Adding marker to map
+        mMap.addMarker(new MarkerOptions()
+                .position(latLng) //setting position
+                .draggable(true) //Making the marker draggable
+                .title("Current Location")); //Adding a title
+
+        //Moving the camera
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+        //Animating the camera
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+
+        //Displaying current coordinates in toast
+        Toast.makeText(this, "Current location is "+msg, Toast.LENGTH_LONG).show();
     }
 
     @Override
