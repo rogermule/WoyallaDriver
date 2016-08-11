@@ -2,28 +2,31 @@ package com.brainup.woyalladriver;
 
 
 import android.app.ProgressDialog;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.brainup.woyalladriver.Adapters.Service_Type_Adapter;
-import com.brainup.woyalladriver.Database.Database;
 import com.brainup.woyalladriver.Model.User;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import kotlin.Pair;
 
 
 public class Login extends AppCompatActivity {
@@ -42,6 +45,7 @@ public class Login extends AppCompatActivity {
     private User Main_User;
     ProgressDialog myDialog;
     ArrayList<String> countryList;
+    private Gson myParser;      //parse an arraylist into json
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,8 @@ public class Login extends AppCompatActivity {
         ed_plate_num.addTextChangedListener(new MyTextWatcher(ed_plate_num));
         ed_car_model.addTextChangedListener(new MyTextWatcher(ed_car_model));
         ed_licence_num.addTextChangedListener(new MyTextWatcher(ed_licence_num));
+
+        myParser = new Gson();  //initialize the Gson parsor object to create json object from an ArrayList object
 
         Main_User = new User();
         countryList = new ArrayList<String>();
@@ -138,7 +144,7 @@ public class Login extends AppCompatActivity {
         myDialog.show();
 
 
-        Thread account = new Thread(){
+/*        Thread account = new Thread(){
             @Override
             public void run() {
                 try {
@@ -150,12 +156,97 @@ public class Login extends AppCompatActivity {
             }
         };
 
-        account.start();
+        account.start();*/
+
+        createAccount();
 
     }
 
 
+
+
     public void createAccount(){
+
+        Main_User.setName(ed_name.getText().toString());
+        Main_User.setPhone(ed_phoneNumber.getText().toString());
+        Main_User.setCar_model(ed_car_model.getText().toString());
+        Main_User.setPlate_number(ed_plate_num.getText().toString());
+        Main_User.setLicence_number(ed_licence_num.getText().toString());
+        Main_User.setService_type(sp_service_type.getSelectedItem().toString());
+
+
+
+
+        final ProgressDialog myDialog = new ProgressDialog(this);
+        myDialog.setTitle(R.string.app_name);
+        myDialog.setMessage("Authenticating the Account ....");
+        myDialog.show();
+        ArrayList<User> user = new ArrayList<>();
+        user.add(Main_User);
+        List<Pair<String, String>> Send_Param;
+        Send_Param = new ArrayList<Pair<String, String>>();
+        Send_Param.add(new kotlin.Pair<String, String>("User_Name", Main_User.getName()));
+        Send_Param.add(new kotlin.Pair<String, String>("User_Pass", Main_User.getPhone()));
+        Send_Param.add(new kotlin.Pair<String, String>("Country", Main_User.getPhone()));
+        Send_Param.add(new kotlin.Pair<String, String>("Data", "Sign_Up"));
+        Send_Param.add(new kotlin.Pair<String, String>("Param", myParser.toJson(user)));
+
+        Toast.makeText(this,myParser.toJson(user),Toast.LENGTH_LONG).show();
+        Log.i("Json", myParser.toJson(user));
+
+/*
+        Fuel.post(DeepLife.API_URL, Send_Param).responseString(new Handler<String>() {
+            @Override
+            public void success(Request request, Response response, String s) {
+                myDialog.cancel();
+                try {
+                    Log.i(TAG, "Server Request -> \n" + request.toString());
+                    Log.i(TAG, "Server Response -> \n" + s);
+                    JSONObject myObject = (JSONObject) new JSONTokener(s).nextValue();
+
+                    if (!myObject.isNull("Response")) {
+
+                        DeepLife.myDatabase.Delete_All(deeplife.gcme.com.deeplife.Database.Database.Table_DISCIPLES);
+                        DeepLife.myDatabase.Delete_All(deeplife.gcme.com.deeplife.Database.Database.Table_SCHEDULES);
+                        DeepLife.myDatabase.Delete_All(deeplife.gcme.com.deeplife.Database.Database.Table_LOGS);
+                        DeepLife.myDatabase.Delete_All(deeplife.gcme.com.deeplife.Database.Database.Table_USER);
+
+                        ContentValues cv = new ContentValues();
+                        cv.put(deeplife.gcme.com.deeplife.Database.Database.USER_FIELDS[0],New_User.getUser_Name());
+                        cv.put(deeplife.gcme.com.deeplife.Database.Database.USER_FIELDS[1],New_User.getUser_Email());
+                        cv.put(deeplife.gcme.com.deeplife.Database.Database.USER_FIELDS[2],New_User.getUser_Phone());
+                        cv.put(deeplife.gcme.com.deeplife.Database.Database.USER_FIELDS[3],New_User.getUser_Pass());
+                        cv.put(deeplife.gcme.com.deeplife.Database.Database.USER_FIELDS[4], New_User.getUser_Country());
+                        cv.put(deeplife.gcme.com.deeplife.Database.Database.USER_FIELDS[5],"");
+                        cv.put(deeplife.gcme.com.deeplife.Database.Database.USER_FIELDS[6],"");
+                        long x = DeepLife.myDatabase.insert(deeplife.gcme.com.deeplife.Database.Database.Table_USER, cv);
+                        Log.i(TAG, "Main User Adding-> " + x);
+
+                        Intent register = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(register);
+                        finish();
+
+                    } else {
+                        ShowDialog("Invalid user account! use a valid account please");
+                    }
+                } catch (Exception e) {
+                    ShowDialog("Something went wrong! Please try again \n"+e.toString());
+                    Log.i(TAG, "Error Occurred-> \n" + e.toString());
+                }
+
+            }
+            @Override
+            public void failure(Request request, Response response, FuelError fuelError) {
+                Log.i(TAG, "Server Response -> \n" + response.toString());
+                myDialog.cancel();
+                ShowDialog("Authentication has failed! Please try again");
+            }
+        });
+*/
+
+
+
+        /*
         Main_User.setName(ed_name.getText().toString());
         Main_User.setPhone(ed_phoneNumber.getText().toString());
         Main_User.setCar_model(ed_car_model.getText().toString());
@@ -187,6 +278,7 @@ public class Login extends AppCompatActivity {
             myDialog.dismiss();
         }
 
+*/
 
 
     }
