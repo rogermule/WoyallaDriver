@@ -11,9 +11,9 @@ public class Database {
     
     public static final String Table_USER = "USER";
 
-    public static final String[] USER_FIELDS = { "Name","Phone","Latitude","Longitude","Car_Model","Plate_Number","Service_Type","Licence_Number"};
+    public static final String[] USER_FIELDS = { "Name","Phone","Latitude","Longitude","Car_Model","Plate_Number","Service_Type","Licence_Number","Status"};
 
-    public static final String[] USER_COLUMN = { "id", "Name","Phone","Latitude","Longitude","Car_Model","Plate_Number","Service_Type","Licence_Number"};
+    public static final String[] USER_COLUMN = { "id", "Name","Phone","Latitude","Longitude","Car_Model","Plate_Number","Service_Type","Licence_Number","Status"};
 
 
 	private SQLiteDatabase myDatabase;
@@ -127,4 +127,6 @@ public class Database {
         }
         return strs;
     }
+
+
 }

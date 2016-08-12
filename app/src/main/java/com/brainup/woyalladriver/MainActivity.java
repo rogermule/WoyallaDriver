@@ -2,6 +2,7 @@ package com.brainup.woyalladriver;
 
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -70,26 +72,45 @@ public class MainActivity extends AppCompatActivity
         handleShowClientButton();
     }
 
-    /*
-  this method handle the availability switch
-  return: void
- */
+    /**
+        this method handle the availability switch
+        return: void
+    */
     private void handleAvailabilitySwitch() {
-        avaialbilitySwitch.setOnClickListener(new View.OnClickListener() {
+        avaialbilitySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View v) {
-                if(avaialbilitySwitch.isChecked()){
-                    Toast.makeText(MainActivity.this,"Availability is ON!",Toast.LENGTH_SHORT).show();
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                int id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
+
+                if(isChecked){
+
+/*                    ContentValues cv = new ContentValues();
+                    cv.put(Database.USER_FIELDS[2],gps.getLatitude());
+                    cv.put(Database.USER_FIELDS[3],gps.getLongitude());
+                    */
+
+                    ContentValues cv = new ContentValues();
+                    cv.put(Database.USER_FIELDS[8],"1");
+                    long check = WoyallaDriver.myDatabase.update(Database.Table_USER,cv,id);
+                    if(check!=-1){
+                        Toast.makeText(MainActivity.this,"Availability is ON!",Toast.LENGTH_SHORT).show();
+                    }
                 }
-                if (!avaialbilitySwitch.isChecked()){
-                    Toast.makeText(MainActivity.this,"Availability is OFF!",Toast.LENGTH_SHORT).show();
+                else if(!isChecked){
+                    ContentValues cv = new ContentValues();
+                    cv.put(Database.USER_FIELDS[8],"0");
+                    long check = WoyallaDriver.myDatabase.update(Database.Table_USER,cv,id);
+                    if(check!=-1){
+                        Toast.makeText(MainActivity.this,"Availability is OFF!",Toast.LENGTH_SHORT).show();
+                    }
+
                 }
             }
         });
 
     }
 
-    /*
+    /**
       this method handle show client button click
       return: void
      */
@@ -229,7 +250,7 @@ public class MainActivity extends AppCompatActivity
                     case DialogInterface.BUTTON_POSITIVE:
                         //Yes button clicked
                         WoyallaDriver.myDatabase.Delete_All(Database.Table_USER);
-                        Intent intent = new Intent(MainActivity.this,Login.class);
+                        Intent intent = new Intent(MainActivity.this,Register.class);
                         startActivity(intent);
                         finish();
                         break;

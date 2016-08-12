@@ -111,8 +111,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center_horizontal|center_vertical">
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/comment_txtinput"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
                             <EditText
-                                android:id="@+id/user_profile_edit_favorite_quote"
+                                android:id="@+id/et_comment"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="25dp"
@@ -121,6 +125,8 @@
                                 android:maxLines="13"
 
                                 android:text="John 3:16 \n For God so loved the world that He gave his only Son so whoever believes in Him should not perish but have eternal life."/>
+                            </android.support.design.widget.TextInputLayout>
+
                         </LinearLayout>
 
                     </LinearLayout>

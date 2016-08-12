@@ -44,12 +44,12 @@ public class Splash extends Activity {
 		}
 		else if(count>1){
 			WoyallaDriver.myDatabase.Delete_All(Database.Table_USER);
-			Intent intent = new Intent(this, Login.class);
+			Intent intent = new Intent(this, Register.class);
 			startActivity(intent);
 			finish();
 		}
 		else{
-			Intent intent = new Intent(this, Login.class);
+			Intent intent = new Intent(this, Register.class);
 			startActivity(intent);
 			finish();
 		}

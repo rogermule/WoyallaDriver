@@ -145,7 +145,7 @@
 
             />
 
-        <!-- Login Button -->
+        <!-- Register Button -->
 
         <Button
             android:id="@+id/btnLogin"

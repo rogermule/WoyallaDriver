@@ -23,12 +23,17 @@
     <string name="err_msg_plate">Enter a valid plate number</string>
     <string name="err_msg_licence">Enter a valid licence number</string>
     <string name="err_msg_car_model">Enter a valid Car Model</string>
+    <string name="err_msg_comment">Enter comment properly</string>
 
     <string-array name="service_type">
-
         <item name="taxi">Taxi Service</item>
         <item name="contact">Daily Contract</item>
         <item name="rental">Rental</item>
-
     </string-array>
+
+
+    <string name="response_ok">ok</string>
+    <string name="response_data">data</string>
+    <string name="response_error">error</string>
+
 </resources>

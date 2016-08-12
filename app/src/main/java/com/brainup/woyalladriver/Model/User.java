@@ -5,69 +5,88 @@ package com.brainup.woyalladriver.Model;
  */
 public class User {
 
-    private String name, phone,latitude,longitude,car_model,plate_number,service_type,licence_number;
+    private String name, phoneNumber,licencePlateNumber,driverLicenceIdNo,carModelDescription;
+    int serviceModel,status;
+    double gpsLatitude,gpsLongitude;
+    boolean owner;
 
     public String getName() {
         return name;
-    }
-
-    public String getLicence_number() {
-        return licence_number;
-    }
-
-    public void setLicence_number(String licence_number) {
-        this.licence_number = licence_number;
-    }
-
-    public String getCar_model() {
-        return car_model;
-    }
-
-    public void setCar_model(String car_model) {
-        this.car_model = car_model;
-    }
-
-    public String getPlate_number() {
-        return plate_number;
-    }
-
-    public void setPlate_number(String plate_number) {
-        this.plate_number = plate_number;
-    }
-
-    public String getService_type() {
-        return service_type;
-    }
-
-    public void setService_type(String service_type) {
-        this.service_type = service_type;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public String getLatitude() {
-        return latitude;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setLatitude(String latitude) {
-        this.latitude = latitude;
+    public String getLicencePlateNumber() {
+        return licencePlateNumber;
     }
 
-    public String getLongitude() {
-        return longitude;
+    public void setLicencePlateNumber(String licencePlateNumber) {
+        this.licencePlateNumber = licencePlateNumber;
     }
 
-    public void setLongitude(String longitude) {
-        this.longitude = longitude;
+    public String getDriverLicenceIdNo() {
+        return driverLicenceIdNo;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setDriverLicenceIdNo(String driverLicenceIdNo) {
+        this.driverLicenceIdNo = driverLicenceIdNo;
+    }
+
+    public String getCarModelDescription() {
+        return carModelDescription;
+    }
+
+    public void setCarModelDescription(String carModelDescription) {
+        this.carModelDescription = carModelDescription;
+    }
+
+    public int getServiceModel() {
+        return serviceModel;
+    }
+
+    public void setServiceModel(int serviceModel) {
+        this.serviceModel = serviceModel;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public double getGpsLatitude() {
+        return gpsLatitude;
+    }
+
+    public void setGpsLatitude(double gpsLatitude) {
+        this.gpsLatitude = gpsLatitude;
+    }
+
+    public double getGpsLongitude() {
+        return gpsLongitude;
+    }
+
+    public void setGpsLongitude(double gpsLongitude) {
+        this.gpsLongitude = gpsLongitude;
+    }
+
+    public boolean isOwner() {
+        return owner;
+    }
+
+    public void setOwner(boolean owner) {
+        this.owner = owner;
     }
 }
