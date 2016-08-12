@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/menu_update_my_location"
+        android:icon="@android:drawable/stat_notify_sync_noanim"
+        android:title="@string/update_my_location"
+        app:showAsAction="ifRoom" />
 </menu>

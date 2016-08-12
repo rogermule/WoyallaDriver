@@ -1,5 +1,6 @@
 package com.brainup.woyalladriver;
 
+import android.content.ContentValues;
 import android.util.Log;
 
 import com.brainup.woyalladriver.Database.Database;
@@ -61,8 +62,12 @@ public class GPSTracker2 extends JobService {
 
         if(gps.canGetLocation() && hasUser && userActive && status>=1) {
 
-            int i = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
+            int id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
+            ContentValues cv = new ContentValues();
+            cv.put(Database.USER_FIELDS[2],gps.getLatitude());
+            cv.put(Database.USER_FIELDS[3],gps.getLongitude());
 
+            WoyallaDriver.myDatabase.update(Database.Table_USER,cv,id);
 
             Thread account = new Thread(){
                 @Override
@@ -89,7 +94,6 @@ public class GPSTracker2 extends JobService {
                 //make the http post request and get the server response
                 Response response = client.newCall(request).execute();
                 String responseBody = response.body().string().toString();
-                Log.i("responseFull", responseBody);
 
                 //get the json response object
                 JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();

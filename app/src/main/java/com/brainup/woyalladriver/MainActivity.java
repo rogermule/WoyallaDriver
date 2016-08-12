@@ -33,11 +33,13 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
 
-    private GoogleMap mMap;
-    SupportMapFragment mapFragment;
-    Button showClient;
-    Switch avaialbilitySwitch;
-    GPSTracker gps;
+    /**
+     * object delarations
+     */
+    private GoogleMap mMap; //map object
+    SupportMapFragment mapFragment; //fragment that holds the map object
+    Button showClient;   //button to show the client location
+    Switch avaialbilitySwitch;    //toggle button to switch the drivers availability on or off
 
 
     @Override
@@ -67,21 +69,27 @@ public class MainActivity extends AppCompatActivity
         //initialize the show client button
         showClient = (Button) findViewById(R.id.showclient);
 
-        //gps = new GPSTracker(MainActivity.this);
 
         initAvailabilitySwitch();
         handleAvailabilitySwitch();
         handleShowClientButton();
     }
 
+    /**
+     * this wil initialize the switch
+     * if status is online (1), set the switch checked true
+     * if status is offline (0), set the switch checked false
+     * return: void
+     */
+
     private void initAvailabilitySwitch() {
+
         String status = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[8]);
         Log.i("testStatus",status );
-
-        if(status=="1"){
-            avaialbilitySwitch.setChecked(true);
+        if(status.startsWith("1")){
+                avaialbilitySwitch.setChecked(true);
         }
-        else if (status=="0"){
+        else if (status.startsWith("0")){
             avaialbilitySwitch.setChecked(false);
         }
     }
@@ -97,12 +105,6 @@ public class MainActivity extends AppCompatActivity
                 int id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
 
                 if(isChecked){
-
-/*                    ContentValues cv = new ContentValues();
-                    cv.put(Database.USER_FIELDS[2],gps.getLatitude());
-                    cv.put(Database.USER_FIELDS[3],gps.getLongitude());
-                    */
-
                     ContentValues cv = new ContentValues();
                     cv.put(Database.USER_FIELDS[8],"1");
                     long check = WoyallaDriver.myDatabase.update(Database.Table_USER,cv,id);
@@ -133,36 +135,23 @@ public class MainActivity extends AppCompatActivity
         showClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(MainActivity.this,"This will check and view client address on the map",Toast.LENGTH_SHORT).show();
-                showGPS();
+                moveMap();
             }
         });
     }
 
-    public void showGPS(){
 
-        // check if GPS enabled
-        if(gps.canGetLocation()){
-
-            double latitude = gps.getLatitude();
-            double longitude = gps.getLongitude();
-            moveMap();
-            // \n is for new line
-            //Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude, Toast.LENGTH_LONG).show();
-        }else{
-            // can't get location
-            // GPS or Network is not enabled
-            // Ask user to enable GPS/network in settings
-            gps.showSettingsAlert();
-        }
-    }
-
+    /**
+     * Get latitude and longitude from database and move the map to that specific place
+     * the background service will update the current location in the database
+     */
     private void moveMap() {
         //String to display current latitude and longitude
-        String msg = gps.getLatitude() + ", "+gps.getLongitude();
+        double latitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[2]));
+        double longitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[3]));
 
         //Creating a LatLng Object to store Coordinates
-        LatLng latLng = new LatLng(gps.getLatitude(), gps.getLongitude());
+        LatLng latLng = new LatLng(latitude,longitude);
 
         //Adding marker to map
         mMap.addMarker(new MarkerOptions()
@@ -177,7 +166,7 @@ public class MainActivity extends AppCompatActivity
         mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
 
         //Displaying current coordinates in toast
-        Toast.makeText(this, "Current location is "+msg, Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "Current location is "+latitude + longitude, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -193,7 +182,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        //getMenuInflater().inflate(R.menu.main, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -203,12 +192,13 @@ public class MainActivity extends AppCompatActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 
-//        int id = item.getItemId();
+        int id = item.getItemId();
 //
 //        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
+        if (id == R.id.menu_update_my_location) {
+            moveMap();
+            return true;
+        }
 
         return super.onOptionsItemSelected(item);
     }

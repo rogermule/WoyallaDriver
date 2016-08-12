@@ -12,11 +12,14 @@ import com.brainup.woyalladriver.Database.Database;
 
 public class Splash extends Activity {
 
+	GPSTracker gps;     //gsp
+
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
+		gps = new GPSTracker(Splash.this);
 
 				Thread splash = new Thread(){
         	@Override
@@ -25,7 +28,7 @@ public class Splash extends Activity {
         			sleep( 2000);
         		} catch(InterruptedException e){
         		} finally {
-        			getNextActivity();
+					checkUp();
         		}
         	}
         };
@@ -33,26 +36,37 @@ public class Splash extends Activity {
         splash.start();
 	}
 
+	public void checkUp(){
+		if(!gps.canGetLocation()){
+			Splash.this.runOnUiThread(new Runnable() {
+				@Override
+				public void run() {
+					gps.showSettingsAlert();
+					finish();
+				}
+			});
+		}
+		getNextActivity();
+	}
 	public synchronized void getNextActivity() {
 
-		int count = WoyallaDriver.myDatabase.count(Database.Table_USER);
-		Log.i("count", "count "+count);
-		if(count ==1){
-			Intent intent = new Intent(this, MainActivity.class);
-			startActivity(intent);
-			finish();
-		}
-		else if(count>1){
-			WoyallaDriver.myDatabase.Delete_All(Database.Table_USER);
-			Intent intent = new Intent(this, Register.class);
-			startActivity(intent);
-			finish();
-		}
-		else{
-			Intent intent = new Intent(this, Register.class);
-			startActivity(intent);
-			finish();
-		}
+			int count = WoyallaDriver.myDatabase.count(Database.Table_USER);
+			Log.i("count", "count " + count);
+			if (count == 1) {
+				Intent intent = new Intent(this, MainActivity.class);
+				startActivity(intent);
+				finish();
+			} else if (count > 1) {
+				WoyallaDriver.myDatabase.Delete_All(Database.Table_USER);
+				Intent intent = new Intent(this, Register.class);
+				startActivity(intent);
+				finish();
+			} else {
+				Intent intent = new Intent(this, Register.class);
+				startActivity(intent);
+				finish();
+			}
+		
 	}
 
 	@Override
