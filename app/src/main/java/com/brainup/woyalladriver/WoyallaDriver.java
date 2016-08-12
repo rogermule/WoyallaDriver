@@ -21,11 +21,14 @@ public class WoyallaDriver extends Application {
     private JobScheduler myJobScheduler;
     public static Database myDatabase;
 
+    public static GPSTracker gps;     //gsp
+
     @Override
     public void onCreate() {
         super.onCreate();
 
         myDatabase = new Database(this);
+        gps = new GPSTracker(WoyallaDriver.this);
         Intent intent = new Intent(this,GPSTracker2.class);
         startService(intent);
         myJobScheduler  = JobScheduler.getInstance(this);

@@ -12,16 +12,14 @@ import com.brainup.woyalladriver.Database.Database;
 
 public class Splash extends Activity {
 
-	GPSTracker gps;     //gsp
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
-		gps = new GPSTracker(Splash.this);
-
-				Thread splash = new Thread(){
+/*
+		Thread splash = new Thread(){
         	@Override
         	public void run() {
         		try {
@@ -33,20 +31,27 @@ public class Splash extends Activity {
         	}
         };
         
-        splash.start();
+        splash.start();*/
+
+		getNextActivity();
+
 	}
 
 	public void checkUp(){
-		if(!gps.canGetLocation()){
-			Splash.this.runOnUiThread(new Runnable() {
+		if(!WoyallaDriver.gps.canGetLocation()){
+	/*		Splash.this.runOnUiThread(new Runnable() {
 				@Override
 				public void run() {
-					gps.showSettingsAlert();
-					finish();
+					WoyallaDriver.gps.showSettingsAlert();
+					Splash.this.finish();
 				}
-			});
+			});*/
+			WoyallaDriver.gps.showSettingsAlert();
+			Splash.this.finish();
 		}
-		getNextActivity();
+		else {
+			getNextActivity();
+		}
 	}
 	public synchronized void getNextActivity() {
 
@@ -66,7 +71,7 @@ public class Splash extends Activity {
 				startActivity(intent);
 				finish();
 			}
-		
+
 	}
 
 	@Override

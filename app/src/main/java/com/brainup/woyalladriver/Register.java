@@ -242,8 +242,8 @@ public class Register extends AppCompatActivity {
                     ContentValues cv = new ContentValues();
                     cv.put(Database.USER_FIELDS[0], Main_User.getName());
                     cv.put(Database.USER_FIELDS[1], Main_User.getPhoneNumber());
-                    cv.put(Database.USER_FIELDS[2], "");
-                    cv.put(Database.USER_FIELDS[3], "");
+                    cv.put(Database.USER_FIELDS[2], "0");
+                    cv.put(Database.USER_FIELDS[3], "0");
                     cv.put(Database.USER_FIELDS[4], Main_User.getCarModelDescription());
                     cv.put(Database.USER_FIELDS[5], Main_User.getLicencePlateNumber());
                     cv.put(Database.USER_FIELDS[6], Main_User.getServiceModel());
@@ -280,8 +280,8 @@ public class Register extends AppCompatActivity {
                     ContentValues cv = new ContentValues();
                     cv.put(Database.USER_FIELDS[0], Main_User.getName());
                     cv.put(Database.USER_FIELDS[1], Main_User.getPhoneNumber());
-                    cv.put(Database.USER_FIELDS[2], "");
-                    cv.put(Database.USER_FIELDS[3], "");
+                    cv.put(Database.USER_FIELDS[2], "0");
+                    cv.put(Database.USER_FIELDS[3], "0");
                     cv.put(Database.USER_FIELDS[4], Main_User.getCarModelDescription());
                     cv.put(Database.USER_FIELDS[5], Main_User.getLicencePlateNumber());
                     cv.put(Database.USER_FIELDS[6], Main_User.getServiceModel());
