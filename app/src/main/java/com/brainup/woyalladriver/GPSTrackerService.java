@@ -22,7 +22,7 @@ import okhttp3.Response;
 /**
  * Created by Roger on 8/11/2016.
  */
-public class GPSTracker2 extends JobService {
+public class GPSTrackerService extends JobService {
 
     OkHttpClient client;    //this object will handle http requests
     MediaType mediaType;
@@ -35,7 +35,7 @@ public class GPSTracker2 extends JobService {
     boolean userActive = false;
     int status;
 
-    public GPSTracker2(){
+    public GPSTrackerService(){
         client = new OkHttpClient();   //initialize the okHttpClient to send http requests
         mediaType = MediaType.parse("application/x-www-form-urlencoded");
         if(WoyallaDriver.myDatabase.count(Database.Table_USER)==1){
@@ -47,6 +47,7 @@ public class GPSTracker2 extends JobService {
     @Override
     public boolean onStartJob(JobParameters params) {
         gps = new GPSTracker(this);
+        Log.i("test", "New request coming");
         status = 0;
         if(WoyallaDriver.myDatabase.count(Database.Table_USER)==1){
             phone = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[1]);
@@ -74,58 +75,59 @@ public class GPSTracker2 extends JobService {
                 public void run() {
                     try {
 
-            //initialize the body object for the http post request
-            body = RequestBody.create(mediaType,
-                    "PhoneNumber="+phone +
-                            "&status="+ status+
-                            "&gpsLatitude="+gps.getLatitude() +
-                            "&gpsLongitude="+gps.getLongitude());
+                    //initialize the body object for the http post request
+                    body = RequestBody.create(mediaType,
+                            "PhoneNumber="+phone +
+                                    "&status="+ status+
+                                    "&gpsLatitude="+gps.getLatitude() +
+                                    "&gpsLongitude="+gps.getLongitude());
 
-            //create the request object from http post
-            request = new Request.Builder()
-                    .url(WoyallaDriver.API_URL + "drivers/update/phoneNumber ")
-                    .put(body)
-                    .addHeader("authorization", "Basic dGhlVXNlcm5hbWU6dGhlUGFzc3dvcmQ=")
-                    .addHeader("cache-control", "no-cache")
-                    .addHeader("content-type", "application/x-www-form-urlencoded")
-                    .build();
+                    //create the request object from http post
+                    request = new Request.Builder()
+                            .url(WoyallaDriver.API_URL + "drivers/update/phoneNumber ")
+                            .put(body)
+                            .addHeader("authorization", "Basic dGhlVXNlcm5hbWU6dGhlUGFzc3dvcmQ=")
+                            .addHeader("cache-control", "no-cache")
+                            .addHeader("content-type", "application/x-www-form-urlencoded")
+                            .build();
 
-            try {
-                //make the http post request and get the server response
-                Response response = client.newCall(request).execute();
-                String responseBody = response.body().string().toString();
+                    try {
+                        //make the http post request and get the server response
+                        Response response = client.newCall(request).execute();
+                        String responseBody = response.body().string().toString();
 
-                //get the json response object
-                JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
+                        //get the json response object
+                        JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
 
-            /**
-             * If we get OK response
-             *
-             * */
+                    /**
+                     * If we get OK response
+                     *
+                     * */
 
-                if (myObject.get("status").toString().startsWith("ok")) {
-                        Log.i("myResponse",myObject.get("description").toString());
+                        if (myObject.get("status").toString().startsWith("ok")) {
+                                Log.i("myResponse",myObject.get("description").toString());
+                        }
+
+                    /**
+                     * If we get OK response
+                     *
+                     * */
+                        else if (myObject.get("status").toString().startsWith("error")) {
+                            Log.i("myResponse",myObject.get("description").toString());
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                } catch(Exception e){
+
                 }
-
-            /**
-             * If we get OK response
-             *
-             * */
-                else if (myObject.get("status").toString().startsWith("error")) {
-                    Log.i("myResponse",myObject.get("description").toString());
                 }
-
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-
-            } catch(Exception e){
-            }
-            }
             };
 
             account.start();

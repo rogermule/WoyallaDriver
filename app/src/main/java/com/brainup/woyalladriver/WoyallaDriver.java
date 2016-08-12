@@ -16,28 +16,24 @@ public class WoyallaDriver extends Application {
 
 //    public static final String API_URL  = "http://weyala.net/api/";
     public static final String API_URL  = "http://192.168.137.1/api.weyala.net/";
-    private static final int JOB_ID = 10;
 
+    private static final int JOB_ID = 10;
     private JobScheduler myJobScheduler;
     public static Database myDatabase;
-
-    public static GPSTracker gps;     //gsp
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         myDatabase = new Database(this);
-        gps = new GPSTracker(WoyallaDriver.this);
-        Intent intent = new Intent(this,GPSTracker2.class);
+        Intent intent = new Intent(this,GPSTrackerService.class);
         startService(intent);
         myJobScheduler  = JobScheduler.getInstance(this);
-
         JobConstr();
     }
 
     public void JobConstr(){
-        JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, new ComponentName(this,GPSTracker2.class));
+        JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, new ComponentName(this,GPSTrackerService.class));
         builder.setPeriodic(1000);
         builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
         myJobScheduler.schedule(builder.build());

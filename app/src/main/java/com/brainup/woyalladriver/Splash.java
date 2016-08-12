@@ -4,7 +4,6 @@ package com.brainup.woyalladriver;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Window;
 
 import com.brainup.woyalladriver.Database.Database;
@@ -12,13 +11,15 @@ import com.brainup.woyalladriver.Database.Database;
 
 public class Splash extends Activity {
 
+	GPSTracker gps;     //gsp
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
-/*
+		gps = new GPSTracker(Splash.this);
+
 		Thread splash = new Thread(){
         	@Override
         	public void run() {
@@ -26,37 +27,18 @@ public class Splash extends Activity {
         			sleep( 2000);
         		} catch(InterruptedException e){
         		} finally {
-					checkUp();
+        			getNextActivity();
         		}
         	}
         };
         
-        splash.start();*/
-
-		getNextActivity();
-
+        splash.start();
 	}
 
-	public void checkUp(){
-		if(!WoyallaDriver.gps.canGetLocation()){
-	/*		Splash.this.runOnUiThread(new Runnable() {
-				@Override
-				public void run() {
-					WoyallaDriver.gps.showSettingsAlert();
-					Splash.this.finish();
-				}
-			});*/
-			WoyallaDriver.gps.showSettingsAlert();
-			Splash.this.finish();
-		}
-		else {
-			getNextActivity();
-		}
-	}
+
 	public synchronized void getNextActivity() {
 
 			int count = WoyallaDriver.myDatabase.count(Database.Table_USER);
-			Log.i("count", "count " + count);
 			if (count == 1) {
 				Intent intent = new Intent(this, MainActivity.class);
 				startActivity(intent);
@@ -71,7 +53,6 @@ public class Splash extends Activity {
 				startActivity(intent);
 				finish();
 			}
-
 	}
 
 	@Override
