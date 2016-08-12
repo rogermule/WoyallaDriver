@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity
         //initialize the show client button
         showClient = (Button) findViewById(R.id.showclient);
 
-        gps = new GPSTracker(MainActivity.this);
+        //gps = new GPSTracker(MainActivity.this);
 
         handleAvailabilitySwitch();
         handleShowClientButton();

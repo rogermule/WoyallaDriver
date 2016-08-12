@@ -1,204 +1,109 @@
 package com.brainup.woyalladriver;
 
-import android.app.AlertDialog;
-import android.app.Service;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
-import android.os.Bundle;
-import android.os.IBinder;
-import android.provider.Settings;
 import android.util.Log;
+
+import com.brainup.woyalladriver.Database.Database;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.IOException;
+
+import me.tatarka.support.job.JobParameters;
+import me.tatarka.support.job.JobService;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by Roger on 8/11/2016.
  */
-public class GPSTracker2 extends Service implements LocationListener {
+public class GPSTracker2 extends JobService {
 
-    private final Context mContext;
+    OkHttpClient client;    //this object will handle http requests
+    MediaType mediaType;
+    RequestBody body;
+    Request request;
 
-    // flag for GPS status
-    boolean isGPSEnabled = false;
+    String phone;
+    boolean hasUser;
+    boolean userActive;
 
-    // flag for network status
-    boolean isNetworkEnabled = false;
-
-    // flag for GPS status
-    boolean canGetLocation = false;
-
-    Location location; // location
-    double latitude; // latitude
-    double longitude; // longitude
-
-    // The minimum distance to change Updates in meters
-    private static final long MIN_DISTANCE_CHANGE_FOR_UPDATES = 10; // 10 meters
-
-    // The minimum time between updates in milliseconds
-    private static final long MIN_TIME_BW_UPDATES = 1000 * 60 * 1; // 1 minute
-
-    // Declaring a Location Manager
-    protected LocationManager locationManager;
-
-    public GPSTracker2(Context context) {
-        this.mContext = context;
-        getLocation();
+    public GPSTracker2(){
+        client = new OkHttpClient();   //initialize the okHttpClient to send http requests
+        mediaType = MediaType.parse("application/x-www-form-urlencoded");
+        if(WoyallaDriver.myDatabase.count(Database.Table_USER)==1){
+            phone = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[1]);
+            hasUser = true;
+        }
     }
+    @Override
+    public boolean onStartJob(JobParameters params) {
+        GPSTracker gps = new GPSTracker(this);
 
-    public Location getLocation() {
-        try {
-            locationManager = (LocationManager) mContext
-                    .getSystemService(LOCATION_SERVICE);
+        if(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[8])=="1");
 
-            // getting GPS status
-            isGPSEnabled = locationManager
-                    .isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if(gps.canGetLocation() && phone!=null && hasUser && userActive) {
 
-            // getting network status
-            isNetworkEnabled = locationManager
-                    .isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+            int i = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
+            double latitude = gps.getLatitude();
+            double longitude = gps.getLongitude();
 
-            if (!isGPSEnabled && !isNetworkEnabled) {
-                // no network provider is enabled
-            } else {
-                this.canGetLocation = true;
-                if (isNetworkEnabled) {
-                    locationManager.requestLocationUpdates(
-                            LocationManager.NETWORK_PROVIDER,
-                            MIN_TIME_BW_UPDATES,
-                            MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                    Log.d("Network", "Network");
-                    if (locationManager != null) {
-                        location = locationManager
-                                .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-                        if (location != null) {
-                            latitude = location.getLatitude();
-                            longitude = location.getLongitude();
-                        }
-                    }
+            //initialize the body object for the http post request
+
+/*            body = RequestBody.create(mediaType,
+                    "driverPhoneNumber=" + update/phoneNumber +
+                            "&comment=" + comment +
+                            "&rate=" + getRating());*/
+
+            body = RequestBody.create(mediaType,
+                    "PhoneNumber=4664546457" +
+                            "&status=0" +
+                            "&gpsLatitude=1" +
+                            "&gpsLongitude=1");
+            //create the request object from http post
+            request = new Request.Builder()
+                    .url(WoyallaDriver.API_URL + "update/phoneNumber ")
+                    .put(body)
+                    .addHeader("authorization", "Basic dGhlVXNlcm5hbWU6dGhlUGFzc3dvcmQ=")
+                    .addHeader("cache-control", "no-cache")
+                    .addHeader("content-type", "application/x-www-form-urlencoded")
+                    .build();
+
+            try {
+                //make the http post request and get the server response
+                Response response = client.newCall(request).execute();
+                String responseBody = response.body().string().toString();
+                Log.i("responseFull", responseBody);
+
+                //get the json response object
+                JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
+
+                /**
+                 * If we get OK response
+                 *
+                 * */
+                if (myObject.get("status").toString().startsWith("ok")) {
+
                 }
-                // if GPS Enabled get lat/long using GPS Services
-                if (isGPSEnabled) {
-                    if (location == null) {
-                        locationManager.requestLocationUpdates(
-                                LocationManager.GPS_PROVIDER,
-                                MIN_TIME_BW_UPDATES,
-                                MIN_DISTANCE_CHANGE_FOR_UPDATES, this);
-                        Log.d("GPS Enabled", "GPS Enabled");
-                        if (locationManager != null) {
-                            location = locationManager
-                                    .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                            if (location != null) {
-                                latitude = location.getLatitude();
-                                longitude = location.getLongitude();
-                            }
-                        }
-                    }
-                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
-        } catch (Exception e) {
-            e.printStackTrace();
+
         }
 
-        return location;
-    }
-
-    /**
-     * Stop using GPS listener
-     * Calling this function will stop using GPS in your app
-     * */
-    public void stopUsingGPS(){
-        if(locationManager != null){
-            locationManager.removeUpdates(GPSTracker2.this);
-        }
-    }
-
-    /**
-     * Function to get latitude
-     * */
-    public double getLatitude(){
-        if(location != null){
-            latitude = location.getLatitude();
-        }
-
-        // return latitude
-        return latitude;
-    }
-
-    /**
-     * Function to get longitude
-     * */
-    public double getLongitude(){
-        if(location != null){
-            longitude = location.getLongitude();
-        }
-
-        // return longitude
-        return longitude;
-    }
-
-    /**
-     * Function to check GPS/wifi enabled
-     * @return boolean
-     * */
-    public boolean canGetLocation() {
-        return this.canGetLocation;
-    }
-
-    /**
-     * Function to show settings alert dialog
-     * On pressing Settings button will lauch Settings Options
-     * */
-    public void showSettingsAlert(){
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
-
-        // Setting Dialog Title
-        alertDialog.setTitle("GPS settings");
-
-        // Setting Dialog Message
-        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
-
-        // On pressing Settings button
-        alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                mContext.startActivity(intent);
-            }
-        });
-
-        // on pressing cancel button
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-
-        // Showing Alert Message
-        alertDialog.show();
+        return false;
     }
 
     @Override
-    public void onLocationChanged(Location location) {
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-    }
-
-    @Override
-    public IBinder onBind(Intent arg0) {
-        return null;
+    public boolean onStopJob(JobParameters params) {
+        return false;
     }
 
 }
