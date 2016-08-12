@@ -27,10 +27,12 @@ public class GPSTracker2 extends JobService {
     MediaType mediaType;
     RequestBody body;
     Request request;
+    GPSTracker gps;
 
     String phone;
-    boolean hasUser;
-    boolean userActive;
+    boolean hasUser = false;
+    boolean userActive = false;
+    int status;
 
     public GPSTracker2(){
         client = new OkHttpClient();   //initialize the okHttpClient to send http requests
@@ -39,34 +41,44 @@ public class GPSTracker2 extends JobService {
             phone = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[1]);
             hasUser = true;
         }
+        status = 0;
     }
     @Override
     public boolean onStartJob(JobParameters params) {
-        GPSTracker gps = new GPSTracker(this);
+        gps = new GPSTracker(this);
+        status = 0;
+        if(WoyallaDriver.myDatabase.count(Database.Table_USER)==1){
+            phone = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[1]);
+            hasUser = true;
 
-        if(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[8])=="1");
+            status = Integer.parseInt(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[8]));
+            if(status >=1){
+                userActive = true;
+            }
 
-        if(gps.canGetLocation() && phone!=null && hasUser && userActive) {
+        }
+
+
+        if(gps.canGetLocation() && hasUser && userActive && status>=1) {
 
             int i = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
-            double latitude = gps.getLatitude();
-            double longitude = gps.getLongitude();
+
+
+            Thread account = new Thread(){
+                @Override
+                public void run() {
+                    try {
 
             //initialize the body object for the http post request
-
-/*            body = RequestBody.create(mediaType,
-                    "driverPhoneNumber=" + update/phoneNumber +
-                            "&comment=" + comment +
-                            "&rate=" + getRating());*/
-
             body = RequestBody.create(mediaType,
-                    "PhoneNumber=4664546457" +
-                            "&status=0" +
-                            "&gpsLatitude=1" +
-                            "&gpsLongitude=1");
+                    "PhoneNumber="+phone +
+                            "&status="+ status+
+                            "&gpsLatitude="+gps.getLatitude() +
+                            "&gpsLongitude="+gps.getLongitude());
+
             //create the request object from http post
             request = new Request.Builder()
-                    .url(WoyallaDriver.API_URL + "update/phoneNumber ")
+                    .url(WoyallaDriver.API_URL + "drivers/update/phoneNumber ")
                     .put(body)
                     .addHeader("authorization", "Basic dGhlVXNlcm5hbWU6dGhlUGFzc3dvcmQ=")
                     .addHeader("cache-control", "no-cache")
@@ -82,13 +94,24 @@ public class GPSTracker2 extends JobService {
                 //get the json response object
                 JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
 
-                /**
-                 * If we get OK response
-                 *
-                 * */
-                if (myObject.get("status").toString().startsWith("ok")) {
+            /**
+             * If we get OK response
+             *
+             * */
 
+                if (myObject.get("status").toString().startsWith("ok")) {
+                        Log.i("myResponse",myObject.get("description").toString());
                 }
+
+            /**
+             * If we get OK response
+             *
+             * */
+                else if (myObject.get("status").toString().startsWith("error")) {
+                    Log.i("myResponse",myObject.get("description").toString());
+                }
+
+
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -96,6 +119,12 @@ public class GPSTracker2 extends JobService {
             }
 
 
+            } catch(Exception e){
+            }
+            }
+            };
+
+            account.start();
         }
 
         return false;

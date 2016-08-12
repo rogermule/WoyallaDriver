@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,8 +69,21 @@ public class MainActivity extends AppCompatActivity
 
         //gps = new GPSTracker(MainActivity.this);
 
+        initAvailabilitySwitch();
         handleAvailabilitySwitch();
         handleShowClientButton();
+    }
+
+    private void initAvailabilitySwitch() {
+        String status = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[8]);
+        Log.i("testStatus",status );
+
+        if(status=="1"){
+            avaialbilitySwitch.setChecked(true);
+        }
+        else if (status=="0"){
+            avaialbilitySwitch.setChecked(false);
+        }
     }
 
     /**

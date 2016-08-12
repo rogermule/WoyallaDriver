@@ -248,6 +248,7 @@ public class Register extends AppCompatActivity {
                     cv.put(Database.USER_FIELDS[5], Main_User.getLicencePlateNumber());
                     cv.put(Database.USER_FIELDS[6], Main_User.getServiceModel());
                     cv.put(Database.USER_FIELDS[7], Main_User.getDriverLicenceIdNo());
+                    cv.put(Database.USER_FIELDS[8],"0");
 
                     long checkAdd = WoyallaDriver.myDatabase.insert(Database.Table_USER, cv);
                     if (checkAdd != -1) {
@@ -285,6 +286,7 @@ public class Register extends AppCompatActivity {
                     cv.put(Database.USER_FIELDS[5], Main_User.getLicencePlateNumber());
                     cv.put(Database.USER_FIELDS[6], Main_User.getServiceModel());
                     cv.put(Database.USER_FIELDS[7], Main_User.getDriverLicenceIdNo());
+                    cv.put(Database.USER_FIELDS[8],"0");
 
                     long checkAdd = WoyallaDriver.myDatabase.insert(Database.Table_USER, cv);
                     if (checkAdd != -1) {
