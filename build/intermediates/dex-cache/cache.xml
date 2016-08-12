@@ -1,12 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" >
+<items version="2" />
 
-    <item
-        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
-        revision="23.0.3"
-        sha1="a0e0df9b89e74438d3104d3550aa01ce9ae43df3">
-        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_7d5dbd3e6af99463b5bdc42a56a3b2c40d60d4a6\classes.dex" />
-    </item>
-
-</items>

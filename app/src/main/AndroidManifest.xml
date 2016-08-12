@@ -45,7 +45,7 @@
 
 
         <activity
-            android:name=".MainActivity"
+            android:name=".Activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -55,7 +55,7 @@
         </activity>
 
         <activity
-            android:name=".Splash"
+            android:name=".Activities.Splash"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -65,7 +65,7 @@
         </activity>
 
         <activity
-            android:name=".Register"
+            android:name=".Activities.Register"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -74,7 +74,7 @@
         </activity>
 
         <activity
-            android:name=".Comment"
+            android:name=".Activities.Comment"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -82,11 +82,11 @@
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".Activities.MainActivity" />
         </activity>
 
         <activity
-            android:name=".About"
+            android:name=".Activities.About"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -94,15 +94,15 @@
             </intent-filter>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value=".Activities.MainActivity" />
         </activity>
 
 
-        <service android:name=".GPSTrackerService"
+        <service android:name=".Services.GPSTrackerService"
             android:permission="android.permission.BIND_JOB_SERVICE"
             android:exported="true"/>
 
-        <service android:name=".GPSTracker"
+        <service android:name=".Services.GPSTracker"
             android:permission="android.permission.ACCESS_FINE_LOCATION"
             />
 

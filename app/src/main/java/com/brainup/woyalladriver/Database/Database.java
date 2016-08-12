@@ -46,11 +46,8 @@ public class Database {
     }
 
     public long update(String DB_Table,ContentValues cv,int id){
-        Log.i(TAG, "Updating Table: "+DB_Table);
         String[] args = {""+id};
         long state = myDatabase.update(DB_Table, cv, "id = ?", args);
-        Log.i(TAG, "Updating Data: "+cv.toString());
-        Log.i(TAG, "Updating Completed: "+state+"\n");
         return state;
     }
 
