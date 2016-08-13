@@ -129,8 +129,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     /**
-      this method handle show client button click
-      return: void
+     * this method handle show client button click
+     * Client info (name, phone, location) will be displayed to the driver
+     * return: void
      */
     public void handleShowClientButton(){
 
@@ -142,7 +143,6 @@ public class MainActivity extends AppCompatActivity
                 String latitudeString = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[2]);
                 String longitudeString = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[3]);
 
-                Log.i("count",WoyallaDriver.myDatabase.count(Database.Table_CLIENT)+"");
                 if(latitudeString!=null && longitudeString!=null){
                     double latitude = Double.parseDouble(latitudeString);
                     double longitude = Double.parseDouble(longitudeString);
@@ -151,9 +151,7 @@ public class MainActivity extends AppCompatActivity
                 }
 
                 else{
-//                    Toast.makeText(MainActivity.this,"You don't have client yet!",Toast.LENGTH_LONG).show();
                     ShowDialog("You don't have client yet!");
-
                 }
 
             }
@@ -230,8 +228,6 @@ public class MainActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
 
         int id = item.getItemId();
-//
-//        //noinspection SimplifiableIfStatement
         if (id == R.id.menu_update_my_location) {
             reload();
             return true;
@@ -292,7 +288,7 @@ public class MainActivity extends AppCompatActivity
         double latitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[2]));
         double longitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[3]));
         moveMap(latitude,longitude,"My Location");
-
+        Toast.makeText(MainActivity.this,"Data is reloaded \nPrevious client info has been removed also.",Toast.LENGTH_LONG).show();
     }
 
     //logout method
