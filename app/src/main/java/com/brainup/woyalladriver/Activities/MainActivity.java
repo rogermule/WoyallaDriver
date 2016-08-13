@@ -13,7 +13,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +23,7 @@ import android.widget.Toast;
 
 import com.brainup.woyalladriver.Database.Database;
 import com.brainup.woyalladriver.R;
+import com.brainup.woyalladriver.Services.GPSTracker;
 import com.brainup.woyalladriver.WoyallaDriver;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity
     SupportMapFragment mapFragment; //fragment that holds the map object
     Button showClient;   //button to show the client location
     Switch avaialbilitySwitch;    //toggle button to switch the drivers availability on or off
-
+    GPSTracker gps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +71,19 @@ public class MainActivity extends AppCompatActivity
         //initialize the show client button
         showClient = (Button) findViewById(R.id.showclient);
 
+        //initialize the gps tracker object
+        gps  = new GPSTracker(this);
 
+        checkGPS();
         initAvailabilitySwitch();
         handleAvailabilitySwitch();
         handleShowClientButton();
+    }
+
+    private void checkGPS() {
+        if(!gps.canGetLocation()){
+            gps.showSettingsAlert();
+        }
     }
 
     /**
@@ -87,13 +96,13 @@ public class MainActivity extends AppCompatActivity
     private void initAvailabilitySwitch() {
 
         String status = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[8]);
-        Log.i("testStatus",status );
         if(status.startsWith("1")){
                 avaialbilitySwitch.setChecked(true);
         }
         else if (status.startsWith("0")){
             avaialbilitySwitch.setChecked(false);
         }
+
     }
 
     /**
@@ -134,7 +143,6 @@ public class MainActivity extends AppCompatActivity
      * return: void
      */
     public void handleShowClientButton(){
-
         showClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,8 +191,6 @@ public class MainActivity extends AppCompatActivity
      * the background service will update the current location int he
      */
     private void moveMap(double latitude, double longitude,String title) {
-        //String to display current latitude and longitude
-
         //Creating a LatLng Object to store Coordinates
         LatLng latLng = new LatLng(latitude,longitude);
 
@@ -198,11 +204,86 @@ public class MainActivity extends AppCompatActivity
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         //Animating the camera
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-
-        //Displaying current coordinates in toast
-        Toast.makeText(this, "Current location is "+latitude + longitude, Toast.LENGTH_LONG).show();
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(25));
     }
+
+
+    public double getLatitudeFromDb(){
+        double latitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[2]));
+        return  latitude;
+    }
+
+    public double getLongitudeFromDb(){
+        double longitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[3]));
+        return  longitude;
+    }
+
+    //reload the client map & data
+    public void reload(){
+        //remove all clients
+        WoyallaDriver.myDatabase.Delete_All(Database.Table_CLIENT);
+        /**
+         * First get the location data from the database.
+         * then view it on the map
+         */
+        double longitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[3]));
+        moveMap(getLatitudeFromDb(),getLongitudeFromDb(),"My Location");
+        Toast.makeText(MainActivity.this,"Data is reloaded \nPrevious client info has been removed also." +
+                " \nThe map is also set to your current location.",Toast.LENGTH_LONG).show();
+    }
+
+    //logout method
+    public void logOut(){
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which){
+                    case DialogInterface.BUTTON_POSITIVE:
+                        //Yes button clicked
+                        WoyallaDriver.myDatabase.Delete_All(Database.Table_USER);
+                        Intent intent = new Intent(MainActivity.this,Register.class);
+                        startActivity(intent);
+                        finish();
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        //No button clicked
+                        break;
+                }
+            }
+        };
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.app_name).setMessage("Are you sure you want to Logout?")
+                .setPositiveButton("Yes", dialogClickListener)
+                .setNegativeButton("No", dialogClickListener)
+                .show();
+    }
+
+
+    //share app method
+
+    public void shareApp(){
+        String shareBody = "Get Free amharic dictionary  market://details?id=com.brainup.woyalladriver";
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        sharingIntent.setType("text/plain");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Amharic dictionary");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+        startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.app_name)));
+    }
+
+    //rate the app method
+
+    public void rateMyApp() {
+        Uri uri = Uri.parse("market://details?id=com.brainup.woyalladriver");
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.brainup.woyalladriver")));
+        }
+    }
+
+
 
     @Override
     public void onBackPressed() {
@@ -269,79 +350,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        double latitude = gps.getLatitude();
+        double longitude = gps.getLongitude();
 
-        // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        // Add a marker in current location and move the camera
+        LatLng mylocation = new LatLng(latitude, longitude);
+        mMap.addMarker(new MarkerOptions().position(mylocation).title("My Location"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
     }
 
-    //reload the client map & data
-    public void reload(){
-
-        //remove all clients
-        WoyallaDriver.myDatabase.Delete_All(Database.Table_CLIENT);
-        /**
-         * First get the location data from the database.
-         * then view it on the map
-         */
-        double latitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[2]));
-        double longitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[3]));
-        moveMap(latitude,longitude,"My Location");
-        Toast.makeText(MainActivity.this,"Data is reloaded \nPrevious client info has been removed also.",Toast.LENGTH_LONG).show();
-    }
-
-    //logout method
-
-    public void logOut(){
-        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                switch (which){
-                    case DialogInterface.BUTTON_POSITIVE:
-                        //Yes button clicked
-                        WoyallaDriver.myDatabase.Delete_All(Database.Table_USER);
-                        Intent intent = new Intent(MainActivity.this,Register.class);
-                        startActivity(intent);
-                        finish();
-                        break;
-                    case DialogInterface.BUTTON_NEGATIVE:
-                        //No button clicked
-                        break;
-                }
-            }
-        };
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.app_name).setMessage("Are you sure you want to Logout?")
-                .setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener)
-                .show();
-    }
-
-
-    //share app method
-
-    public void shareApp(){
-        String shareBody = "Get Free amharic dictionary  market://details?id=com.brainup.woyalladriver";
-        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Amharic dictionary");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
-        startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.app_name)));
-    }
-
-    //rate the app method
-
-    public void rateMyApp() {
-        Uri uri = Uri.parse("market://details?id=com.brainup.woyalladriver");
-        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-        try {
-            startActivity(goToMarket);
-        } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://play.google.com/store/apps/details?id=com.brainup.woyalladriver")));
-        }
-    }
 
 
 }

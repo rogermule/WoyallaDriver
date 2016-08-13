@@ -8,20 +8,16 @@ import android.view.Window;
 
 import com.brainup.woyalladriver.Database.Database;
 import com.brainup.woyalladriver.R;
-import com.brainup.woyalladriver.Services.GPSTracker;
 import com.brainup.woyalladriver.WoyallaDriver;
 
 
 public class Splash extends Activity {
-
-	GPSTracker gps;     //gsp
 
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
-		gps = new GPSTracker(Splash.this);
 
 		Thread splash = new Thread(){
         	@Override

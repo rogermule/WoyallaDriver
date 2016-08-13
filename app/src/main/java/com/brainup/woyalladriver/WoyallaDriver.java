@@ -35,7 +35,7 @@ public class WoyallaDriver extends Application {
 
     public void JobConstr(){
         JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, new ComponentName(this,GPSTrackerService.class));
-        builder.setPeriodic(1000);
+        builder.setPeriodic(10000);
         builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
         myJobScheduler.schedule(builder.build());
     }

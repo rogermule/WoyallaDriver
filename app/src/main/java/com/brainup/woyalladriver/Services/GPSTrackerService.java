@@ -50,13 +50,14 @@ public class GPSTrackerService extends JobService {
             phone = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[1]);
             hasUser = true;
         }
-        status = 0;
+        status = 0;  //initialize the user to be offline
     }
     @Override
     public boolean onStartJob(JobParameters params) {
         gps = new GPSTracker(this);
-        status = 0;
-        if(WoyallaDriver.myDatabase.count(Database.Table_USER)==1){
+        status = 0;   //initialize the user to be offline just in case
+
+        if(WoyallaDriver.myDatabase.count(Database.Table_USER)==1){     //check if there is user in the database
             phone = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[1]);
             hasUser = true;
 

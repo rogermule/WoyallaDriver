@@ -165,6 +165,7 @@ public class Comment extends AppCompatActivity {
             //get the json response object
             JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
 
+
         /**
          * If we get OK response
          *
