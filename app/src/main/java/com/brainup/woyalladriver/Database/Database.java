@@ -10,10 +10,13 @@ import android.util.Log;
 public class Database {
     
     public static final String Table_USER = "USER";
+    public static final String Table_CLIENT = "CLIENT";
 
     public static final String[] USER_FIELDS = { "Name","Phone","Latitude","Longitude","Car_Model","Plate_Number","Service_Type","Licence_Number","Status"};
+    public static final String[] CLIENT_FIELDS = { "Name","Phone","Latitude","Longitude","Order_Id","Status","Service_Type"};
 
     public static final String[] USER_COLUMN = { "id", "Name","Phone","Latitude","Longitude","Car_Model","Plate_Number","Service_Type","Licence_Number","Status"};
+    public static final String[] CLIENT_COLUMN = { "id", "Name","Phone","Latitude","Longitude","Order_Id","Status","Service_Type"};
 
 
 	private SQLiteDatabase myDatabase;
@@ -27,6 +30,7 @@ public class Database {
         myDatabase = mySQL.getWritableDatabase();
 
         mySQL.createTables(Table_USER, USER_FIELDS);
+        mySQL.createTables(Table_CLIENT, CLIENT_FIELDS);
 
     }
 
@@ -78,11 +82,13 @@ public class Database {
     }
 
     public String get_Value_At_Bottom(String DB_Table,String column){
-        String str = "";
+        String str = null;
         try{
             Cursor c = myDatabase.query(DB_Table, getColumns(DB_Table), null, null, null, null, null);
             c.moveToLast();
-            str = c.getString(c.getColumnIndex(column));
+            if(c.getString(c.getColumnIndex(column))!=null){
+                str = c.getString(c.getColumnIndex(column));
+            }
         }catch (Exception e){
 
         }
@@ -121,6 +127,9 @@ public class Database {
         String[] strs = null;
         if(DB_Table == Table_USER){
             strs = USER_COLUMN;
+        }
+        else if(DB_Table == Table_CLIENT){
+            strs = CLIENT_COLUMN;
         }
         return strs;
     }

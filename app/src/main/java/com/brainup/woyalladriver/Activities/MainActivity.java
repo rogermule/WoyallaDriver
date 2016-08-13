@@ -137,20 +137,55 @@ public class MainActivity extends AppCompatActivity
         showClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                moveMap();
+                String clientName = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[0]);
+                String clientPhone = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[1]);
+                String latitudeString = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[2]);
+                String longitudeString = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[3]);
+
+                Log.i("count",WoyallaDriver.myDatabase.count(Database.Table_CLIENT)+"");
+                if(latitudeString!=null && longitudeString!=null){
+                    double latitude = Double.parseDouble(latitudeString);
+                    double longitude = Double.parseDouble(longitudeString);
+                    moveMap(latitude,longitude,clientName);
+                    ShowDialog("Client Name: " + clientName + "\nClient Phone: " + clientPhone +"\n\nYou can view the location on the map now!");
+                }
+
+                else{
+//                    Toast.makeText(MainActivity.this,"You don't have client yet!",Toast.LENGTH_LONG).show();
+                    ShowDialog("You don't have client yet!");
+
+                }
+
             }
         });
     }
 
+    /**
+     * Show message
+    * */
+    public void ShowDialog(String message) {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        // Yes button clicked
+                        break;
+                }
+            }
+        };
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(R.string.app_name)
+                .setMessage(message)
+                .setPositiveButton("Ok", dialogClickListener).show();
+    }
 
     /**
      * Get latitude and longitude from database and move the map to that specific place
      * the background service will update the current location int he
      */
-    private void moveMap() {
+    private void moveMap(double latitude, double longitude,String title) {
         //String to display current latitude and longitude
-        double latitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[2]));
-        double longitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[3]));
 
         //Creating a LatLng Object to store Coordinates
         LatLng latLng = new LatLng(latitude,longitude);
@@ -159,7 +194,7 @@ public class MainActivity extends AppCompatActivity
         mMap.addMarker(new MarkerOptions()
                 .position(latLng) //setting position
                 .draggable(true) //Making the marker draggable
-                .title("My Location")); //Adding a title
+                .title(title)); //Adding a title
 
         //Moving the camera
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -198,7 +233,7 @@ public class MainActivity extends AppCompatActivity
 //
 //        //noinspection SimplifiableIfStatement
         if (id == R.id.menu_update_my_location) {
-            moveMap();
+            reload();
             return true;
         }
 
@@ -245,6 +280,20 @@ public class MainActivity extends AppCompatActivity
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 
+    //reload the client map & data
+    public void reload(){
+
+        //remove all clients
+        WoyallaDriver.myDatabase.Delete_All(Database.Table_CLIENT);
+        /**
+         * First get the location data from the database.
+         * then view it on the map
+         */
+        double latitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[2]));
+        double longitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[3]));
+        moveMap(latitude,longitude,"My Location");
+
+    }
 
     //logout method
 

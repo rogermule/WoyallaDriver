@@ -25,16 +25,22 @@ import okhttp3.Response;
  */
 public class GPSTrackerService extends JobService {
 
+    /**
+     * Object declaration
+     */
+    ////OkHttp objects
     OkHttpClient client;    //this object will handle http requests
     MediaType mediaType;
     RequestBody body;
     Request request;
+
+    //GPS tracker object
     GPSTracker gps;
 
-    String phone;
-    boolean hasUser = false;
-    boolean userActive = false;
-    int status;
+    String phone;    //current user phone number
+    boolean hasUser = false;    //check if there is a user
+    boolean userActive = false;    //check if the user is active
+    int status;     //what is the status of the user
 
     public GPSTrackerService(){
         client = new OkHttpClient();   //initialize the okHttpClient to send http requests
@@ -110,6 +116,22 @@ public class GPSTrackerService extends JobService {
                              * If the driver status is on service
                              */
                             if(myObject.get("data")!=null) {
+                                JSONObject json_response = myObject.getJSONObject("data");
+
+                                ContentValues cv = new ContentValues();
+                                cv.put(Database.CLIENT_FIELDS[0],json_response.getString("clientName"));
+                                cv.put(Database.CLIENT_FIELDS[1],json_response.getString("clientPhoneNumber"));
+                                cv.put(Database.CLIENT_FIELDS[2],json_response.get("clientGpsLatitude").toString());
+                                cv.put(Database.CLIENT_FIELDS[3],json_response.get("clientGpsLongtude").toString());
+                                cv.put(Database.CLIENT_FIELDS[4],json_response.get("orderId").toString());
+                                cv.put(Database.CLIENT_FIELDS[5],"0");
+
+                                long check = WoyallaDriver.myDatabase.insert(Database.Table_CLIENT,cv);
+                                if(check!=-1){
+                                    Log.i("client","Successfully added");
+                                }else{
+                                    Log.i("client","Error adding client info");
+                                }
 
                             }
 
@@ -122,7 +144,7 @@ public class GPSTrackerService extends JobService {
                         }
 
                     /**
-                     * If we get OK response
+                     * If we get error response
                      *
                      * */
                         else if (myObject.get("status").toString().startsWith("error")) {
