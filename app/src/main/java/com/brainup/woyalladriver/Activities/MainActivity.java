@@ -226,7 +226,6 @@ public class MainActivity extends AppCompatActivity
          * First get the location data from the database.
          * then view it on the map
          */
-        double longitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[3]));
         moveMap(getLatitudeFromDb(),getLongitudeFromDb(),"My Location");
         Toast.makeText(MainActivity.this,"Data is reloaded \nPrevious client info has been removed also." +
                 " \nThe map is also set to your current location.",Toast.LENGTH_LONG).show();

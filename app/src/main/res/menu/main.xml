@@ -6,4 +6,5 @@
         android:icon="@android:drawable/stat_notify_sync_noanim"
         android:title="@string/update_my_location"
         app:showAsAction="ifRoom" />
+
 </menu>

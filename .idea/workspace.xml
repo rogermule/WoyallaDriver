@@ -21,15 +21,11 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Comment.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Comment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Splash.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Splash.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Services/GPSTrackerService.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Services/GPSTrackerService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/WoyallaDriver.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/WoyallaDriver.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/main.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/main.xml" />
     </list>
     <ignored path="WoyallaDriver.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -50,11 +46,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="101" column="41" selection-start-line="101" selection-start-column="41" selection-end-line="101" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.4117647">
+              <caret line="310" column="31" selection-start-line="310" selection-start-column="31" selection-end-line="310" selection-end-column="31" />
               <folding>
                 <element signature="e#2265#2296#0" expanded="true" />
                 <element signature="e#2298#2330#0" expanded="true" />
@@ -63,29 +59,29 @@
                 <element signature="e#5426#6622#0" expanded="true" />
                 <element signature="e#6621#6622#0" expanded="true" />
                 <element signature="e#7271#7288#0" expanded="true" />
-                <element signature="e#9413#10133#0" expanded="true" />
-                <element signature="e#10132#10133#0" expanded="true" />
-                <element signature="e#10230#10247#0" expanded="true" />
-                <element signature="e#10963#11006#0" expanded="true" />
+                <element signature="e#9278#9998#0" expanded="true" />
+                <element signature="e#9997#9998#0" expanded="true" />
+                <element signature="e#10095#10112#0" expanded="true" />
+                <element signature="e#10828#10871#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AndroidManifest.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.6153846">
-              <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="22" selection-end-column="77" />
+            <state vertical-scroll-proportion="-2.018868">
+              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GPSTrackerService.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="GPSTrackerService.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Services/GPSTrackerService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.32">
+            <state vertical-scroll-proportion="0.0">
               <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="136" selection-end-column="29" />
               <folding>
                 <element signature="e#2669#6682#0" expanded="true" />
@@ -2390,8 +2386,6 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/GPSTracker.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/menu/main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Register.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/GPSTracker2.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Splash.java" />
@@ -2405,8 +2399,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/WoyallaDriver.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Splash.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Services/GPSTrackerService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Comment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/menu/main.xml" />
       </list>
     </option>
   </component>
@@ -2488,6 +2484,28 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WoyallaDriver" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2608,6 +2626,16 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="Activities" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WoyallaDriver" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
@@ -2977,10 +3005,10 @@
             <element signature="e#5426#6622#0" expanded="true" />
             <element signature="e#6621#6622#0" expanded="true" />
             <element signature="e#7271#7288#0" expanded="true" />
-            <element signature="e#9413#10133#0" expanded="true" />
-            <element signature="e#10132#10133#0" expanded="true" />
-            <element signature="e#10230#10247#0" expanded="true" />
-            <element signature="e#10963#11006#0" expanded="true" />
+            <element signature="e#9278#9998#0" expanded="true" />
+            <element signature="e#9997#9998#0" expanded="true" />
+            <element signature="e#10095#10112#0" expanded="true" />
+            <element signature="e#10828#10871#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -3168,24 +3196,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.42159384">
-          <caret line="10" column="56" selection-start-line="10" selection-start-column="48" selection-end-line="10" selection-end-column="56" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16346154">
-          <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
-          <folding>
-            <element signature="e#308#336#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-23/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
@@ -3322,34 +3332,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="101" column="41" selection-start-line="101" selection-start-column="41" selection-end-line="101" selection-end-column="41" />
-          <folding>
-            <element signature="e#2265#2296#0" expanded="true" />
-            <element signature="e#2298#2330#0" expanded="true" />
-            <element signature="e#4054#5173#0" expanded="true" />
-            <element signature="e#5172#5173#0" expanded="true" />
-            <element signature="e#5426#6622#0" expanded="true" />
-            <element signature="e#6621#6622#0" expanded="true" />
-            <element signature="e#7271#7288#0" expanded="true" />
-            <element signature="e#9413#10133#0" expanded="true" />
-            <element signature="e#10132#10133#0" expanded="true" />
-            <element signature="e#10230#10247#0" expanded="true" />
-            <element signature="e#10963#11006#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6153846">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="22" selection-end-column="77" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Comment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3360,11 +3342,63 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Services/GPSTrackerService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.32">
+        <state vertical-scroll-proportion="0.0">
           <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="136" selection-end-column="29" />
           <folding>
             <element signature="e#2669#6682#0" expanded="true" />
             <element signature="e#6681#6682#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17042607">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="22" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.018868">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build/generated/source/r/debug/com/brainup/woyalladriver/R.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.35427135">
+          <caret line="3544" column="32" selection-start-line="3544" selection-start-column="32" selection-end-line="3544" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/menu/main.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17042607">
+          <caret line="4" column="20" selection-start-line="4" selection-start-column="20" selection-end-line="4" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4117647">
+          <caret line="310" column="31" selection-start-line="310" selection-start-column="31" selection-end-line="310" selection-end-column="31" />
+          <folding>
+            <element signature="e#2265#2296#0" expanded="true" />
+            <element signature="e#2298#2330#0" expanded="true" />
+            <element signature="e#4054#5173#0" expanded="true" />
+            <element signature="e#5172#5173#0" expanded="true" />
+            <element signature="e#5426#6622#0" expanded="true" />
+            <element signature="e#6621#6622#0" expanded="true" />
+            <element signature="e#7271#7288#0" expanded="true" />
+            <element signature="e#9278#9998#0" expanded="true" />
+            <element signature="e#9997#9998#0" expanded="true" />
+            <element signature="e#10095#10112#0" expanded="true" />
+            <element signature="e#10828#10871#0" expanded="true" />
           </folding>
         </state>
       </provider>
