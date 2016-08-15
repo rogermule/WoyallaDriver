@@ -17,6 +17,7 @@
     <string name="hint_plate_number">Enter Plate Number</string>
     <string name="call">Call to get Taxi</string>
     <string name="show_map">Show Client Location</string>
+    <string name="change_map_type">Change Type</string>
     <string name="comment">Send Comment</string>
 
     <string name="err_msg_name">Enter your full name here</string>

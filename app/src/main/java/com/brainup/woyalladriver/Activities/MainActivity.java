@@ -13,11 +13,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
@@ -39,10 +41,12 @@ public class MainActivity extends AppCompatActivity
      * object delarations
      */
     private GoogleMap mMap; //map object
-    SupportMapFragment mapFragment; //fragment that holds the map object
-    Button showClient;   //button to show the client location
-    Switch avaialbilitySwitch;    //toggle button to switch the drivers availability on or off
-    GPSTracker gps;
+    private SupportMapFragment mapFragment; //fragment that holds the map object
+    private Button showClient;   //button to show the client location
+    private Switch avaialbilitySwitch;    //toggle button to switch the drivers availability on or off
+    private GPSTracker gps;
+
+    private ImageButton zoomIn, zoomOut,changeMapType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +75,12 @@ public class MainActivity extends AppCompatActivity
         //initialize the show client button
         showClient = (Button) findViewById(R.id.showclient);
 
+
+        //initialize the zoom in and zoom out buttons
+        zoomIn = (ImageButton) findViewById(R.id.ib_zoom_in);
+        zoomOut = (ImageButton) findViewById(R.id.ib_zoom_out);
+        changeMapType = (ImageButton) findViewById(R.id.ib_change_map);
+
         //initialize the gps tracker object
         gps  = new GPSTracker(this);
 
@@ -78,6 +88,48 @@ public class MainActivity extends AppCompatActivity
         initAvailabilitySwitch();
         handleAvailabilitySwitch();
         handleShowClientButton();
+        handleZoomIn();
+        handleZoomOut();
+        handleMapTypeChange();
+    }
+
+    private void handleMapTypeChange() {
+
+        changeMapType.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mMap != null) {
+                    Log.i("changemap",mMap.getMapType()+"");
+                    if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
+                        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                    } else if (mMap.getMapType() == GoogleMap.MAP_TYPE_SATELLITE) {
+                        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                    }
+                }
+                else{
+                    Log.i("changemap","Map type is null");
+                }
+            }
+        });
+
+    }
+
+    private void handleZoomOut() {
+        zoomOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.animateCamera(CameraUpdateFactory.zoomOut());
+            }
+        });
+    }
+
+    private void handleZoomIn() {
+        zoomIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mMap.animateCamera(CameraUpdateFactory.zoomIn());
+            }
+        });
     }
 
     private void checkGPS() {
