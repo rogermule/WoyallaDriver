@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.util.Log;
 
 import com.brainup.woyalladriver.Database.Database;
+import com.brainup.woyalladriver.Notifications;
 import com.brainup.woyalladriver.WoyallaDriver;
 
 import org.json.JSONException;
@@ -69,7 +70,7 @@ public class GPSTrackerService extends JobService {
 
         if(gps.canGetLocation() && hasUser && userActive && status>=1) {
 
-            int id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
+            final int id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
             ContentValues cv = new ContentValues();
             cv.put(Database.USER_FIELDS[2],gps.getLatitude());
             cv.put(Database.USER_FIELDS[3],gps.getLongitude());
@@ -105,7 +106,6 @@ public class GPSTrackerService extends JobService {
                         //get the json response object
                         JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
 
-
                     /**
                      * If we get OK response
                      *
@@ -129,6 +129,8 @@ public class GPSTrackerService extends JobService {
 
                                 long check = WoyallaDriver.myDatabase.insert(Database.Table_CLIENT,cv);
                                 if(check!=-1){
+                                    Notifications notifications = new Notifications(getApplicationContext(),(int)check);
+                                    notifications.buildNotification();
                                     Log.i("client","Successfully added");
                                 }else{
                                     Log.i("client","Error adding client info");

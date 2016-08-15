@@ -412,13 +412,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        double latitude = gps.getLatitude();
-        double longitude = gps.getLongitude();
-
-        // Add a marker in current location and move the camera
-        LatLng mylocation = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(mylocation).title("My Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(mylocation));
+        moveMap(gps.getLatitude(),gps.getLongitude(),"My Location");
     }
 
 

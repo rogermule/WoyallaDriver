@@ -14,29 +14,30 @@ import com.brainup.woyalladriver.Activities.MainActivity;
  */
 public class Notifications {
     Context context;
+    int id;
 
-    public Notifications(Context context){
+    public Notifications(Context context,int id){
         this.context = context;
+        this.id = id;
     }
 
-    NotificationManager mgr = (NotificationManager)context.getSystemService(context.NOTIFICATION_SERVICE);
-    Intent notificationIntent = new Intent(context, MainActivity.class);
-    PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
-    Uri uri = Uri.parse("android.resource://"+context.getPackageName()+"/"+R.raw.ringtone);
-    Notification.Builder builder = new Notification.Builder(context)
-            .setContentTitle("You have new Client")
-            .setContentIntent(pi)
-            .setContentText("Client here to view the client location")
-            .setAutoCancel(true)
-            .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)
-            .setWhen(System.currentTimeMillis())
-            .setSound(uri)
-            .setSmallIcon(R.drawable.nav_icon);
+    public void buildNotification() {
+        NotificationManager mgr = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
+        Intent notificationIntent = new Intent(context, MainActivity.class);
+        PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
+        Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.ringtone);
+        Notification.Builder builder = new Notification.Builder(context)
+                .setContentTitle("You have new Client")
+                .setContentIntent(pi)
+                .setContentText("Client here to view the client location")
+                .setAutoCancel(true)
+                .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)
+                .setWhen(System.currentTimeMillis())
+                .setSound(uri)
+                .setSmallIcon(R.drawable.ic_taxi);
 
-    builder.setSmallIcon(R.drawable.logoicon_ldpi);
+        Notification notification = builder.build();
+        mgr.notify(id,notification);
 
-    Notification note = builder.build();
-
-    int id = (int)((long)rowId);
-    mgr.notify(id, note);
+    }
 }
