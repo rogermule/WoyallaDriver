@@ -21,6 +21,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.brainup.woyalladriver.Database.Database;
@@ -47,7 +48,7 @@ public class MainActivity extends AppCompatActivity
     private GPSTracker gps;
 
     private ImageButton zoomIn, zoomOut,changeMapType;
-
+    private TextView client_available;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +76,8 @@ public class MainActivity extends AppCompatActivity
         //initialize the show client button
         showClient = (Button) findViewById(R.id.showclient);
 
+        //initialize client available text view which tells if a client is available
+        client_available = (TextView) findViewById(R.id.tv_notification);
 
         //initialize the zoom in and zoom out buttons
         zoomIn = (ImageButton) findViewById(R.id.ib_zoom_in);
@@ -88,9 +91,20 @@ public class MainActivity extends AppCompatActivity
         initAvailabilitySwitch();
         handleAvailabilitySwitch();
         handleShowClientButton();
-        handleZoomIn();
-        handleZoomOut();
+        handleZoom();
         handleMapTypeChange();
+        handleClientAvailableTextView();
+    }
+
+    private void handleClientAvailableTextView() {
+        if(WoyallaDriver.myDatabase.count(Database.Table_CLIENT)>0){
+            client_available.setText(R.string.new_client);
+            client_available.setVisibility(View.VISIBLE);
+        }
+        else{
+            client_available.setVisibility(View.GONE);
+        }
+
     }
 
     private void handleMapTypeChange() {
@@ -99,7 +113,6 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 if(mMap != null) {
-                    Log.i("changemap",mMap.getMapType()+"");
                     if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
                         mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
                     } else if (mMap.getMapType() == GoogleMap.MAP_TYPE_SATELLITE) {
@@ -114,16 +127,14 @@ public class MainActivity extends AppCompatActivity
 
     }
 
-    private void handleZoomOut() {
+    private void handleZoom() {
         zoomOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mMap.animateCamera(CameraUpdateFactory.zoomOut());
             }
         });
-    }
 
-    private void handleZoomIn() {
         zoomIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

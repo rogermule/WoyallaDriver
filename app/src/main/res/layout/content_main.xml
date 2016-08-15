@@ -25,6 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:textColor="@color/colorPrimary"
                 android:text="Sample"/>
         </LinearLayout>
         <FrameLayout
@@ -75,7 +76,7 @@
             android:orientation="horizontal"
             android:layout_gravity="center">
 
-            
+
 
             <ImageButton
                 android:id="@+id/ib_change_map"

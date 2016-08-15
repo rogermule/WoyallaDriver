@@ -105,6 +105,7 @@ public class GPSTrackerService extends JobService {
                         //get the json response object
                         JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
 
+
                     /**
                      * If we get OK response
                      *
@@ -112,7 +113,6 @@ public class GPSTrackerService extends JobService {
 
                         if (myObject.get("status").toString().startsWith("ok")) {
                                 Log.i("myResponse",myObject.get("description").toString());
-
                             /**
                              * If the driver status is on service
                              */

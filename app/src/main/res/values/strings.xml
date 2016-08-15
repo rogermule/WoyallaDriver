@@ -26,6 +26,7 @@
     <string name="err_msg_licence">Enter a valid licence number</string>
     <string name="err_msg_car_model">Enter a valid Car Model</string>
     <string name="err_msg_comment">Enter comment properly</string>
+    <string name="new_client">You have new client.</string>
 
     <string-array name="service_type">
         <item name="taxi">Taxi Service</item>
