@@ -6,5 +6,9 @@
         android:icon="@android:drawable/stat_notify_sync_noanim"
         android:title="@string/update_my_location"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/menu_change_map_type"
+        android:title="@string/change_map_type"
+        app:showAsAction="ifRoom" />
 
 </menu>

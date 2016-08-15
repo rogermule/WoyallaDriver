@@ -19,7 +19,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,10 +43,11 @@ public class MainActivity extends AppCompatActivity
     private GoogleMap mMap; //map object
     private SupportMapFragment mapFragment; //fragment that holds the map object
     private Button showClient;   //button to show the client location
+//    private Button changeMapType;   //button to show the client location
     private Switch avaialbilitySwitch;    //toggle button to switch the drivers availability on or off
     private GPSTracker gps;
 
-    private ImageButton zoomIn, zoomOut,changeMapType;
+//    private ImageButton zoomIn, zoomOut;
     private TextView client_available;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +79,11 @@ public class MainActivity extends AppCompatActivity
         //initialize client available text view which tells if a client is available
         client_available = (TextView) findViewById(R.id.tv_notification);
 
-        //initialize the zoom in and zoom out buttons
+/*
+        //initialize the zoom in and zoom out buttons and change map type button
         zoomIn = (ImageButton) findViewById(R.id.ib_zoom_in);
         zoomOut = (ImageButton) findViewById(R.id.ib_zoom_out);
-        changeMapType = (ImageButton) findViewById(R.id.ib_change_map);
+        changeMapType = (Button) findViewById(R.id.btn_change_map);*/
 
         //initialize the gps tracker object
         gps  = new GPSTracker(this);
@@ -91,8 +92,8 @@ public class MainActivity extends AppCompatActivity
         initAvailabilitySwitch();
         handleAvailabilitySwitch();
         handleShowClientButton();
-        handleZoom();
-        handleMapTypeChange();
+//        handleZoom();
+//        handleMapTypeChange();
         handleClientAvailableTextView();
     }
 
@@ -109,24 +110,19 @@ public class MainActivity extends AppCompatActivity
 
     private void handleMapTypeChange() {
 
-        changeMapType.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(mMap != null) {
-                    if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
-                        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-                    } else if (mMap.getMapType() == GoogleMap.MAP_TYPE_SATELLITE) {
-                        mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                    }
-                }
-                else{
-                    Log.i("changemap","Map type is null");
+            if(mMap != null) {
+                if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
+                    mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                } else if (mMap.getMapType() == GoogleMap.MAP_TYPE_SATELLITE) {
+                    mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 }
             }
-        });
+            else{
+                Log.i("changemap","Map type is null");
+            }
 
     }
-
+/*
     private void handleZoom() {
         zoomOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,7 +137,7 @@ public class MainActivity extends AppCompatActivity
                 mMap.animateCamera(CameraUpdateFactory.zoomIn());
             }
         });
-    }
+    }*/
 
     private void checkGPS() {
         if(!gps.canGetLocation()){
@@ -270,18 +266,27 @@ public class MainActivity extends AppCompatActivity
         mMap.animateCamera(CameraUpdateFactory.zoomTo(25));
     }
 
-
+    /**
+     * get current location data from database
+     * @return double
+     */
     public double getLatitudeFromDb(){
         double latitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[2]));
         return  latitude;
     }
 
+    /**
+     * return current longitude from database
+     * @return
+     */
     public double getLongitudeFromDb(){
         double longitude=  Double.parseDouble(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[3]));
         return  longitude;
     }
 
-    //reload the client map & data
+    /**
+     * reload the map to clear previous clients and update location
+     */
     public void reload(){
         //remove all clients
         WoyallaDriver.myDatabase.Delete_All(Database.Table_CLIENT);
@@ -294,7 +299,6 @@ public class MainActivity extends AppCompatActivity
                 " \nThe map is also set to your current location.",Toast.LENGTH_LONG).show();
     }
 
-    //logout method
     public void logOut(){
         DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
             @Override
@@ -321,9 +325,7 @@ public class MainActivity extends AppCompatActivity
                 .show();
     }
 
-
     //share app method
-
     public void shareApp(){
         String shareBody = "Get Free amharic dictionary  market://details?id=com.brainup.woyalladriver";
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -334,7 +336,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     //rate the app method
-
     public void rateMyApp() {
         Uri uri = Uri.parse("market://details?id=com.brainup.woyalladriver");
         Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
@@ -375,7 +376,10 @@ public class MainActivity extends AppCompatActivity
             reload();
             return true;
         }
-
+        if (id == R.id.menu_change_map_type) {
+            handleMapTypeChange();
+            return true;
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -407,7 +411,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
 
     @Override
     public void onMapReady(GoogleMap googleMap) {

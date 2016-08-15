@@ -15,8 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Get Taxi Easily"
-        android:textColor="@color/colorPrimary"
+        android:text="@string/nav_sub_title"
+        android:textColor="@color/white"
         android:textSize="18dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
