@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity
         handleAvailabilitySwitch();
         handleShowClientButton();
 //        handleZoom();
-//        handleMapTypeChange();
         handleClientAvailableTextView();
     }
 
