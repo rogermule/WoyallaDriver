@@ -1,13 +1,16 @@
 package com.brainup.woyalladriver.Activities;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -23,6 +26,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.brainup.woyalladriver.Checkups;
 import com.brainup.woyalladriver.Database.Database;
 import com.brainup.woyalladriver.R;
 import com.brainup.woyalladriver.Services.GPSTracker;
@@ -138,9 +142,24 @@ public class MainActivity extends AppCompatActivity
         });
     }*/
 
-    private void checkGPS() {
-        if(!gps.canGetLocation()){
-            gps.showSettingsAlert();
+    private boolean checkGPS() {
+        gps = new GPSTracker(MainActivity.this);
+        if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            //if it permission not granted, request a dialog box that asks the client to grant the permission
+            //the response will be handled by onRequestPermissionResult method
+            ActivityCompat.requestPermissions(MainActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},2);
+            return false;
+        }
+        else if(!Checkups.isNetworkAvailable(MainActivity.this)){
+            Checkups.showDialog("No connection found!\nPlease open cellular data or connect to wifi for the app to work properly.",MainActivity.this);
+            return false;
+        }
+        else if(!gps.canGetLocation()){
+            Checkups.showSettingsAlert(MainActivity.this);
+            return false;
+        }
+        else {
+            return true;
         }
     }
 
@@ -174,12 +193,18 @@ public class MainActivity extends AppCompatActivity
                 int id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
 
                 if(isChecked){
-                    ContentValues cv = new ContentValues();
-                    cv.put(Database.USER_FIELDS[8],"1");
-                    long check = WoyallaDriver.myDatabase.update(Database.Table_USER,cv,id);
-                    if(check!=-1){
-                        Toast.makeText(MainActivity.this,"Availability is ON!",Toast.LENGTH_SHORT).show();
+                    if(checkGPS()){
+                        ContentValues cv = new ContentValues();
+                        cv.put(Database.USER_FIELDS[8],"1");
+                        long check = WoyallaDriver.myDatabase.update(Database.Table_USER,cv,id);
+                        if(check!=-1){
+                            Toast.makeText(MainActivity.this,"Availability is ON!",Toast.LENGTH_SHORT).show();
+                        }
                     }
+                    else{
+                        avaialbilitySwitch.setChecked(false);
+                    }
+
                 }
                 else if(!isChecked){
                     ContentValues cv = new ContentValues();
