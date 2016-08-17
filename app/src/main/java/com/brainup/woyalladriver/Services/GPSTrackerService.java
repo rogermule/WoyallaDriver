@@ -84,14 +84,14 @@ public class GPSTrackerService extends JobService {
 
                     //initialize the body object for the http post request
                     body = RequestBody.create(mediaType,
-                            "PhoneNumber="+phone +
+                            "phoneNumber="+phone +
                                     "&status="+ status+
                                     "&gpsLatitude="+gps.getLatitude() +
                                     "&gpsLongitude="+gps.getLongitude());
 
                     //create the request object from http post
                     request = new Request.Builder()
-                            .url(WoyallaDriver.API_URL + "drivers/update/phoneNumber ")
+                            .url(WoyallaDriver.API_URL + "drivers/update/"+phone)
                             .put(body)
                             .addHeader("authorization", "Basic dGhlVXNlcm5hbWU6dGhlUGFzc3dvcmQ=")
                             .addHeader("cache-control", "no-cache")
@@ -105,6 +105,8 @@ public class GPSTrackerService extends JobService {
 
                         //get the json response object
                         JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
+                        Log.i("errorResponse", myObject.toString());
+                        Log.i("phonenumber", phone);
 
                     /**
                      * If we get OK response
@@ -129,9 +131,15 @@ public class GPSTrackerService extends JobService {
 
                                 long check = WoyallaDriver.myDatabase.insert(Database.Table_CLIENT,cv);
                                 if(check!=-1){
+                                    //Update the client status to on Service (2)
+                                    ContentValues userStatus = new ContentValues();
+                                    userStatus.put(Database.USER_FIELDS[8],"2");
+                                    WoyallaDriver.myDatabase.update(Database.Table_USER,userStatus,id);
+
+                                    //Send notification to the user that a client exists
                                     Notifications notifications = new Notifications(getApplicationContext(),(int)check);
                                     notifications.buildNotification();
-                                    Log.i("client","Successfully added");
+                                    Log.i("client","Client Successfully added");
                                 }else{
                                     Log.i("client","Error adding client info");
                                 }

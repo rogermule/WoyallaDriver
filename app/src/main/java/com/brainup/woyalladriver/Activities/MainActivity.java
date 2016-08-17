@@ -38,6 +38,18 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONTokener;
+
+import java.io.IOException;
+
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
 
@@ -204,7 +216,6 @@ public class MainActivity extends AppCompatActivity
                     else{
                         avaialbilitySwitch.setChecked(false);
                     }
-
                 }
                 else if(!isChecked){
                     ContentValues cv = new ContentValues();
@@ -213,11 +224,72 @@ public class MainActivity extends AppCompatActivity
                     if(check!=-1){
                         Toast.makeText(MainActivity.this,"Availability is OFF!",Toast.LENGTH_SHORT).show();
                     }
-
+                    String userPhone = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[1]);
+                    sendStatusOff(userPhone,0);
                 }
             }
         });
 
+    }
+
+    public void sendStatusOff(final String phone, final int status) {
+        final OkHttpClient client = new OkHttpClient();;    //this object will handle http requests
+        final MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
+        final RequestBody body = RequestBody.create(mediaType,
+                "phoneNumber=" + phone +
+                        "&status=" + status +
+                        "&gpsLatitude=" + gps.getLatitude() +
+                        "&gpsLongitude=" + gps.getLongitude());
+
+        final Request request  = new Request.Builder()
+                .url(WoyallaDriver.API_URL + "drivers/update/" + phone)
+                .put(body)
+                .addHeader("authorization", "Basic dGhlVXNlcm5hbWU6dGhlUGFzc3dvcmQ=")
+                .addHeader("cache-control", "no-cache")
+                .addHeader("content-type", "application/x-www-form-urlencoded")
+                .build();
+
+        Thread sendStatusOff = new Thread() {
+            @Override
+            public void run() {
+                    try {
+                        //make the http post request and get the server response
+                        Response response = client.newCall(request).execute();
+                        String responseBody = response.body().string().toString();
+
+                        //get the json response object
+                        JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
+
+                        /**
+                         * If we get OK response
+                         *
+                         * */
+
+                        if (myObject.get("status").toString().startsWith("ok")) {
+                            MainActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(MainActivity.this,"Status is sent to server!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        /**
+                         * If we get error response
+                         *
+                         * */
+                        else if (myObject.get("status").toString().startsWith("error")) {
+                            Toast.makeText(MainActivity.this,"Status is not sent to server!", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+            }
+        };
+        sendStatusOff.start();
     }
 
     /**
@@ -314,6 +386,25 @@ public class MainActivity extends AppCompatActivity
     public void reload(){
         //remove all clients
         WoyallaDriver.myDatabase.Delete_All(Database.Table_CLIENT);
+        int user_id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
+        int currentStatus = Integer.parseInt(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[8]));
+        if(currentStatus>1){
+            if(avaialbilitySwitch.isChecked()){
+                //Change the client status to active
+                ContentValues userStatus = new ContentValues();
+                userStatus.put(Database.USER_FIELDS[8],"1");
+                WoyallaDriver.myDatabase.update(Database.Table_USER,userStatus,user_id);
+            }
+            else{
+                //Change the client status to offline
+                ContentValues userStatus = new ContentValues();
+                userStatus.put(Database.USER_FIELDS[8],"0");
+                WoyallaDriver.myDatabase.update(Database.Table_USER,userStatus,user_id);
+            }
+
+        }
+
+        mMap.clear();   //clear the client marker from the map
         /**
          * First get the location data from the database.
          * then view it on the map
@@ -351,10 +442,10 @@ public class MainActivity extends AppCompatActivity
 
     //share app method
     public void shareApp(){
-        String shareBody = "Get Free amharic dictionary  market://details?id=com.brainup.woyalladriver";
+        String shareBody = "Get Weyala driver app at  market://details?id=com.brainup.woyalladriver";
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
         sharingIntent.setType("text/plain");
-        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Amharic dictionary");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Weyala Driver");
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
         startActivity(Intent.createChooser(sharingIntent, getResources().getString(R.string.app_name)));
     }

@@ -12,7 +12,7 @@
     <string name="nav_sub_title">Get Clients Easily</string>
     <string name="btn_login">Login</string>
     <string name="hint_name">Enter Name</string>
-    <string name="hint_phone">Enter Phone Number</string>
+    <string name="hint_phone">Enter Phone Number (09xxxxxx)</string>
     <string name="hint_licence">Enter Licence Number</string>
     <string name="hint_car_model">Enter Car Model</string>
     <string name="hint_plate_number">Enter Plate Number</string>

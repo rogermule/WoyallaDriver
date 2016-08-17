@@ -136,6 +136,7 @@
                 />
         </android.support.design.widget.TextInputLayout>
 
+
         <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -144,7 +145,31 @@
             android:layout_marginBottom="10dp"
 
             />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                android:text="Are you the owner?"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/input_login"
+                />
 
+            <CheckBox
+                android:id="@+id/cb_owner"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                />
+
+        </LinearLayout>
         <!-- Register Button -->
 
         <Button

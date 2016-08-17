@@ -17,11 +17,13 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.brainup.woyalladriver.Adapters.Service_Type_Adapter;
+import com.brainup.woyalladriver.Checkups;
 import com.brainup.woyalladriver.Database.Database;
 import com.brainup.woyalladriver.Model.User;
 import com.brainup.woyalladriver.R;
@@ -52,6 +54,7 @@ public class Register extends AppCompatActivity {
 	private Context myContext;
 	EditText ed_phoneNumber, ed_name,ed_plate_num,ed_car_model,ed_licence_num;
     private Spinner sp_service_type;
+    CheckBox cb_owner;
 	Button bt_login;
 	private TextInputLayout inputLayoutPhone, inputLayoutName,inputLayoutCarModel,inputLayoutPlateNumber,inputLayoutLicenceNumber;
     private User Main_User;
@@ -81,6 +84,7 @@ public class Register extends AppCompatActivity {
         ed_licence_num = (EditText) findViewById(R.id.login_licence_num);
         sp_service_type = (Spinner) findViewById(R.id.sp_service_type);
 		bt_login = (Button) findViewById(R.id.btnLogin);
+        cb_owner = (CheckBox) findViewById(R.id.cb_owner);
 
         inputLayoutPhone = (TextInputLayout) findViewById(R.id.login_txtinput_phone);
         inputLayoutName = (TextInputLayout) findViewById(R.id.login_inputtxt_name);
@@ -130,7 +134,13 @@ public class Register extends AppCompatActivity {
 		bt_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitForm();
+
+                if(Checkups.isNetworkAvailable(Register.this)){
+                    submitForm();
+                }
+                else{
+                    ShowDialog("Connection Error. Please try again");
+                }
             }
 
         });
@@ -169,6 +179,7 @@ public class Register extends AppCompatActivity {
         myDialog = new ProgressDialog(this);
         myDialog.setTitle(R.string.app_name);
         myDialog.setMessage("Creating the Account ....");
+        myDialog.setCancelable(false);
         myDialog.show();
 
         //start a thread different from the main thread to handle http requests
@@ -197,6 +208,12 @@ public class Register extends AppCompatActivity {
         Main_User.setLicencePlateNumber(ed_plate_num.getText().toString());
         Main_User.setDriverLicenceIdNo(ed_licence_num.getText().toString());
         Main_User.setServiceModel(sp_service_type.getSelectedItemPosition());
+        if(cb_owner.isChecked()){
+            Main_User.setOwner(true);
+        }
+        else{
+            Main_User.setOwner(false);
+        }
 
         //initialize the body object for the http post request
         body = RequestBody.create(mediaType,
@@ -204,7 +221,8 @@ public class Register extends AppCompatActivity {
                         "&name="+Main_User.getName()+
                         "&licencePlateNumber="+Main_User.getLicencePlateNumber() +
                         "&carModelDescription="+Main_User.getCarModelDescription() +
-                        "&driverLicenceIdNo="+Main_User.getDriverLicenceIdNo());
+                        "&driverLicenceIdNo="+Main_User.getDriverLicenceIdNo()+
+                        "&owner="+Main_User.isOwner());
 
         //create the request object from http post
         request = new Request.Builder()
@@ -336,6 +354,12 @@ public class Register extends AppCompatActivity {
         catch (IOException e) {
             e.printStackTrace();
             myDialog.dismiss();
+            Register.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    ShowDialog("Connection error! Please try again.");
+                }
+            });
         } catch(JSONException e){
 
         }
