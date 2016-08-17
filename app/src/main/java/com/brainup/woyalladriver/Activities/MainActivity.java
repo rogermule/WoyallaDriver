@@ -386,6 +386,22 @@ public class MainActivity extends AppCompatActivity
     public void reload(){
         //remove all clients
         WoyallaDriver.myDatabase.Delete_All(Database.Table_CLIENT);
+        int user_id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
+        int currentStatus = Integer.parseInt(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[8]));
+        if(currentStatus>1){
+            if(avaialbilitySwitch.isChecked()){
+                //Change the client status to active
+                ContentValues userStatus = new ContentValues();
+                userStatus.put(Database.USER_FIELDS[8],"1");
+                WoyallaDriver.myDatabase.update(Database.Table_USER,userStatus,user_id);
+            }
+            else{
+                //Change the client status to offline
+                ContentValues userStatus = new ContentValues();
+                userStatus.put(Database.USER_FIELDS[8],"0");
+                WoyallaDriver.myDatabase.update(Database.Table_USER,userStatus,user_id);
+            }
+        }
 
         mMap.clear();   //clear the client marker from the map
         /**
