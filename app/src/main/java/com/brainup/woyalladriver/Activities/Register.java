@@ -86,17 +86,17 @@ public class Register extends AppCompatActivity {
 		bt_login = (Button) findViewById(R.id.btnLogin);
         cb_owner = (CheckBox) findViewById(R.id.cb_owner);
 
-        inputLayoutPhone = (TextInputLayout) findViewById(R.id.login_txtinput_phone);
         inputLayoutName = (TextInputLayout) findViewById(R.id.login_inputtxt_name);
+        inputLayoutPhone = (TextInputLayout) findViewById(R.id.login_txtinput_phone);
+        inputLayoutLicenceNumber = (TextInputLayout) findViewById(R.id.login_txtinput_licence_num);
         inputLayoutCarModel = (TextInputLayout) findViewById(R.id.login_txtinput_car_model);
         inputLayoutPlateNumber = (TextInputLayout) findViewById(R.id.login_txtinput_plate_number);
-        inputLayoutLicenceNumber = (TextInputLayout) findViewById(R.id.login_txtinput_licence_num);
 
 		ed_phoneNumber.addTextChangedListener(new MyTextWatcher(ed_phoneNumber));
         ed_name.addTextChangedListener(new MyTextWatcher(ed_name));
-        ed_plate_num.addTextChangedListener(new MyTextWatcher(ed_plate_num));
-        ed_car_model.addTextChangedListener(new MyTextWatcher(ed_car_model));
         ed_licence_num.addTextChangedListener(new MyTextWatcher(ed_licence_num));
+        ed_car_model.addTextChangedListener(new MyTextWatcher(ed_car_model));
+        ed_plate_num.addTextChangedListener(new MyTextWatcher(ed_plate_num));
 
         /*
         * Initialize the http request objects
@@ -278,13 +278,11 @@ public class Register extends AppCompatActivity {
 
                     long checkAdd = WoyallaDriver.myDatabase.insert(Database.Table_USER, cv);
                     if (checkAdd != -1) {
-                        //Toast.makeText(this,"Account has been created",Toast.LENGTH_SHORT).show();
-
                         myDialog.dismiss();
                         Register.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(Register.this,"Your Account has been successfully created",Toast.LENGTH_LONG).show();
+                                Toast.makeText(Register.this,Register.this.getResources().getString(R.string.toast_register_ok_new),Toast.LENGTH_LONG).show();
                             }
                         });
 
@@ -293,7 +291,7 @@ public class Register extends AppCompatActivity {
                         finish();
                     } else {
                         myDialog.dismiss();
-                        ShowDialog("An error occurred. Please try again.");
+                        ShowDialog(Register.this.getResources().getString(R.string.error_general));
                     }
                 }
 
@@ -321,7 +319,7 @@ public class Register extends AppCompatActivity {
                         Register.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(Register.this,"We found an account with this phone number. \nWe have updated your info with your new data",Toast.LENGTH_LONG).show();
+                                Toast.makeText(Register.this,Register.this.getResources().getString(R.string.toast_register_ok_new),Toast.LENGTH_LONG).show();
                             }
                         });
                         Intent intent = new Intent(this, MainActivity.class);
@@ -332,7 +330,7 @@ public class Register extends AppCompatActivity {
                         Register.this.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                ShowDialog("An error occurred! Please try again later");
+                                ShowDialog(Register.this.getResources().getString(R.string.error_general));
                             }
                         });
                     }
@@ -361,7 +359,7 @@ public class Register extends AppCompatActivity {
             Register.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    ShowDialog("Connection error! Please try again.");
+                    ShowDialog(Register.this.getResources().getString(R.string.error_connection));
                 }
             });
         } catch(JSONException e){
@@ -410,7 +408,7 @@ public class Register extends AppCompatActivity {
         if (ed_phoneNumber.getText().toString().trim().isEmpty() || ed_phoneNumber.getText().toString().length()>10 || ed_phoneNumber.getText().toString().length()<10) {
             inputLayoutPhone.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             inputLayoutPhone.setError(getString(R.string.err_msg_phone));
-            requestFocus(ed_phoneNumber);
+            //requestFocus(ed_phoneNumber);
             return false;
         }
         else {
@@ -421,7 +419,7 @@ public class Register extends AppCompatActivity {
     private boolean validateName() {
         if (ed_name.getText().toString().trim().isEmpty()) {
             inputLayoutName.setError(getString(R.string.err_msg_name));
-            requestFocus(ed_name);
+            //requestFocus(ed_name);
             return false;
         } else {
             inputLayoutName.setErrorEnabled(false);
@@ -432,7 +430,7 @@ public class Register extends AppCompatActivity {
     private boolean validateCarModel() {
         if (ed_car_model.getText().toString().trim().isEmpty()) {
             inputLayoutCarModel.setError(getString(R.string.err_msg_car_model));
-            requestFocus(ed_car_model);
+            //requestFocus(ed_car_model);
             return false;
         } else {
             inputLayoutCarModel.setErrorEnabled(false);
@@ -443,7 +441,7 @@ public class Register extends AppCompatActivity {
     private boolean validatePlateNumber() {
         if (ed_plate_num.getText().toString().trim().isEmpty()) {
             inputLayoutPlateNumber.setError(getString(R.string.err_msg_plate));
-            requestFocus(ed_plate_num);
+            //requestFocus(ed_plate_num);
             return false;
         } else {
             inputLayoutPlateNumber.setErrorEnabled(false);
@@ -455,7 +453,7 @@ public class Register extends AppCompatActivity {
     private boolean validateLicenceNumber() {
         if (ed_licence_num.getText().toString().trim().isEmpty()) {
             inputLayoutLicenceNumber.setError(getString(R.string.err_msg_licence));
-            requestFocus(ed_licence_num);
+            //requestFocus(ed_licence_num);
             return false;
         } else {
             inputLayoutLicenceNumber.setErrorEnabled(false);

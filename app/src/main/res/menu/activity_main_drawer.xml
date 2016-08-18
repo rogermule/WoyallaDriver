@@ -5,15 +5,15 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@android:drawable/ic_dialog_dialer"
-            android:title="Home" />
+            android:title="@string/nav_home" />
         <item
             android:id="@+id/nav_about"
             android:icon="@android:drawable/ic_dialog_info"
-            android:title="About" />
+            android:title="@string/nav_about" />
         <item
             android:id="@+id/nav_logout"
             android:icon="@android:drawable/ic_lock_idle_charging"
-            android:title="Logout" />
+            android:title="@string/nav_logout" />
 
     </group>
 
@@ -22,20 +22,20 @@
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share App" />
+                android:title="@string/nav_share" />
             <item
                 android:id="@+id/nav_rate"
                 android:icon="@android:drawable/star_big_off"
-                android:title="Rate App" />
+                android:title="@string/nav_rate" />
             <item
                 android:id="@+id/nav_comment"
                 android:icon="@android:drawable/ic_menu_edit"
-                android:title="Comment App" />
+                android:title="@string/nav_comment" />
 
             <item
                 android:id="@+id/nav_exit"
                 android:icon="@android:drawable/ic_delete"
-                android:title="Exit" />
+                android:title="@string/nav_exit" />
         </menu>
     </item>
 

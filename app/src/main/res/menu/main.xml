@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_update_my_location"
-        android:icon="@android:drawable/stat_notify_sync_noanim"
         android:title="@string/update_my_location"
         app:showAsAction="ifRoom" />
     <item

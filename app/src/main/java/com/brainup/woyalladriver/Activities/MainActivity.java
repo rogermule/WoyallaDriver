@@ -114,13 +114,12 @@ public class MainActivity extends AppCompatActivity
 //        handleZoom();
         handleClientAvailableTextView();
     }
-    
+
     private void checkIfFromNotification() {
         Bundle bundle = this.getIntent().getExtras();
-        if(bundle.getString("newDriver").equals(null))
-            return;
-        else{
-            showClient();
+        if(bundle!=null) {
+            if (bundle.getString("newDriver")!=null)
+                showClient();
         }
     }
 
@@ -223,7 +222,7 @@ public class MainActivity extends AppCompatActivity
                         cv.put(Database.USER_FIELDS[8],"1");
                         long check = WoyallaDriver.myDatabase.update(Database.Table_USER,cv,id);
                         if(check!=-1){
-                            Toast.makeText(MainActivity.this,"Availability is ON!",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_availability_on),Toast.LENGTH_SHORT).show();
                         }
                     }
                     else{
@@ -235,7 +234,7 @@ public class MainActivity extends AppCompatActivity
                     cv.put(Database.USER_FIELDS[8],"0");
                     long check = WoyallaDriver.myDatabase.update(Database.Table_USER,cv,id);
                     if(check!=-1){
-                        Toast.makeText(MainActivity.this,"Availability is OFF!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_availability_off),Toast.LENGTH_SHORT).show();
                     }
                     String userPhone = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[1]);
                     sendStatusOff(userPhone,0);
@@ -282,7 +281,7 @@ public class MainActivity extends AppCompatActivity
                             MainActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
-                                    Toast.makeText(MainActivity.this,"Status is sent to server!", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_status_sent_ok), Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -292,7 +291,12 @@ public class MainActivity extends AppCompatActivity
                          *
                          * */
                         else if (myObject.get("status").toString().startsWith("error")) {
-                            Toast.makeText(MainActivity.this,"Status is not sent to server!", Toast.LENGTH_SHORT).show();
+                            MainActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_status_sent_error), Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
 
                     } catch (JSONException e) {
@@ -458,9 +462,8 @@ public class MainActivity extends AppCompatActivity
          * First get the location data from the database.
          * then view it on the map
          */
-        moveMap(getLatitudeFromDb(),getLongitudeFromDb(),"My Location");
-        Toast.makeText(MainActivity.this,"Data is reloaded \nPrevious client info has been removed also." +
-                " \nThe map is also set to your current location.",Toast.LENGTH_LONG).show();
+        moveMap(getLatitudeFromDb(),getLongitudeFromDb(),MainActivity.this.getResources().getString(R.string.my_location));
+        Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_reload),Toast.LENGTH_LONG).show();
     }
 
     public void logOut(){

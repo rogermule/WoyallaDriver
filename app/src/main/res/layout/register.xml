@@ -7,15 +7,14 @@
     android:fitsSystemWindows="true"
     >
 <ScrollView
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="@color/colorPrimary"
     android:gravity="center"
-
     >
 <LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:gravity="center"
     android:layout_gravity="center"
     android:orientation="vertical"
@@ -24,19 +23,19 @@
 <ImageView
     android:layout_width="250dp"
     android:layout_height="130dp"
-    android:paddingBottom="20dp"
+    android:layout_marginTop="20dp"
     android:src="@drawable/logo"
     />
 
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:layout_marginTop="20dp"
-        android:paddingRight="40dp" >
+        android:paddingRight="20dp" >
 
 
         <android.support.design.widget.TextInputLayout
@@ -138,6 +137,26 @@
         </android.support.design.widget.TextInputLayout>
 
 
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/login_txtinput_station"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <EditText
+                android:id="@+id/login_station"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                android:hint="@string/hint_station"
+                android:inputType="text"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@color/input_login"
+                android:textColorHint="@color/input_login_hint"
+                />
+        </android.support.design.widget.TextInputLayout>
+
         <Spinner
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -147,18 +166,18 @@
 
             />
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:text="@string/register_owner"
-                android:inputType="phone"
+                android:inputType="text"
+                android:textSize="17dp"
                 android:padding="10dp"
-                android:singleLine="true"
                 android:textColor="@color/input_login"
                 />
 
@@ -171,8 +190,43 @@
                 />
 
         </LinearLayout>
-        <!-- Register Button -->
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:background="@color/white"
+                android:text="@string/register_roofrack"
+                android:inputType="text"
+                android:textSize="17dp"
+                android:padding="10dp"
+                android:textColor="@color/input_login"
+                />
+
+          <RadioGroup
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginLeft="20dp"
+              android:padding="10dp"
+              android:background="@color/white"
+              android:orientation="horizontal">
+                <RadioButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yes"/>
+              <RadioButton
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="@string/no"/>
+          </RadioGroup>
+        </LinearLayout>
+
+
+        <!-- Register Button -->
         <Button
             android:id="@+id/btnLogin"
             android:layout_width="fill_parent"
@@ -183,8 +237,6 @@
             android:textColor="@color/white" />
 
     </LinearLayout>
-
-
 
 </LinearLayout>
 </ScrollView>

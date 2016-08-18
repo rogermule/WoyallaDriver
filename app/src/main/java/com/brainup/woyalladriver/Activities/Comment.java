@@ -176,7 +176,7 @@ public class Comment extends AppCompatActivity {
                 Comment.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(Comment.this,"Your comment has been sent! Thank you!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(Comment.this,Comment.this.getResources().getString(R.string.toast_comment_ok),Toast.LENGTH_LONG).show();
                     }
                 });
                 this.finish();
@@ -190,7 +190,7 @@ public class Comment extends AppCompatActivity {
                 Comment.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(Comment.this,"Your comment has been sent! Thank you!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(Comment.this,Comment.this.getResources().getString(R.string.toast_comment_error),Toast.LENGTH_LONG).show();
                     }
                 });
 

@@ -50,13 +50,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/splashlogo_xhdpi"/>
+                android:background="@drawable/logo"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#000000"
                 android:textSize="14sp"
-                android:text="committed, responsible and accountable mentorship to discipleship relationship.  "
+                android:text="@string/about"
                 android:background="#ffffff"
                 android:padding="15dp"
                 android:gravity="center_horizontal"/>
