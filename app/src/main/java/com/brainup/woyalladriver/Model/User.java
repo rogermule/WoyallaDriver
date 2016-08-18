@@ -6,9 +6,8 @@ package com.brainup.woyalladriver.Model;
 public class User {
 
     private String name, phoneNumber,licencePlateNumber,driverLicenceIdNo,carModelDescription;
-    int serviceModel,status;
+    int serviceModel,status,owner;
     double gpsLatitude,gpsLongitude;
-    boolean owner;
 
     public String getName() {
         return name;
@@ -82,11 +81,11 @@ public class User {
         this.gpsLongitude = gpsLongitude;
     }
 
-    public boolean isOwner() {
+    public int getOwner() {
         return owner;
     }
 
-    public void setOwner(boolean owner) {
+    public void setOwner(int owner) {
         this.owner = owner;
     }
 }

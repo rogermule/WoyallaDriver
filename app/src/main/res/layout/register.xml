@@ -25,7 +25,7 @@
     android:layout_width="250dp"
     android:layout_height="130dp"
     android:paddingBottom="20dp"
-    android:src="@drawable/splashlogo_xhdpi"
+    android:src="@drawable/logo"
     />
 
 
@@ -35,8 +35,8 @@
         android:layout_gravity="center"
         android:orientation="vertical"
         android:paddingLeft="20dp"
-        android:layout_marginTop="10dp"
-        android:paddingRight="20dp" >
+        android:layout_marginTop="20dp"
+        android:paddingRight="40dp" >
 
 
         <android.support.design.widget.TextInputLayout
@@ -68,6 +68,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="@color/white"
                     android:hint="@string/hint_phone"
+                    android:maxLength="10"
                     android:inputType="phone"
                     android:padding="10dp"
                     android:singleLine="true"
@@ -88,7 +89,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:hint="@string/hint_licence"
-                android:inputType="phone"
+                android:inputType="text"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textColor="@color/input_login"
@@ -108,7 +109,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:hint="@string/hint_car_model"
-                android:inputType="phone"
+                android:inputType="text"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textColor="@color/input_login"
@@ -128,7 +129,7 @@
                 android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:hint="@string/hint_plate_number"
-                android:inputType="phone"
+                android:inputType="text"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textColor="@color/input_login"
@@ -154,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@color/white"
-                android:text="Are you the owner?"
+                android:text="@string/register_owner"
                 android:inputType="phone"
                 android:padding="10dp"
                 android:singleLine="true"

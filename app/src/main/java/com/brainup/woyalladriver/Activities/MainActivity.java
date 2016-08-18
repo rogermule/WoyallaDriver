@@ -35,6 +35,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -58,7 +60,7 @@ public class MainActivity extends AppCompatActivity
      */
     private GoogleMap mMap; //map object
     private SupportMapFragment mapFragment; //fragment that holds the map object
-    private Button showClient;   //button to show the client location
+    private Button btn_showClient;   //button to show the client location
 //    private Button changeMapType;   //button to show the client location
     private Switch avaialbilitySwitch;    //toggle button to switch the drivers availability on or off
     private GPSTracker gps;
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity
         avaialbilitySwitch = (Switch) findViewById(R.id.availability);
 
         //initialize the show client button
-        showClient = (Button) findViewById(R.id.showclient);
+        btn_showClient = (Button) findViewById(R.id.showclient);
 
         //initialize client available text view which tells if a client is available
         client_available = (TextView) findViewById(R.id.tv_notification);
@@ -104,6 +106,7 @@ public class MainActivity extends AppCompatActivity
         //initialize the gps tracker object
         gps  = new GPSTracker(this);
 
+        checkIfFromNotification();
         checkGPS();
         initAvailabilitySwitch();
         handleAvailabilitySwitch();
@@ -111,6 +114,8 @@ public class MainActivity extends AppCompatActivity
 //        handleZoom();
         handleClientAvailableTextView();
     }
+
+
 
     private void handleClientAvailableTextView() {
         if(WoyallaDriver.myDatabase.count(Database.Table_CLIENT)>0){
@@ -256,7 +261,7 @@ public class MainActivity extends AppCompatActivity
                         //make the http post request and get the server response
                         Response response = client.newCall(request).execute();
                         String responseBody = response.body().string().toString();
-
+                        Log.i("avaiabliltiyOFF", responseBody);
                         //get the json response object
                         JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
 
@@ -286,6 +291,8 @@ public class MainActivity extends AppCompatActivity
                         e.printStackTrace();
                     } catch (IOException e) {
                         e.printStackTrace();
+                    } catch(Exception e){
+                        e.printStackTrace();
                     }
             }
         };
@@ -298,29 +305,32 @@ public class MainActivity extends AppCompatActivity
      * return: void
      */
     public void handleShowClientButton(){
-        showClient.setOnClickListener(new View.OnClickListener() {
+        btn_showClient.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String clientName = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[0]);
-                String clientPhone = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[1]);
-                String latitudeString = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[2]);
-                String longitudeString = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[3]);
-
-                if(latitudeString!=null && longitudeString!=null){
-                    double latitude = Double.parseDouble(latitudeString);
-                    double longitude = Double.parseDouble(longitudeString);
-                    moveMap(latitude,longitude,clientName);
-                    ShowDialog("Client Name: " + clientName + "\nClient Phone: " + clientPhone +"\n\nYou can view the location on the map now!");
-                }
-
-                else{
-                    ShowDialog("You don't have client yet!");
-                }
-
+                showClient();
             }
         });
     }
 
+    //actual show client method
+    public void showClient(){
+        String clientName = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[0]);
+        String clientPhone = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[1]);
+        String latitudeString = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[2]);
+        String longitudeString = WoyallaDriver.myDatabase.get_Value_At_Bottom(Database.Table_CLIENT,Database.CLIENT_FIELDS[3]);
+
+        if(latitudeString!=null && longitudeString!=null){
+            double latitude = Double.parseDouble(latitudeString);
+            double longitude = Double.parseDouble(longitudeString);
+            moveMapForClient(latitude,longitude,clientName);
+            ShowDialog("Client Name: " + clientName + "\nClient Phone: " + clientPhone +"\n\nYou can view the location on the map now!");
+        }
+
+        else{
+            ShowDialog("You don't have client yet!");
+        }
+    }
     /**
      * Show message
     * */
@@ -341,16 +351,20 @@ public class MainActivity extends AppCompatActivity
                 .setPositiveButton("Ok", dialogClickListener).show();
     }
 
+
     /**
      * Get latitude and longitude from database and move the map to that specific place
      * the background service will update the current location int he
      */
-    private void moveMap(double latitude, double longitude,String title) {
+    private void moveMapForClient(double latitude, double longitude,String title) {
         //Creating a LatLng Object to store Coordinates
         LatLng latLng = new LatLng(latitude,longitude);
 
+        CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(15).build();
+
         //Adding marker to map
         mMap.addMarker(new MarkerOptions()
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_client_map))
                 .position(latLng) //setting position
                 .draggable(true) //Making the marker draggable
                 .title(title)); //Adding a title
@@ -359,7 +373,34 @@ public class MainActivity extends AppCompatActivity
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         //Animating the camera
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(25));
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+    }
+
+
+    /**
+     * Get latitude and longitude from database and move the map to that specific place
+     * the background service will update the current location int he
+     */
+    private void moveMap(double latitude, double longitude,String title) {
+        //Creating a LatLng Object to store Coordinates
+
+        if(!mMap.equals(null)) {
+            mMap.clear();
+            LatLng latLng = new LatLng(latitude, longitude);
+
+            CameraPosition cameraPosition = new CameraPosition.Builder().target(latLng).zoom(15).build();
+            //Adding marker to map
+            mMap.addMarker(new MarkerOptions()
+                    .position(latLng) //setting position
+                    .draggable(true) //Making the marker draggable
+                    .title(title)); //Adding a title
+
+            //Moving the camera
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+            //Animating the camera
+            mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+        }
     }
 
     /**
@@ -386,6 +427,7 @@ public class MainActivity extends AppCompatActivity
     public void reload(){
         //remove all clients
         WoyallaDriver.myDatabase.Delete_All(Database.Table_CLIENT);
+        client_available.setVisibility(View.GONE);
         int user_id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
         int currentStatus = Integer.parseInt(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[8]));
         if(currentStatus>1){
@@ -529,7 +571,10 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        gps = new GPSTracker(this);
+        mMap.getUiSettings().setZoomControlsEnabled(true);
         moveMap(gps.getLatitude(),gps.getLongitude(),"My Location");
+
     }
 
 

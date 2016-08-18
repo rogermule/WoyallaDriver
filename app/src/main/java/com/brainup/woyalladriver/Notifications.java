@@ -6,6 +6,7 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Bundle;
 
 import com.brainup.woyalladriver.Activities.MainActivity;
 
@@ -24,6 +25,10 @@ public class Notifications {
     public void buildNotification() {
         NotificationManager mgr = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
         Intent notificationIntent = new Intent(context, MainActivity.class);
+        Bundle b = new Bundle();
+        b.putString("newDriver","ok");
+        notificationIntent.putExtras(b);
+
         PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
         Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.ringtone);
         Notification.Builder builder = new Notification.Builder(context)
@@ -34,7 +39,7 @@ public class Notifications {
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)
                 .setWhen(System.currentTimeMillis())
                 .setSound(uri)
-                .setSmallIcon(R.drawable.ic_taxi);
+                .setSmallIcon(R.drawable.ic_client_map);
 
         Notification notification = builder.build();
         mgr.notify(id,notification);

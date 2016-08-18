@@ -118,15 +118,22 @@ public class GPSTrackerService extends JobService {
                             /**
                              * If the driver status is on service
                              */
-                            if(myObject.get("data")!=null) {
+                            boolean isDataExist = false;
+                            try{
+                                isDataExist =  myObject.get("data").equals(null)? false: true;
+                            }catch (Exception e){
+                                isDataExist = false;
+                            }
+
+                            if(isDataExist) {
                                 JSONObject json_response = myObject.getJSONObject("data");
+                                Log.i("dataResponse", json_response.toString());
 
                                 ContentValues cv = new ContentValues();
                                 cv.put(Database.CLIENT_FIELDS[0],json_response.getString("clientName"));
                                 cv.put(Database.CLIENT_FIELDS[1],json_response.getString("clientPhoneNumber"));
                                 cv.put(Database.CLIENT_FIELDS[2],json_response.get("clientGpsLatitude").toString());
-                                cv.put(Database.CLIENT_FIELDS[3],json_response.get("clientGpsLongtude").toString());
-                                cv.put(Database.CLIENT_FIELDS[4],json_response.get("orderId").toString());
+                                cv.put(Database.CLIENT_FIELDS[3],json_response.get("clientGpsLongitude").toString());
                                 cv.put(Database.CLIENT_FIELDS[5],"0");
 
                                 long check = WoyallaDriver.myDatabase.insert(Database.Table_CLIENT,cv);
@@ -149,7 +156,7 @@ public class GPSTrackerService extends JobService {
                             /**
                              * If the driver status is active
                              */
-                            if(myObject.get("data")==null) {
+                            else {
 
                             }
                         }

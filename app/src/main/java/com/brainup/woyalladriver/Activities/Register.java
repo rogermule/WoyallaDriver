@@ -209,10 +209,10 @@ public class Register extends AppCompatActivity {
         Main_User.setDriverLicenceIdNo(ed_licence_num.getText().toString());
         Main_User.setServiceModel(sp_service_type.getSelectedItemPosition());
         if(cb_owner.isChecked()){
-            Main_User.setOwner(true);
+            Main_User.setOwner(1);
         }
         else{
-            Main_User.setOwner(false);
+            Main_User.setOwner(0);
         }
 
         //initialize the body object for the http post request
@@ -222,7 +222,7 @@ public class Register extends AppCompatActivity {
                         "&licencePlateNumber="+Main_User.getLicencePlateNumber() +
                         "&carModelDescription="+Main_User.getCarModelDescription() +
                         "&driverLicenceIdNo="+Main_User.getDriverLicenceIdNo()+
-                        "&owner="+Main_User.isOwner());
+                        "&owner="+Main_User.getOwner());
 
         //create the request object from http post
         request = new Request.Builder()
@@ -251,7 +251,13 @@ public class Register extends AppCompatActivity {
             * If we get OK response & we get a data object with in the response json
             * This is a new user
             * */
-                if(myObject.get("data")!=null) {
+            boolean isDataExist = false;
+            try{
+               isDataExist =  myObject.get("data").equals(null)? false: true;
+            }catch (Exception e){
+                isDataExist = false;
+            }
+                if(isDataExist) {
                     Log.i("resposeJsonStatus", myObject.get("status").toString());
                     Log.i("resposeJsonMessage", myObject.get("message").toString());
 
@@ -295,8 +301,7 @@ public class Register extends AppCompatActivity {
             * If we get OK response & we don't get a data object with in the response json
             * This is an existing user but the account is updated with new info
             * */
-                else if(myObject.get("data")==null){
-
+                else{
                     ContentValues cv = new ContentValues();
                     cv.put(Database.USER_FIELDS[0], Main_User.getName());
                     cv.put(Database.USER_FIELDS[1], Main_User.getPhoneNumber());
@@ -310,7 +315,6 @@ public class Register extends AppCompatActivity {
 
                     long checkAdd = WoyallaDriver.myDatabase.insert(Database.Table_USER, cv);
                     if (checkAdd != -1) {
-                        //Toast.makeText(this,"Account has been created",Toast.LENGTH_SHORT).show();
                         Log.i("user","An already account is updated");
                         myDialog.dismiss();
 
@@ -403,7 +407,8 @@ public class Register extends AppCompatActivity {
     }
 
     private boolean validatePhone() {
-        if (ed_phoneNumber.getText().toString().trim().isEmpty() || ed_phoneNumber.getText().toString().length()>12 || ed_phoneNumber.getText().toString().length()<6) {
+        if (ed_phoneNumber.getText().toString().trim().isEmpty() || ed_phoneNumber.getText().toString().length()>10 || ed_phoneNumber.getText().toString().length()<10) {
+            inputLayoutPhone.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
             inputLayoutPhone.setError(getString(R.string.err_msg_phone));
             requestFocus(ed_phoneNumber);
             return false;
