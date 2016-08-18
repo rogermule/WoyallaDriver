@@ -168,9 +168,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@color/white"
@@ -180,6 +180,25 @@
                 android:padding="10dp"
                 android:textColor="@color/input_login"
                 />
+            <RadioGroup
+                android:id="@+id/register_owner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:padding="10dp"
+                android:background="@color/white"
+                android:orientation="horizontal">
+                <RadioButton
+                    android:id="@+id/register_owner_yes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yes"/>
+                <RadioButton
+                    android:id="@+id/register_owner_no"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/no"/>
+            </RadioGroup>
 
             <CheckBox
                 android:id="@+id/cb_owner"
@@ -200,7 +219,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
                 android:background="@color/white"
-                android:text="@string/register_roofrack"
+                android:text="@string/register_roof_rack"
                 android:inputType="text"
                 android:textSize="17dp"
                 android:padding="10dp"
@@ -208,6 +227,7 @@
                 />
 
           <RadioGroup
+              android:id="@+id/register_roofrack"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginLeft="20dp"
@@ -215,10 +235,12 @@
               android:background="@color/white"
               android:orientation="horizontal">
                 <RadioButton
+                    android:id="@+id/register_roofrack_yes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/yes"/>
               <RadioButton
+                  android:id="@+id/register_roofrack_no"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
                   android:text="@string/no"/>
