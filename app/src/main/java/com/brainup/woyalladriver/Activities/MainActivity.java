@@ -114,7 +114,15 @@ public class MainActivity extends AppCompatActivity
 //        handleZoom();
         handleClientAvailableTextView();
     }
-
+    
+    private void checkIfFromNotification() {
+        Bundle bundle = this.getIntent().getExtras();
+        if(bundle.getString("newDriver").equals(null))
+            return;
+        else{
+            showClient();
+        }
+    }
 
 
     private void handleClientAvailableTextView() {
