@@ -17,8 +17,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -52,9 +53,11 @@ public class Register extends AppCompatActivity {
     private  AlertDialog.Builder builder;
 	private ProgressDialog pDialog;
 	private Context myContext;
-	EditText ed_phoneNumber, ed_name,ed_plate_num,ed_car_model,ed_licence_num;
+	EditText ed_phoneNumber, ed_name,ed_plate_num,ed_car_model,ed_licence_num,ed_station;
+    RadioGroup rg_owner,rg_roofrack;
+    RadioButton rb_owner, rb_roofrack;
+
     private Spinner sp_service_type;
-    CheckBox cb_owner;
 	Button bt_login;
 	private TextInputLayout inputLayoutPhone, inputLayoutName,inputLayoutCarModel,inputLayoutPlateNumber,inputLayoutLicenceNumber;
     private User Main_User;
@@ -82,9 +85,13 @@ public class Register extends AppCompatActivity {
         ed_car_model = (EditText) findViewById(R.id.login_car_model);
         ed_plate_num = (EditText) findViewById(R.id.login_plate_number);
         ed_licence_num = (EditText) findViewById(R.id.login_licence_num);
+        ed_station = (EditText) findViewById(R.id.login_station);
         sp_service_type = (Spinner) findViewById(R.id.sp_service_type);
 		bt_login = (Button) findViewById(R.id.btnLogin);
-        cb_owner = (CheckBox) findViewById(R.id.cb_owner);
+        rg_owner = (RadioGroup) findViewById(R.id.register_owner);
+        rg_roofrack = (RadioGroup) findViewById(R.id.register_roofrack);
+        rb_owner = (RadioButton) findViewById(R.id.register_owner_yes);
+        rb_owner = (RadioButton) findViewById(R.id.register_owner_no);
 
         inputLayoutName = (TextInputLayout) findViewById(R.id.login_inputtxt_name);
         inputLayoutPhone = (TextInputLayout) findViewById(R.id.login_txtinput_phone);
@@ -208,11 +215,22 @@ public class Register extends AppCompatActivity {
         Main_User.setLicencePlateNumber(ed_plate_num.getText().toString());
         Main_User.setDriverLicenceIdNo(ed_licence_num.getText().toString());
         Main_User.setServiceModel(sp_service_type.getSelectedItemPosition());
-        if(cb_owner.isChecked()){
+        Main_User.setStation(ed_station.getText().toString());
+
+        int radio_owner = rg_owner.getCheckedRadioButtonId();
+        int radio_roofRack = rg_roofrack.getCheckedRadioButtonId();
+        if(radio_owner == R.id.register_owner_yes){
             Main_User.setOwner(1);
         }
         else{
             Main_User.setOwner(0);
+        }
+
+        if(radio_roofRack == R.id.register_roofrack_yes){
+            Main_User.setRoofRack(1);
+        }
+        else{
+            Main_User.setRoofRack(0);
         }
 
         //initialize the body object for the http post request
@@ -222,6 +240,8 @@ public class Register extends AppCompatActivity {
                         "&licencePlateNumber="+Main_User.getLicencePlateNumber() +
                         "&carModelDescription="+Main_User.getCarModelDescription() +
                         "&driverLicenceIdNo="+Main_User.getDriverLicenceIdNo()+
+                        "&station="+Main_User.getStation()+
+                        "&roofRack="+Main_User.getRoofRack()+
                         "&owner="+Main_User.getOwner());
 
         //create the request object from http post

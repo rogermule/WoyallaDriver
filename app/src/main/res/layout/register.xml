@@ -165,16 +165,18 @@
             android:layout_marginBottom="10dp"
 
             />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:orientation="vertical">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:text="@string/register_owner"
+                android:layout_marginBottom="5dp"
                 android:inputType="text"
                 android:textSize="17dp"
                 android:padding="10dp"
@@ -184,8 +186,11 @@
                 android:id="@+id/register_owner"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:padding="10dp"
+                android:layout_marginLeft="30dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
                 <RadioButton
@@ -200,26 +205,20 @@
                     android:text="@string/no"/>
             </RadioGroup>
 
-            <CheckBox
-                android:id="@+id/cb_owner"
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                />
-
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            >
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:text="@string/register_roof_rack"
+                android:layout_marginBottom="5dp"
                 android:inputType="text"
                 android:textSize="17dp"
                 android:padding="10dp"
@@ -230,8 +229,11 @@
               android:id="@+id/register_roofrack"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:layout_marginLeft="20dp"
-              android:padding="10dp"
+              android:layout_marginLeft="30dp"
+              android:paddingTop="5dp"
+              android:paddingBottom="5dp"
+              android:paddingLeft="10dp"
+              android:paddingRight="10dp"
               android:background="@color/white"
               android:orientation="horizontal">
                 <RadioButton

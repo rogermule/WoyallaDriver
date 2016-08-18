@@ -5,9 +5,26 @@ package com.brainup.woyalladriver.Model;
  */
 public class User {
 
-    private String name, phoneNumber,licencePlateNumber,driverLicenceIdNo,carModelDescription;
-    int serviceModel,status,owner;
+    private String name, phoneNumber,licencePlateNumber,driverLicenceIdNo,carModelDescription,station;
+    int serviceModel,status,owner,roofRack;
     double gpsLatitude,gpsLongitude;
+
+    public int getRoofRack() {
+        return roofRack;
+    }
+
+    public void setRoofRack(int roofRack) {
+        this.roofRack = roofRack;
+    }
+
+    public String getStation() {
+        return station;
+    }
+
+    public void setStation(String station) {
+        this.station = station;
+    }
+
 
     public String getName() {
         return name;
