@@ -45,7 +45,7 @@ public class Checkups {
         android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(context);
         builder.setTitle(R.string.app_name)
                 .setMessage(message)
-                .setPositiveButton("Ok", dialogClickListener).show();
+                .setPositiveButton(context.getResources().getString(R.string.ok), dialogClickListener).show();
     }
 
 
@@ -59,7 +59,7 @@ public class Checkups {
         alertDialog.setTitle(R.string.app_name);
 
         // Setting Dialog Message
-        alertDialog.setMessage("GPS is not enabled. Do you want to go to settings menu?");
+        alertDialog.setMessage(context.getResources().getString(R.string.no_gps_found));
 
         // On pressing Settings button
         alertDialog.setPositiveButton("Settings", new DialogInterface.OnClickListener() {
@@ -70,7 +70,7 @@ public class Checkups {
         });
 
         // on pressing cancel button
-        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        alertDialog.setNegativeButton(context.getResources().getString(R.string.nav_exit), new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }

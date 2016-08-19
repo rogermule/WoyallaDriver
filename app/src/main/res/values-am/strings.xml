@@ -60,4 +60,8 @@
     <string name="availability">መገኛ</string>
     <string name="no_client">አዲስ ደንበኛ የሎትም እካሁን</string>
     <string name="nav_lang">ቋንቋ ምረጥ</string>
+    <string name="ok">እሺ</string>
+    <string name="no_connection_found">ኢንተርኔት የለም። ወያላ በትክክል እንዲሰራ እባኮዎን የስልኮትን ኢንተርኔት ይክፈቱ ወይም ዋይፋይ ጋር ይገናኙ።</string>
+    <string name="no_gps_found">GPS ዝግ ነው። ወያላ በትክክል እንዲሰራ እባኮዎን GPS ይክፈቱ። ለመክፈት Setting ሚለውን ይምረጡ።</string>
+    <string name="dialog_select_language"></string>
 </resources>

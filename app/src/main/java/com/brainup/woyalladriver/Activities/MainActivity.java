@@ -140,9 +140,6 @@ public class MainActivity extends AppCompatActivity
                     mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 }
             }
-            else{
-                Log.i("changemap","Map type is null");
-            }
 
     }
 
@@ -155,7 +152,7 @@ public class MainActivity extends AppCompatActivity
             return false;
         }
         else if(!Checkups.isNetworkAvailable(MainActivity.this)){
-            Checkups.showDialog("No connection found!\nPlease open cellular data or connect to wifi for the app to work properly.",MainActivity.this);
+            Checkups.showDialog(MainActivity.this.getResources().getString(R.string.no_connection_found),MainActivity.this);
             return false;
         }
         else if(!gps.canGetLocation()){

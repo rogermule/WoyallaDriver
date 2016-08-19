@@ -29,8 +29,10 @@
     <string name="about">Are you the car owner. asethalksjdg asdkgj;las alsdkgj alskdjg ;alsdkjg al;skdjg ;asdg </string>
     <string name="yes">Yes </string>
     <string name="no">No</string>
+    <string name="ok">Ok</string>
     <string name="availability">Availability</string>
     <string name="no_client">You do not have new client yet.</string>
+
 
     <string name="err_msg_name">Enter your full name here</string>
     <string name="err_msg_phone">Enter a valid phone number</string>
@@ -76,4 +78,6 @@
     <string name="dialog_creating_account">Creating account .. </string>
     <string name="dialog_select_language">Select Language / ቋንቋ ምረጥ</string>
 
+    <string name="no_connection_found">No connection found! Please open cellular data or connect to wifi for the app to work properly.</string>
+    <string name="no_gps_found">GPS is not enabled. Do you want to go to settings menu?</string>
 </resources>

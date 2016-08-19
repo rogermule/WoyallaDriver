@@ -6,6 +6,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
@@ -18,7 +20,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -36,6 +37,7 @@ import org.json.JSONTokener;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -55,10 +57,9 @@ public class Register extends AppCompatActivity {
 	private Context myContext;
 	EditText ed_phoneNumber, ed_name,ed_plate_num,ed_car_model,ed_licence_num,ed_station;
     RadioGroup rg_owner,rg_roofrack;
-    RadioButton rb_owner, rb_roofrack;
 
     private Spinner sp_service_type;
-	Button bt_login;
+	Button bt_login, bt_change_language;
 	private TextInputLayout inputLayoutPhone, inputLayoutName,inputLayoutCarModel,inputLayoutPlateNumber,inputLayoutLicenceNumber;
     private User Main_User;
     ProgressDialog myDialog;
@@ -68,6 +69,7 @@ public class Register extends AppCompatActivity {
     MediaType mediaType;
     RequestBody body;
     Request request;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -88,10 +90,11 @@ public class Register extends AppCompatActivity {
         ed_station = (EditText) findViewById(R.id.login_station);
         sp_service_type = (Spinner) findViewById(R.id.sp_service_type);
 		bt_login = (Button) findViewById(R.id.btnLogin);
+        bt_change_language = (Button) findViewById(R.id.register_btn_change_lang);
         rg_owner = (RadioGroup) findViewById(R.id.register_owner);
         rg_roofrack = (RadioGroup) findViewById(R.id.register_roofrack);
-        rb_owner = (RadioButton) findViewById(R.id.register_owner_yes);
-        rb_owner = (RadioButton) findViewById(R.id.register_owner_no);
+
+
 
         inputLayoutName = (TextInputLayout) findViewById(R.id.login_inputtxt_name);
         inputLayoutPhone = (TextInputLayout) findViewById(R.id.login_txtinput_phone);
@@ -114,7 +117,17 @@ public class Register extends AppCompatActivity {
         //initialize the User object
         Main_User = new User();
         spinnerInit();   //populate the service type spinner
+        handleChangeLanguage();
 	}
+
+    private void handleChangeLanguage() {
+        bt_change_language.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectLanguage();
+            }
+        });
+    }
 
     public void spinnerInit() {
         //initialize the service ArrayList which holds the services available
@@ -521,5 +534,59 @@ public class Register extends AppCompatActivity {
             }
         }
     }
+
+    private void setLanguage(String lang) {
+        SharedPreferences settings = getSharedPreferences(WoyallaDriver.PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        Locale locale;
+        Configuration configuration;
+        switch (lang){
+            case "am":
+                editor.putString("lang","am");
+                editor.commit();
+                locale = new Locale("am");
+                Locale.setDefault(locale);
+                configuration = new Configuration();
+                configuration.locale = locale;
+                getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
+                break;
+            case "en":
+                editor.putString("lang","en");
+                editor.commit();
+                locale = new Locale("en");
+                Locale.setDefault(locale);
+                configuration = new Configuration();
+                configuration.locale = locale;
+                getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
+                break;
+        }
+        this.finish();
+        startActivity( new Intent(Register.this,Register.class));
+    }
+
+    /**
+     * Select language dialog
+     * */
+    public void selectLanguage() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        setLanguage("en");
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        setLanguage("am");
+                        break;
+                }
+            }
+        };
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(Register.this);
+        builder.setTitle(R.string.app_name)
+                .setMessage(getResources().getString(R.string.dialog_select_language))
+                .setPositiveButton("English", dialogClickListener)
+                .setNegativeButton("አማርኛ",dialogClickListener).show();
+    }
+
 
 }

@@ -25,13 +25,19 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Register.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Register.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Splash.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Splash.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Checkups.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Checkups.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/register.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/register.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-am/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-am/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <ignored path="WoyallaDriver.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -47,6 +53,26 @@
     <option name="PATCH_PATH" value="" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <PATH>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ExternalProjectsStructure$RootNode" />
+              </PATH_ELEMENT>
+              <PATH_ELEMENT>
+                <option name="myItemId" value="WoyallaDriver" />
+                <option name="myItemType" value="com.intellij.openapi.externalSystem.view.ProjectNode" />
+              </PATH_ELEMENT>
+            </PATH>
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
   <component name="FavoritesManager">
     <favorites_list name="WoyallaDriver" />
   </component>
@@ -65,21 +91,13 @@
       <file leaf-file-name="Splash.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Splash.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.041062802">
-              <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+            <state vertical-scroll-proportion="2.067633">
+              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
               <folding>
-                <element signature="e#850#1080#0" expanded="true" />
-                <element signature="e#1079#1080#0" expanded="true" />
-                <element signature="e#1400#1493#0" expanded="true" />
-                <element signature="e#1492#1493#0" expanded="true" />
-                <element signature="e#1683#1776#0" expanded="true" />
-                <element signature="e#1775#1776#0" expanded="true" />
-                <element signature="e#1972#2254#0" expanded="true" />
-                <element signature="e#2253#2254#0" expanded="true" />
-                <element signature="e#2391#2408#0" expanded="true" />
-                <element signature="e#2426#2483#0" expanded="true" />
-                <element signature="e#3136#3137#0" expanded="true" />
-                <element signature="e#3160#3161#0" expanded="true" />
+                <element signature="e#700#930#0" expanded="true" />
+                <element signature="e#929#930#0" expanded="true" />
+                <element signature="e#1545#1546#0" expanded="true" />
+                <element signature="e#1569#1570#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -89,28 +107,28 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+              <caret line="154" column="59" selection-start-line="154" selection-start-column="59" selection-end-line="154" selection-end-column="59" />
               <folding>
                 <element signature="e#3036#3067#0" expanded="true" />
                 <element signature="e#3069#3101#0" expanded="true" />
                 <element signature="e#4582#4601#0" expanded="true" />
-                <element signature="e#7644#7718#0" expanded="true" />
-                <element signature="e#8262#8337#0" expanded="true" />
-                <element signature="e#10603#10676#0" expanded="true" />
-                <element signature="e#11266#11342#0" expanded="true" />
-                <element signature="e#13230#13292#0" expanded="true" />
-                <element signature="e#13455#13795#0" expanded="true" />
-                <element signature="e#13794#13795#0" expanded="true" />
-                <element signature="e#13950#13967#0" expanded="true" />
-                <element signature="e#18140#18204#0" expanded="true" />
-                <element signature="e#18248#18313#0" expanded="true" />
-                <element signature="e#19253#19270#0" expanded="true" />
-                <element signature="e#19976#20019#0" expanded="true" />
-                <element signature="e#21967#22436#0" expanded="true" />
-                <element signature="e#22435#22436#0" expanded="true" />
-                <element signature="e#22591#22608#0" expanded="true" />
-                <element signature="e#22638#22695#0" expanded="true" />
-                <element signature="e#25224#25288#0" expanded="true" />
+                <element signature="e#7531#7605#0" expanded="true" />
+                <element signature="e#8149#8224#0" expanded="true" />
+                <element signature="e#10490#10563#0" expanded="true" />
+                <element signature="e#11153#11229#0" expanded="true" />
+                <element signature="e#13117#13179#0" expanded="true" />
+                <element signature="e#13342#13682#0" expanded="true" />
+                <element signature="e#13681#13682#0" expanded="true" />
+                <element signature="e#13837#13854#0" expanded="true" />
+                <element signature="e#18027#18091#0" expanded="true" />
+                <element signature="e#18135#18200#0" expanded="true" />
+                <element signature="e#19140#19157#0" expanded="true" />
+                <element signature="e#19863#19906#0" expanded="true" />
+                <element signature="e#21854#22323#0" expanded="true" />
+                <element signature="e#22322#22323#0" expanded="true" />
+                <element signature="e#22478#22495#0" expanded="true" />
+                <element signature="e#22525#22582#0" expanded="true" />
+                <element signature="e#25111#25175#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -2398,7 +2416,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Model/Client.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Database/SQL_Helper.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Database/Database.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Checkups.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/splash.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Notifications.java" />
@@ -2412,16 +2429,17 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Model/User.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Services/GPSTrackerService.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Register.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/register.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/content_main.xml" />
         <option value="$PROJECT_DIR$/app/build/intermediates/res/merged/debug/values/values.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/WoyallaDriver.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/menu/activity_main_drawer.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Language.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Register.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Splash.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/register.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Checkups.java" />
       </list>
     </option>
   </component>
@@ -2596,6 +2614,28 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="woyalladriver" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WoyallaDriver" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="woyalladriver" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Activities" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2921,7 +2961,7 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1996587" sideWeight="0.50610685" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Android Monitor" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24573378" sideWeight="0.49389312" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24573378" sideWeight="0.49389312" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3114504" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32935154" sideWeight="0.49694657" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -2931,7 +2971,7 @@
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2427481" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977098" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
@@ -3029,13 +3069,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="3637" column="28" selection-start-line="3637" selection-start-column="28" selection-end-line="3637" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Checkups.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.0751173">
-          <caret line="11" column="33" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -3257,27 +3290,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Register.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34299517">
-          <caret line="75" column="37" selection-start-line="75" selection-start-column="37" selection-end-line="75" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/register.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1615599">
-          <caret line="25" column="6" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="6" />
-          <folding>
-            <element signature="e#991#1022#0" expanded="true" />
-            <element signature="e#1868#1887#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/WoyallaDriver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -3294,19 +3306,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.61772853">
-          <caret line="62" column="26" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="android-dummy://E:/Projects/BrainUpTech/App/WoyallaDriver/app/Translations Editor">
-      <provider selected="true" editor-type-id="string-resource-editor">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values-am/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.047091413">
@@ -3320,8 +3319,8 @@
         <state vertical-scroll-proportion="0.45169082">
           <caret line="50" column="45" selection-start-line="50" selection-start-column="45" selection-end-line="50" selection-end-column="45" />
           <folding>
-            <element signature="e#2455#2456#0" expanded="true" />
-            <element signature="e#2483#2484#0" expanded="true" />
+            <element signature="e#2455#2456#0" expanded="false" />
+            <element signature="e#2483#2484#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -3365,49 +3364,109 @@
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <caret line="154" column="59" selection-start-line="154" selection-start-column="59" selection-end-line="154" selection-end-column="59" />
           <folding>
             <element signature="e#3036#3067#0" expanded="true" />
             <element signature="e#3069#3101#0" expanded="true" />
             <element signature="e#4582#4601#0" expanded="true" />
-            <element signature="e#7644#7718#0" expanded="true" />
-            <element signature="e#8262#8337#0" expanded="true" />
-            <element signature="e#10603#10676#0" expanded="true" />
-            <element signature="e#11266#11342#0" expanded="true" />
-            <element signature="e#13230#13292#0" expanded="true" />
-            <element signature="e#13455#13795#0" expanded="true" />
-            <element signature="e#13794#13795#0" expanded="true" />
-            <element signature="e#13950#13967#0" expanded="true" />
-            <element signature="e#18140#18204#0" expanded="true" />
-            <element signature="e#18248#18313#0" expanded="true" />
-            <element signature="e#19253#19270#0" expanded="true" />
-            <element signature="e#19976#20019#0" expanded="true" />
-            <element signature="e#21967#22436#0" expanded="true" />
-            <element signature="e#22435#22436#0" expanded="true" />
-            <element signature="e#22591#22608#0" expanded="true" />
-            <element signature="e#22638#22695#0" expanded="true" />
-            <element signature="e#25224#25288#0" expanded="true" />
+            <element signature="e#7531#7605#0" expanded="true" />
+            <element signature="e#8149#8224#0" expanded="true" />
+            <element signature="e#10490#10563#0" expanded="true" />
+            <element signature="e#11153#11229#0" expanded="true" />
+            <element signature="e#13117#13179#0" expanded="true" />
+            <element signature="e#13342#13682#0" expanded="true" />
+            <element signature="e#13681#13682#0" expanded="true" />
+            <element signature="e#13837#13854#0" expanded="true" />
+            <element signature="e#18027#18091#0" expanded="true" />
+            <element signature="e#18135#18200#0" expanded="true" />
+            <element signature="e#19140#19157#0" expanded="true" />
+            <element signature="e#19863#19906#0" expanded="true" />
+            <element signature="e#21854#22323#0" expanded="true" />
+            <element signature="e#22322#22323#0" expanded="true" />
+            <element signature="e#22478#22495#0" expanded="true" />
+            <element signature="e#22525#22582#0" expanded="true" />
+            <element signature="e#25111#25175#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Checkups.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66183573">
+          <caret line="47" column="79" selection-start-line="47" selection-start-column="79" selection-end-line="47" selection-end-column="79" />
+          <folding>
+            <element signature="e#1514#1531#0" expanded="true" />
+            <element signature="e#2051#2106#0" expanded="true" />
+            <element signature="e#2199#2464#0" expanded="true" />
+            <element signature="e#2463#2464#0" expanded="true" />
+            <element signature="e#2543#2594#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/register.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.09470752">
+          <caret line="22" column="33" selection-start-line="22" selection-start-column="33" selection-end-line="22" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Register.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2874396">
+          <caret line="73" column="56" selection-start-line="73" selection-start-column="56" selection-end-line="73" selection-end-column="56" />
+          <folding>
+            <element signature="e#4583#4733#0" expanded="true" />
+            <element signature="e#4732#4733#0" expanded="true" />
+            <element signature="e#5765#5830#0" expanded="true" />
+            <element signature="e#6503#6520#0" expanded="true" />
+            <element signature="e#6551#6623#0" expanded="true" />
+            <element signature="e#11757#11827#0" expanded="true" />
+            <element signature="e#12181#12243#0" expanded="true" />
+            <element signature="e#13716#13786#0" expanded="true" />
+            <element signature="e#14302#14364#0" expanded="true" />
+            <element signature="e#15242#15307#0" expanded="true" />
+            <element signature="e#15925#15942#0" expanded="true" />
+            <element signature="e#16677#16694#0" expanded="true" />
+            <element signature="e#17054#17087#0" expanded="true" />
+            <element signature="e#17400#17432#0" expanded="true" />
+            <element signature="e#17744#17781#0" expanded="true" />
+            <element signature="e#18105#18138#0" expanded="true" />
+            <element signature="e#18474#18509#0" expanded="true" />
+            <element signature="e#21355#21824#0" expanded="true" />
+            <element signature="e#21823#21824#0" expanded="true" />
+            <element signature="e#21975#21992#0" expanded="true" />
+            <element signature="e#22022#22079#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="android-dummy://E:/Projects/BrainUpTech/App/WoyallaDriver/app/Translations Editor">
+      <provider selected="true" editor-type-id="string-resource-editor">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4238227">
+          <caret line="36" column="51" selection-start-line="36" selection-start-column="51" selection-end-line="36" selection-end-column="51" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/brainup/woyalladriver/Activities/Splash.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.041062802">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
+        <state vertical-scroll-proportion="2.067633">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
           <folding>
-            <element signature="e#850#1080#0" expanded="true" />
-            <element signature="e#1079#1080#0" expanded="true" />
-            <element signature="e#1400#1493#0" expanded="true" />
-            <element signature="e#1492#1493#0" expanded="true" />
-            <element signature="e#1683#1776#0" expanded="true" />
-            <element signature="e#1775#1776#0" expanded="true" />
-            <element signature="e#1972#2254#0" expanded="true" />
-            <element signature="e#2253#2254#0" expanded="true" />
-            <element signature="e#2391#2408#0" expanded="true" />
-            <element signature="e#2426#2483#0" expanded="true" />
-            <element signature="e#3136#3137#0" expanded="true" />
-            <element signature="e#3160#3161#0" expanded="true" />
+            <element signature="e#700#930#0" expanded="true" />
+            <element signature="e#929#930#0" expanded="true" />
+            <element signature="e#1545#1546#0" expanded="true" />
+            <element signature="e#1569#1570#0" expanded="true" />
           </folding>
         </state>
       </provider>
