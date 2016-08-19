@@ -64,11 +64,9 @@ public class MainActivity extends AppCompatActivity
     private GoogleMap mMap; //map object
     private SupportMapFragment mapFragment; //fragment that holds the map object
     private Button btn_showClient;   //button to show the client location
-//    private Button changeMapType;   //button to show the client location
     private Switch avaialbilitySwitch;    //toggle button to switch the drivers availability on or off
     private GPSTracker gps;
 
-//    private ImageButton zoomIn, zoomOut;
     private TextView client_available;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,11 +98,6 @@ public class MainActivity extends AppCompatActivity
         //initialize client available text view which tells if a client is available
         client_available = (TextView) findViewById(R.id.tv_notification);
 
-/*
-        //initialize the zoom in and zoom out buttons and change map type button
-        zoomIn = (ImageButton) findViewById(R.id.ib_zoom_in);
-        zoomOut = (ImageButton) findViewById(R.id.ib_zoom_out);
-        changeMapType = (Button) findViewById(R.id.btn_change_map);*/
 
         //initialize the gps tracker object
         gps  = new GPSTracker(this);
@@ -114,9 +107,9 @@ public class MainActivity extends AppCompatActivity
         initAvailabilitySwitch();
         handleAvailabilitySwitch();
         handleShowClientButton();
-//        handleZoom();
         handleClientAvailableTextView();
     }
+
 
     private void checkIfFromNotification() {
         Bundle bundle = this.getIntent().getExtras();
@@ -152,22 +145,6 @@ public class MainActivity extends AppCompatActivity
             }
 
     }
-/*
-    private void handleZoom() {
-        zoomOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMap.animateCamera(CameraUpdateFactory.zoomOut());
-            }
-        });
-
-        zoomIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mMap.animateCamera(CameraUpdateFactory.zoomIn());
-            }
-        });
-    }*/
 
     private boolean checkGPS() {
         gps = new GPSTracker(MainActivity.this);
@@ -524,29 +501,30 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences.Editor editor = settings.edit();
         Locale locale;
         Configuration configuration;
+        Intent intent;
         switch (lang){
-            case "amh":
-                editor.putString("lang","amh");
+            case "am":
+                editor.putString("lang","am");
                 editor.commit();
                 locale = new Locale("am");
                 Locale.setDefault(locale);
                 configuration = new Configuration();
                 configuration.locale = locale;
                 getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
-
                 break;
-            case "eng":
-                editor.putString("lang","eng");
+            case "en":
+                editor.putString("lang","en");
                 editor.commit();
-
                 locale = new Locale("en");
                 Locale.setDefault(locale);
                 configuration = new Configuration();
                 configuration.locale = locale;
                 getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
-
                 break;
         }
+        this.finish();
+        intent = new Intent(MainActivity.this,MainActivity.class);
+        startActivity(intent);
     }
 
     /**
@@ -558,10 +536,10 @@ public class MainActivity extends AppCompatActivity
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        setLanguage("eng");
+                        setLanguage("en");
                         break;
                     case DialogInterface.BUTTON_NEGATIVE:
-                        setLanguage("amh");
+                        setLanguage("am");
                         break;
                 }
             }
@@ -572,7 +550,6 @@ public class MainActivity extends AppCompatActivity
                 .setPositiveButton("English", dialogClickListener)
                 .setNegativeButton("አማርኛ",dialogClickListener).show();
     }
-
 
 
 

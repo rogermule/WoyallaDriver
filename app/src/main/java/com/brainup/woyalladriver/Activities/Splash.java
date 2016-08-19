@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Window;
 
 import com.brainup.woyalladriver.Database.Database;
+import com.brainup.woyalladriver.Language;
 import com.brainup.woyalladriver.R;
 import com.brainup.woyalladriver.WoyallaDriver;
 
@@ -17,14 +18,15 @@ import java.util.Locale;
 
 
 public class Splash extends AppCompatActivity {
-
+	Language language;
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
-
+		language = new Language(this);
+		language.init();
 
 		Thread splash = new Thread(){
         	@Override
@@ -43,7 +45,6 @@ public class Splash extends AppCompatActivity {
 
 
 	public synchronized void getNextActivity() {
-
 
 			int count = WoyallaDriver.myDatabase.count(Database.Table_USER);
 			if (count == 1) {
@@ -75,9 +76,6 @@ public class Splash extends AppCompatActivity {
 	}
 
 
-	/**
-	 * Show message
-	 * */
 	public void selectLanguage() {
 		DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
 			@Override
@@ -102,7 +100,7 @@ public class Splash extends AppCompatActivity {
 	public void setLanguage(){
 		SharedPreferences settings = getSharedPreferences(WoyallaDriver.PREFS_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
-		editor.putString("lang","amh");
+		editor.putString("lang","am");
 		editor.commit();
 
 		Locale locale = new Locale("am");
