@@ -312,7 +312,7 @@ public class MainActivity extends AppCompatActivity
         if(latitudeString!=null && longitudeString!=null){
             double latitude = Double.parseDouble(latitudeString);
             double longitude = Double.parseDouble(longitudeString);
-            moveMapForClient(latitude,longitude,clientName);
+            moveMapForClient(latitude,longitude,clientName,clientPhone);
             //ShowDialog("Client Name: " + clientName + "\nClient Phone: " + clientPhone +"\n\nYou can view the location on the map now!");
         }
 
@@ -345,7 +345,7 @@ public class MainActivity extends AppCompatActivity
      * Get latitude and longitude from database and move the map to that specific place
      * the background service will update the current location int he
      */
-    private void moveMapForClient(double latitude, double longitude,String title) {
+    private void moveMapForClient(double latitude, double longitude,String title,String snippet) {
         //Creating a LatLng Object to store Coordinates
         LatLng latLng = new LatLng(latitude,longitude);
 
@@ -354,6 +354,7 @@ public class MainActivity extends AppCompatActivity
         //Adding marker to map
         mMap.addMarker(new MarkerOptions()
                 .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_client_map))
+                .snippet(snippet)
                 .position(latLng) //setting position
                 .draggable(true) //Making the marker draggable
                 .title(title)); //Adding a title

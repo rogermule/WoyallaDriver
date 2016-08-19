@@ -113,16 +113,16 @@ public class GPSTrackerService extends JobService {
 
                                 if (myObject.get("status").toString().startsWith("ok")) {
                                     Log.i("myResponse", myObject.get("description").toString());
-                                    /**
-                                     * If the driver status is on service
-                                     */
+
                                     boolean isDataExist = false;
                                     try {
                                         isDataExist = myObject.get("data").equals(null) ? false : true;
                                     } catch (Exception e) {
                                         isDataExist = false;
                                     }
-
+                                    /**
+                                     * If the driver status is on service
+                                     */
                                     if (isDataExist) {
                                         JSONObject json_response = myObject.getJSONObject("data");
                                         Log.i("dataResponse", json_response.toString());
