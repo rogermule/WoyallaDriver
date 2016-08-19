@@ -146,7 +146,7 @@ public class Register extends AppCompatActivity {
                     submitForm();
                 }
                 else{
-                    ShowDialog("Connection Error. Please try again");
+                    ShowDialog(Register.this.getResources().getString(R.string.error_connection));
                 }
             }
 
@@ -185,7 +185,7 @@ public class Register extends AppCompatActivity {
         //initialize the progress dialog
         myDialog = new ProgressDialog(this);
         myDialog.setTitle(R.string.app_name);
-        myDialog.setMessage("Creating the Account ....");
+        myDialog.setMessage(Register.this.getResources().getString(R.string.dialog_creating_account));
         myDialog.setCancelable(false);
         myDialog.show();
 
@@ -426,9 +426,8 @@ public class Register extends AppCompatActivity {
 
     private boolean validatePhone() {
         if (ed_phoneNumber.getText().toString().trim().isEmpty() || ed_phoneNumber.getText().toString().length()>10 || ed_phoneNumber.getText().toString().length()<10) {
-            inputLayoutPhone.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
-            inputLayoutPhone.setError(getString(R.string.err_msg_phone));
-            //requestFocus(ed_phoneNumber);
+            ed_phoneNumber.setError(getString(R.string.err_msg_phone));
+            requestFocus(ed_phoneNumber);
             return false;
         }
         else {
@@ -438,8 +437,8 @@ public class Register extends AppCompatActivity {
     }
     private boolean validateName() {
         if (ed_name.getText().toString().trim().isEmpty()) {
-            inputLayoutName.setError(getString(R.string.err_msg_name));
-            //requestFocus(ed_name);
+            ed_name.setError(getString(R.string.err_msg_name));
+            requestFocus(ed_name);
             return false;
         } else {
             inputLayoutName.setErrorEnabled(false);
@@ -449,8 +448,8 @@ public class Register extends AppCompatActivity {
     }
     private boolean validateCarModel() {
         if (ed_car_model.getText().toString().trim().isEmpty()) {
-            inputLayoutCarModel.setError(getString(R.string.err_msg_car_model));
-            //requestFocus(ed_car_model);
+            ed_car_model.setError(getString(R.string.err_msg_car_model));
+            requestFocus(ed_car_model);
             return false;
         } else {
             inputLayoutCarModel.setErrorEnabled(false);
@@ -460,7 +459,7 @@ public class Register extends AppCompatActivity {
     }
     private boolean validatePlateNumber() {
         if (ed_plate_num.getText().toString().trim().isEmpty()) {
-            inputLayoutPlateNumber.setError(getString(R.string.err_msg_plate));
+            ed_plate_num.setError(getString(R.string.err_msg_plate));
             //requestFocus(ed_plate_num);
             return false;
         } else {
@@ -472,7 +471,7 @@ public class Register extends AppCompatActivity {
 
     private boolean validateLicenceNumber() {
         if (ed_licence_num.getText().toString().trim().isEmpty()) {
-            inputLayoutLicenceNumber.setError(getString(R.string.err_msg_licence));
+            ed_licence_num.setError(getString(R.string.err_msg_licence));
             //requestFocus(ed_licence_num);
             return false;
         } else {
@@ -481,6 +480,7 @@ public class Register extends AppCompatActivity {
 
         return true;
     }
+
     private void requestFocus(View view) {
         if (view.requestFocus()) {
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);

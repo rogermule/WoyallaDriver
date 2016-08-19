@@ -6,7 +6,9 @@ import android.content.ActivityNotFoundException;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -45,6 +47,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 
 import java.io.IOException;
+import java.util.Locale;
 
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -336,11 +339,11 @@ public class MainActivity extends AppCompatActivity
             double latitude = Double.parseDouble(latitudeString);
             double longitude = Double.parseDouble(longitudeString);
             moveMapForClient(latitude,longitude,clientName);
-            ShowDialog("Client Name: " + clientName + "\nClient Phone: " + clientPhone +"\n\nYou can view the location on the map now!");
+            //ShowDialog("Client Name: " + clientName + "\nClient Phone: " + clientPhone +"\n\nYou can view the location on the map now!");
         }
 
         else{
-            ShowDialog("You don't have client yet!");
+            ShowDialog(MainActivity.this.getResources().getString(R.string.no_client));
         }
     }
     /**
@@ -393,8 +396,11 @@ public class MainActivity extends AppCompatActivity
      * Get latitude and longitude from database and move the map to that specific place
      * the background service will update the current location int he
      */
-    private void moveMap(double latitude, double longitude,String title) {
+    private void moveMap(String title) {
         //Creating a LatLng Object to store Coordinates
+        gps = new GPSTracker(this);
+        double latitude = gps.getLatitude();
+        double longitude = gps.getLongitude();
 
         if(!mMap.equals(null)) {
             mMap.clear();
@@ -462,7 +468,7 @@ public class MainActivity extends AppCompatActivity
          * First get the location data from the database.
          * then view it on the map
          */
-        moveMap(getLatitudeFromDb(),getLongitudeFromDb(),MainActivity.this.getResources().getString(R.string.my_location));
+        moveMap(MainActivity.this.getResources().getString(R.string.my_location));
         Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_reload),Toast.LENGTH_LONG).show();
     }
 
@@ -513,6 +519,61 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    private void setLanguage(String lang) {
+        SharedPreferences settings = getSharedPreferences(WoyallaDriver.PREFS_NAME, 0);
+        SharedPreferences.Editor editor = settings.edit();
+        Locale locale;
+        Configuration configuration;
+        switch (lang){
+            case "amh":
+                editor.putString("lang","amh");
+                editor.commit();
+                locale = new Locale("am");
+                Locale.setDefault(locale);
+                configuration = new Configuration();
+                configuration.locale = locale;
+                getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
+
+                break;
+            case "eng":
+                editor.putString("lang","eng");
+                editor.commit();
+
+                locale = new Locale("en");
+                Locale.setDefault(locale);
+                configuration = new Configuration();
+                configuration.locale = locale;
+                getBaseContext().getResources().updateConfiguration(configuration,getBaseContext().getResources().getDisplayMetrics());
+
+                break;
+        }
+    }
+
+    /**
+     * Select language dialog
+     * */
+    public void selectLanguage() {
+        DialogInterface.OnClickListener dialogClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case DialogInterface.BUTTON_POSITIVE:
+                        setLanguage("eng");
+                        break;
+                    case DialogInterface.BUTTON_NEGATIVE:
+                        setLanguage("amh");
+                        break;
+                }
+            }
+        };
+        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(MainActivity.this);
+        builder.setTitle(R.string.app_name)
+                .setMessage(getResources().getString(R.string.dialog_select_language))
+                .setPositiveButton("English", dialogClickListener)
+                .setNegativeButton("አማርኛ",dialogClickListener).show();
+    }
+
+
 
 
     @Override
@@ -561,6 +622,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_about) {
             intent = new Intent(this,About.class);
             startActivity(intent);
+        }else if (id == R.id.nav_lang) {
+            selectLanguage();
         } else if (id == R.id.nav_logout) {
             logOut();
         } else if (id == R.id.nav_share) {
@@ -579,12 +642,12 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        gps = new GPSTracker(this);
         mMap.getUiSettings().setZoomControlsEnabled(true);
-        moveMap(gps.getLatitude(),gps.getLongitude(),"My Location");
+        moveMap(MainActivity.this.getResources().getString(R.string.my_location));
 
     }
 

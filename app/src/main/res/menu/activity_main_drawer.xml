@@ -14,6 +14,10 @@
             android:id="@+id/nav_logout"
             android:icon="@android:drawable/ic_lock_idle_charging"
             android:title="@string/nav_logout" />
+        <item
+            android:id="@+id/nav_lang"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="@string/nav_lang" />
 
     </group>
 

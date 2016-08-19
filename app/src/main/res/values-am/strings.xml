@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="about">ስለ እና ብዙ ምናወራው ነገር አለ</string>
+    <string name="action_settings">ማስተካከያ</string>
+    <string name="app_name">ወያላ ሹፌር</string>
+    <string name="btn_login">ግባ</string>
+    <string name="call">ታክሲ ለማግኘት ደውል</string>
+    <string name="change_map_type">የካርታ አይነት ቀይር</string>
+    <string name="comment">አስተያየት ስጥ</string>
+    <string name="comment_write">አስተያየቶን እዚህ ፃፍ</string>
+    <string name="comment_your">አስተያየት</string>
+    <string name="dialog_creating_account">አካውንት እየተፈጠረ ነው</string>
+    <string name="err_msg_car_model">የመኪያ አይነት በትክክል ያስገቡ</string>
+    <string name="err_msg_comment">አስተያየት በትክክል ያስገቡ</string>
+    <string name="err_msg_licence">መንጃ ፈቃድ በትክክል ያስገቡ</string>
+    <string name="err_msg_name">ሙሉ ስሞትን በትክክል ያስገቡ</string>
+    <string name="err_msg_phone">ስልክ ቁጥሮን በትክክል ያስገቡ</string>
+    <string name="err_msg_plate">የመኪናዎትን ታርጋ በትክክል ያስቡ</string>
+    <string name="error_general">ችግር ተፈጥራል ስልዚህ እባኮትን እንደገና ይሞክሩ</string>
+    <string name="error_connection">የኢነተርኔት ችግር ተፈጥራል ስልዚህ እባኮትን እንደገና ይሞክሩ</string>
+    <string name="hint_car_model">የሚኪናዎትን አይነት ያስገቡ</string>
+    <string name="hint_licence">የመንጃ ፈቃድዎን ያስገቡ</string>
+    <string name="hint_name">ሙሉ ስሞትን ያስገቡ</string>
+    <string name="hint_phone">ስልክ ቁጥሮን ያስገቡ</string>
+    <string name="hint_plate_number">የመኪናዎትን ታርጋ ያስገቡ</string>
+    <string name="hint_station">መገኛዎትን ያስገቡ</string>
+    <string name="my_location">የኔ አድራሻ</string>
+    <string name="nav_about">ስለ ወያላ</string>
+    <string name="nav_comment">አስተያየት ስጥ</string>
+    <string name="nav_exit">ዝጋ</string>
+    <string name="nav_home">ቤት</string>
+    <string name="nav_logout">ሙሉ ለሙሉ ውጣ</string>
+    <string name="nav_rate">ነጥብ ስጥ</string>
+    <string name="nav_share">አጋራ</string>
+    <string name="nav_sub_title">ደንበኞችን በቀላሉ ያግኙ</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="new_client">አዲስ ደንበኛ አሎት</string>
+    <string name="no">አይ</string>
+    <string name="notification_bundle_key">newDriver</string>
+    <string name="register_owner">አመኪናው ባለቤት ኖት?</string>
+    <string name="register_roof_rack">መኪናው እቃ መጫኛ አለው?</string>
+    <string name="show_map">የደንበኛ አድራሻ አሳይ</string>
+    <string name="toast_availability_off">መገኛዎት ጠፍቷል</string>
+    <string name="toast_availability_on">መገኛዎት ተከፍቷል</string>
+    <string name="toast_comment_error">ይቅርታ ችግር ተፈጥሩዋል፡፡ አስተያየቶ አልተላከም ስለዚህ እነደገና ይላኩ።</string>
+    <string name="toast_comment_ok">አስተያየቶ በትክክል ተልኳል</string>
+    <string name="toast_register_ok_new">አዲስ አካውንቶ ተፈጥሯል</string>
+    <string name="toast_register_ok_update">ነባር አካውንቶ በአዲሱ ተተክቷል</string>
+    <string name="toast_reload">በትክክል ታድሷል። የቀደመው ደንበኛዎ መረጃ ጠፍቷል</string>
+    <string name="toast_status_sent_error">መረጃው ወደ ሰረቨር አልተላከም</string>
+    <string name="toast_status_sent_ok">መረጃው ወደ ሰረቨር ተልኳል</string>
+    <string name="update_my_location">አድስ</string>
+    <string name="yes">አዎ</string>
+    <string name="response_data">data</string>
+    <string name="response_error">error</string>
+    <string name="response_ok">ok</string>
+    <string name="google_maps_key" translatable="false">AIzaSyDaPXcWKfViH71hLmPyutQUft3wHKJnHXw</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="register_notification">እባኮትን መረጃውን በጥንቃቄ ያስገቡ</string>
+    <string name="availability">መገኛ</string>
+    <string name="no_client">አዲስ ደንበኛ የሎትም እካሁን</string>
+    <string name="nav_lang">ቋንቋ ምረጥ</string>
+</resources>

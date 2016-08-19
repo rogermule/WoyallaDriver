@@ -10,13 +10,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    android:gravity="center"
     >
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:layout_gravity="center"
     android:orientation="vertical"
     android:padding="10dp" >
 
@@ -27,7 +25,14 @@
     android:src="@drawable/logo"
     />
 
-
+<TextView
+    android:layout_marginTop="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="16dp"
+    android:text="@string/register_notification"
+    android:textColor="@color/white"
+    />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,30 +46,32 @@
         <android.support.design.widget.TextInputLayout
             android:id="@+id/login_inputtxt_name"
             android:layout_width="match_parent"
+            android:layout_marginBottom="10dp"
             android:layout_height="wrap_content">
             <EditText
                 android:id="@+id/login_name"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:hint="@string/hint_name"
                 android:inputType="text"
                 android:padding="10dp"
                 android:singleLine="true"
                 android:textColor="@color/input_login"
+                android:textColorHighlight="@color/white"
+                android:textColorLink="@color/white"
                 android:textColorHint="@color/input_login_hint" />
         </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/login_txtinput_phone"
                 android:layout_width="match_parent"
+                android:layout_marginBottom="10dp"
                 android:layout_height="wrap_content">
                 <EditText
                     android:id="@+id/login_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
                     android:background="@color/white"
                     android:hint="@string/hint_phone"
                     android:maxLength="10"
@@ -176,9 +183,8 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:text="@string/register_owner"
-                android:layout_marginBottom="5dp"
                 android:inputType="text"
-                android:textSize="17dp"
+                android:textSize="16dp"
                 android:padding="10dp"
                 android:textColor="@color/input_login"
                 />
@@ -187,9 +193,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:paddingTop="5dp"
                 android:paddingBottom="5dp"
-                android:paddingLeft="10dp"
+                android:paddingLeft="5dp"
                 android:paddingRight="10dp"
                 android:background="@color/white"
                 android:orientation="horizontal">
@@ -218,10 +223,9 @@
                 android:layout_height="wrap_content"
                 android:background="@color/white"
                 android:text="@string/register_roof_rack"
-                android:layout_marginBottom="5dp"
                 android:inputType="text"
-                android:textSize="17dp"
-                android:padding="10dp"
+                android:textSize="16dp"
+                android:padding="16dp"
                 android:textColor="@color/input_login"
                 />
 

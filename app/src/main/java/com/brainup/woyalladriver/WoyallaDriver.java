@@ -16,6 +16,7 @@ import me.tatarka.support.job.JobScheduler;
 public class WoyallaDriver extends Application {
 
     public static final String API_URL  = "http://weyala.net/api/";
+    public static final String PREFS_NAME = "language";
 //    public static final String API_URL  = "http://192.168.2.100/api.weyala.net/";
 
     private static final int JOB_ID = 10;

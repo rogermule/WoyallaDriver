@@ -58,7 +58,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
-                    android:text="Availability"
+                    android:text="@string/availability"
                     android:textColor="@color/colorPrimary"
                     android:shadowColor="@color/colorPrimary"
                     android:textColorHint="@color/colorPrimary"
