@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
@@ -467,9 +468,9 @@ public class MainActivity extends AppCompatActivity
         };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(R.string.app_name).setMessage("Are you sure you want to Logout?")
-                .setPositiveButton("Yes", dialogClickListener)
-                .setNegativeButton("No", dialogClickListener)
+        builder.setTitle(R.string.app_name).setMessage(this.getString(R.string.logout_title))
+                .setPositiveButton(this.getString(R.string.yes), dialogClickListener)
+                .setNegativeButton(this.getString(R.string.no), dialogClickListener)
                 .show();
     }
 
@@ -550,6 +551,23 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+
+            case 2:
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(MainActivity.this,MainActivity.this.getString(R.string.toast_permission_granted),Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(MainActivity.this,MainActivity.this.getString(R.string.toast_permission_denied),Toast.LENGTH_SHORT).show();
+                    checkGPS();
+                }
+        }
+    }
 
     @Override
     public void onBackPressed() {

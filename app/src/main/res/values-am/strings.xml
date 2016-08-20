@@ -6,7 +6,7 @@
     <string name="btn_login">ግባ</string>
     <string name="call">ታክሲ ለማግኘት ደውል</string>
     <string name="change_map_type">የካርታ አይነት ቀይር</string>
-    <string name="comment">አስተያየት ስጥ</string>
+    <string name="comment">አስተያየት ላክ</string>
     <string name="comment_write">አስተያየቶን እዚህ ፃፍ</string>
     <string name="comment_your">አስተያየት</string>
     <string name="dialog_creating_account">አካውንት እየተፈጠረ ነው</string>
@@ -64,4 +64,9 @@
     <string name="no_connection_found">ኢንተርኔት የለም። ወያላ በትክክል እንዲሰራ እባኮዎን የስልኮትን ኢንተርኔት ይክፈቱ ወይም ዋይፋይ ጋር ይገናኙ።</string>
     <string name="no_gps_found">GPS ዝግ ነው። ወያላ በትክክል እንዲሰራ እባኮዎን GPS ይክፈቱ። ለመክፈት Setting ሚለውን ይምረጡ።</string>
     <string name="dialog_select_language"></string>
+    <string name="comment_sending">አስተያየቶ እየተላከ ነው</string>
+    <string name="logout_title">እርግጠኛ ኖት ሙሉ በሙሉ መውጣት ይፈልጋሉ?</string>
+    <string name="nav_communicate">ተገናኝ</string>
+    <string name="toast_permission_denied">ፈቃድ ከልክለዋል። እባኮትን ፈቃድ ይስጡ።</string>
+    <string name="toast_permission_granted">ፈቃድ ስለሰጡ እናመሰግናለን</string>
 </resources>

@@ -3,7 +3,7 @@
     <string name="title_activity_maps">Weyala Driver</string>
 
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="register_notification">Please fill out the form correctly</string>
@@ -24,6 +24,7 @@
     <string name="comment">Send Comment</string>
     <string name="comment_your">Your Comment</string>
     <string name="comment_write">Write your Comment here</string>
+    <string name="comment_sending">Sending the comment ...</string>
     <string name="register_owner">Are you the car owner?</string>
     <string name="register_roof_rack">Does the car have roof rack?</string>
     <string name="about">Are you the car owner. asethalksjdg asdkgj;las alsdkgj alskdjg ;alsdkjg al;skdjg ;asdg </string>
@@ -63,6 +64,7 @@
     <string name="nav_comment">Comment App</string>
     <string name="nav_exit">Exit</string>
     <string name="nav_lang">Change Language</string>
+    <string name="nav_communicate">Communicate</string>
 
 
     <string name="toast_availability_on">Availability is ON!</string>
@@ -74,10 +76,16 @@
     <string name="toast_comment_error">Sorry something went wrong. \nYour comment is not sent. Please try again.</string>
     <string name="toast_register_ok_new">Your Account has been successfully created.</string>
     <string name="toast_register_ok_update">We found an account with this phone number. We have updated your info with your new data</string>
+    <string name="toast_permission_denied">Permission denied! Please Grant Permission. </string>
+    <string name="toast_permission_granted">Permission granted! Thank you! </string>
 
     <string name="dialog_creating_account">Creating account .. </string>
     <string name="dialog_select_language">Select Language / ቋንቋ ምረጥ</string>
 
     <string name="no_connection_found">No connection found! Please open cellular data or connect to wifi for the app to work properly.</string>
     <string name="no_gps_found">GPS is not enabled. Do you want to go to settings menu?</string>
+
+    <string name="logout_title">Are you sure you want to Logout?</string>
+
+
 </resources>
