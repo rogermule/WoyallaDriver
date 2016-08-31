@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="about">ስለ እና ብዙ ምናወራው ነገር አለ</string>
+    <string name="about">ወያላ ታክሲ ፈላጊዎችን ከታክሲ ሹፌሮች ጋር በቀላሉ የሚያገናኝ ሲስተም ነው።</string>
     <string name="action_settings">ማስተካከያ</string>
     <string name="app_name">ወያላ ሹፌር</string>
     <string name="btn_login">ግባ</string>
@@ -33,7 +33,6 @@
     <string name="nav_rate">ነጥብ ስጥ</string>
     <string name="nav_share">አጋራ</string>
     <string name="nav_sub_title">ደንበኞችን በቀላሉ ያግኙ</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="new_client">አዲስ ደንበኛ አሎት</string>
     <string name="no">አይ</string>
     <string name="notification_bundle_key">newDriver</string>
@@ -54,8 +53,6 @@
     <string name="response_data">data</string>
     <string name="response_error">error</string>
     <string name="response_ok">ok</string>
-    <string name="google_maps_key" translatable="false">AIzaSyDaPXcWKfViH71hLmPyutQUft3wHKJnHXw</string>
-    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="register_notification">እባኮትን መረጃውን በጥንቃቄ ያስገቡ</string>
     <string name="availability">መገኛ</string>
     <string name="no_client">አዲስ ደንበኛ የሎትም እካሁን</string>
@@ -63,10 +60,20 @@
     <string name="ok">እሺ</string>
     <string name="no_connection_found">ኢንተርኔት የለም። ወያላ በትክክል እንዲሰራ እባኮዎን የስልኮትን ኢንተርኔት ይክፈቱ ወይም ዋይፋይ ጋር ይገናኙ።</string>
     <string name="no_gps_found">GPS ዝግ ነው። ወያላ በትክክል እንዲሰራ እባኮዎን GPS ይክፈቱ። ለመክፈት Setting ሚለውን ይምረጡ።</string>
-    <string name="dialog_select_language"></string>
+    <string name="dialog_select_language">Select Language / ቋንቋ ምረጥ</string>
     <string name="comment_sending">አስተያየቶ እየተላከ ነው</string>
     <string name="logout_title">እርግጠኛ ኖት ሙሉ በሙሉ መውጣት ይፈልጋሉ?</string>
     <string name="nav_communicate">ተገናኝ</string>
     <string name="toast_permission_denied">ፈቃድ ከልክለዋል። እባኮትን ፈቃድ ይስጡ።</string>
     <string name="toast_permission_granted">ፈቃድ ስለሰጡ እናመሰግናለን</string>
+    <string name="fb_link">https://facebook.com/HelloWeyala/</string>
+    <string name="title_activity_maps">Weyala Driver</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+	
+	<string-array name="service_type">
+        <item name="taxi">የታክሲ አገልግሎት</item>
+        <item name="contact">የቀን ኮንትራት</item>
+        <item name="rental">ኪራይ</item>
+    </string-array>
 </resources>

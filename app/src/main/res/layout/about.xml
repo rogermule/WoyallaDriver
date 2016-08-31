@@ -76,7 +76,7 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:textColor="#ffffff"
-                    android:text="https://www.facebook.com/woyalla"/>
+                    android:text="@string/fb_link"/>
             </LinearLayout>
         </LinearLayout>
 

@@ -3,7 +3,7 @@
     <string name="title_activity_maps">Weyala Driver</string>
 
 
-    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="register_notification">Please fill out the form correctly</string>
@@ -27,7 +27,7 @@
     <string name="comment_sending">Sending the comment ...</string>
     <string name="register_owner">Are you the car owner?</string>
     <string name="register_roof_rack">Does the car have roof rack?</string>
-    <string name="about">Are you the car owner. asethalksjdg asdkgj;las alsdkgj alskdjg ;alsdkjg al;skdjg ;asdg </string>
+    <string name="about">Weyala is a platform that connects clients (taxi users) with taxi drivers easily.</string>
     <string name="yes">Yes </string>
     <string name="no">No</string>
     <string name="ok">Ok</string>
@@ -61,7 +61,7 @@
     <string name="nav_logout">Logout</string>
     <string name="nav_share">Share App</string>
     <string name="nav_rate">Rate App</string>
-    <string name="nav_comment">Comment App</string>
+    <string name="nav_comment">Comment</string>
     <string name="nav_exit">Exit</string>
     <string name="nav_lang">Change Language</string>
     <string name="nav_communicate">Communicate</string>
@@ -86,6 +86,7 @@
     <string name="no_gps_found">GPS is not enabled. Do you want to go to settings menu?</string>
 
     <string name="logout_title">Are you sure you want to Logout?</string>
+    <string name="fb_link">https://facebook.com/HelloWeyala/</string>
 
 
 </resources>

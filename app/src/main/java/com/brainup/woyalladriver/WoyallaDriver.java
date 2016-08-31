@@ -17,7 +17,6 @@ public class WoyallaDriver extends Application {
 
     public static final String API_URL  = "http://weyala.net/api/";
     public static final String PREFS_NAME = "language";
-//    public static final String API_URL  = "http://192.168.2.100/api.weyala.net/";
 
     private static final int JOB_ID = 10;
     private JobScheduler myJobScheduler;
@@ -36,8 +35,7 @@ public class WoyallaDriver extends Application {
 
     public void JobConstr(){
         JobInfo.Builder builder = new JobInfo.Builder(JOB_ID, new ComponentName(this,GPSTrackerService.class));
-//        builder.setPeriodic(60000);
-        builder.setPeriodic(10000);
+        builder.setPeriodic(60000);
         builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED);
         myJobScheduler.schedule(builder.build());
     }

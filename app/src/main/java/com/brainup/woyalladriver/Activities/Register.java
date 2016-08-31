@@ -118,7 +118,13 @@ public class Register extends AppCompatActivity {
         Main_User = new User();
         spinnerInit();   //populate the service type spinner
         handleChangeLanguage();
+        checkBoxInit();
 	}
+
+    private void checkBoxInit() {
+        rg_owner.check(R.id.register_owner_yes);
+        rg_roofrack.check(R.id.register_roofrack_no);
+    }
 
     private void handleChangeLanguage() {
         bt_change_language.setOnClickListener(new View.OnClickListener() {

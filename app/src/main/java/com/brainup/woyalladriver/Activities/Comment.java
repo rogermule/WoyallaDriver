@@ -99,14 +99,16 @@ public class Comment extends AppCompatActivity {
     }
 
     private void handleSendComment() {
+        Toast.makeText(Comment.this, "Validation error", Toast.LENGTH_SHORT).show();
 
-        if (!validateComment()) {
-            return;
-        }
 
         sendCommentBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (!validateComment()) {
+                    return;
+                }
                 submitComment();
             }
         });
@@ -196,8 +198,10 @@ public class Comment extends AppCompatActivity {
 
             }
         } catch (JSONException e) {
+            myDialog.dismiss();
             e.printStackTrace();
         } catch (IOException e) {
+            myDialog.dismiss();
             e.printStackTrace();
         }
 
@@ -247,7 +251,7 @@ public class Comment extends AppCompatActivity {
 
     private boolean validateComment() {
         if (et_comment.getText().toString().trim().isEmpty()) {
-            inputLayoutComment.setError(getString(R.string.err_msg_comment));
+            et_comment.setError(getString(R.string.err_msg_comment));
             requestFocus(et_comment);
             return false;
         } else {

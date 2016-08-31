@@ -28,7 +28,7 @@ public class About extends AppCompatActivity {
         FaceBook_Link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/woyalla"));
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(About.this.getString(R.string.fb_link)));
                 startActivity(browserIntent);
             }
         });
