@@ -107,11 +107,10 @@ public class GPSTrackerService extends JobService {
             @Override
             public void run() {
                 try {
-
                     //initialize the body object for the http post request
                     body = RequestBody.create(mediaType,
                             "phoneNumber=" + phone +
-                                    "&status=" + status +
+//                                    "&status=" + status +
                                     "&gpsLatitude=" + gps.getLatitude() +
                                     "&gpsLongitude=" + gps.getLongitude());
 
@@ -155,6 +154,7 @@ public class GPSTrackerService extends JobService {
                                 JSONObject json_response = myObject.getJSONObject("data");
                                 Log.i("dataResponse", json_response.toString());
 
+                                int clientCount =  WoyallaDriver.myDatabase.count(Database.Table_CLIENT);
                                 ContentValues cv = new ContentValues();
                                 cv.put(Database.CLIENT_FIELDS[0], json_response.getString("clientName"));
                                 cv.put(Database.CLIENT_FIELDS[1], json_response.getString("clientPhoneNumber"));
@@ -169,9 +169,11 @@ public class GPSTrackerService extends JobService {
                                     userStatus.put(Database.USER_FIELDS[8], "2");
                                     WoyallaDriver.myDatabase.update(Database.Table_USER, userStatus, user_id);
 
-                                    //Send notification to the user that a client exists
-                                    Notifications notifications = new Notifications(getApplicationContext(), 1);
-                                    notifications.buildNotification();
+                                    if(clientCount<1) {
+                                        //Send notification to the user that a client exists
+                                        Notifications notifications = new Notifications(getApplicationContext(), 1);
+                                        notifications.buildNotification();
+                                    }
                                     Log.i("client", "Client Successfully added");
                                 } else {
                                     Log.i("client", "Error adding client info");

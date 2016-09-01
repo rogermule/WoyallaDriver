@@ -260,6 +260,7 @@ public class Register extends AppCompatActivity {
                         "&carModelDescription="+Main_User.getCarModelDescription() +
                         "&driverLicenceIdNo="+Main_User.getDriverLicenceIdNo()+
                         "&station="+Main_User.getStation()+
+                        "&serviceModel="+Main_User.getServiceModel()+
                         "&roofRack="+Main_User.getRoofRack()+
                         "&owner="+Main_User.getOwner());
 

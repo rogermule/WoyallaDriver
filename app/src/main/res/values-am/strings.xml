@@ -7,7 +7,7 @@
     <string name="call">ታክሲ ለማግኘት ደውል</string>
     <string name="change_map_type">የካርታ አይነት ቀይር</string>
     <string name="comment">አስተያየት ላክ</string>
-    <string name="comment_write">አስተያየቶን እዚህ ፃፍ</string>
+    <string name="comment_write">አስተያየቶን እዚህ ይፃፍ</string>
     <string name="comment_your">አስተያየት</string>
     <string name="dialog_creating_account">አካውንት እየተፈጠረ ነው</string>
     <string name="err_msg_car_model">የመኪያ አይነት በትክክል ያስገቡ</string>
@@ -76,4 +76,5 @@
         <item name="contact">የቀን ኮንትራት</item>
         <item name="rental">ኪራይ</item>
     </string-array>
+    <string name="about_developer">በብሬን አፕ ሶፍትዌር ቴክኖሎጂ</string>
 </resources>

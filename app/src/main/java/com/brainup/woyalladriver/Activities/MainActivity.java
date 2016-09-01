@@ -43,11 +43,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 
-import java.io.IOException;
 import java.util.Locale;
 
 import okhttp3.MediaType;
@@ -69,6 +67,10 @@ public class MainActivity extends AppCompatActivity
     private GPSTracker gps;
 
     private TextView client_available;
+
+    int user_id;
+    String user_phone;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -100,10 +102,12 @@ public class MainActivity extends AppCompatActivity
         client_available = (TextView) findViewById(R.id.tv_notification);
 
 
+        user_id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
+        user_phone = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[1]);
+
         //initialize the gps tracker object
         gps  = new GPSTracker(this);
 
-        checkIfFromNotification();
         checkGPS();
         initAvailabilitySwitch();
         handleAvailabilitySwitch();
@@ -111,14 +115,6 @@ public class MainActivity extends AppCompatActivity
         handleClientAvailableTextView();
     }
 
-
-    private void checkIfFromNotification() {
-        Bundle bundle = this.getIntent().getExtras();
-        if(bundle!=null) {
-            if (bundle.getString("newDriver")!=null)
-                showClient();
-        }
-    }
 
 
     private void handleClientAvailableTextView() {
@@ -137,7 +133,7 @@ public class MainActivity extends AppCompatActivity
             if(mMap != null) {
                 if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
                     mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-                } else if (mMap.getMapType() == GoogleMap.MAP_TYPE_SATELLITE) {
+                } else if (mMap.getMapType() == GoogleMap.MAP_TYPE_HYBRID) {
                     mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 }
             }
@@ -175,7 +171,9 @@ public class MainActivity extends AppCompatActivity
     private void initAvailabilitySwitch() {
 
         String status = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[8]);
-        if(status.startsWith("1")){
+        Log.i("LocalStatus",status);
+
+        if(status.startsWith("1") && status.startsWith("2")){
                 avaialbilitySwitch.setChecked(true);
         }
         else if (status.startsWith("0")){
@@ -192,116 +190,189 @@ public class MainActivity extends AppCompatActivity
         avaialbilitySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                int id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
 
                 if(isChecked){
                     if(checkGPS()){
-                        ContentValues cv = new ContentValues();
-                        cv.put(Database.USER_FIELDS[8],"1");
-                        long check = WoyallaDriver.myDatabase.update(Database.Table_USER,cv,id);
-                        if(check!=-1){
-                            Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_availability_on),Toast.LENGTH_SHORT).show();
-                            SharedPreferences settings = getSharedPreferences(WoyallaDriver.PREFS_NAME, 0);
-                            SharedPreferences.Editor editor = settings.edit();
-                            editor.putInt("status",1);
-                            editor.commit();
-                        }
+                        sendStatus(1);
                     }
                     else{
                         avaialbilitySwitch.setChecked(false);
                     }
                 }
                 else if(!isChecked){
-                    ContentValues cv = new ContentValues();
-                    cv.put(Database.USER_FIELDS[8],"0");
-                    long check = WoyallaDriver.myDatabase.update(Database.Table_USER,cv,id);
-                    if(check!=-1){
-                        Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_availability_off),Toast.LENGTH_SHORT).show();
+                    if(checkGPS()){
+                        sendStatus(0);
                     }
-                    String userPhone = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[1]);
-                    sendStatusOff(userPhone,0);
+                    else{
+                        avaialbilitySwitch.setChecked(true);
+                    }
                 }
             }
         });
 
     }
 
-    public void sendStatusOff(final String phone, final int status) {
+    public void sendStatus(final int status) {
         final OkHttpClient client = new OkHttpClient();    //this object will handle http requests
         final MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
         final RequestBody body = RequestBody.create(mediaType,
-                "phoneNumber=" + phone +
+                "phoneNumber=" + user_phone +
                         "&status=" + status +
                         "&gpsLatitude=" + gps.getLatitude() +
                         "&gpsLongitude=" + gps.getLongitude());
 
         final Request request  = new Request.Builder()
-                .url(WoyallaDriver.API_URL + "drivers/update/" + phone)
+                .url(WoyallaDriver.API_URL + "drivers/update/" + user_phone)
                 .put(body)
                 .addHeader("authorization", "Basic dGhlVXNlcm5hbWU6dGhlUGFzc3dvcmQ=")
                 .addHeader("cache-control", "no-cache")
                 .addHeader("content-type", "application/x-www-form-urlencoded")
                 .build();
 
-        Thread sendStatusOff = new Thread() {
-            @Override
-            public void run() {
-                    try {
-                        //make the http post request and get the server response
-                        Response response = client.newCall(request).execute();
-                        String responseBody = response.body().string().toString();
-                        Log.i("avaiabliltiyOFF", responseBody);
-                        //get the json response object
-                        JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
+       if(status == 0){
+           Thread sendStatusOff = new Thread() {
+               @Override
+               public void run() {
+                   try {
+                       //make the http post request and get the server response
+                       Response response = client.newCall(request).execute();
+                       String responseBody = response.body().string().toString();
+                       Log.i("avaiabliltiyOFF", responseBody);
+                       //get the json response object
+                       JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
 
-                        /**
-                         * If we get OK response
-                         *
-                         * */
+                       /**
+                        * If we get OK response
+                        *
+                        * */
 
-                        if (myObject.get("status").toString().startsWith("ok")) {
+                       if (myObject.get("status").toString().startsWith("ok")) {
 
-                            MainActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_status_sent_ok), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                            SharedPreferences settings = getSharedPreferences(WoyallaDriver.PREFS_NAME, 0);
-                            SharedPreferences.Editor editor = settings.edit();
-                            editor.putInt("status",0);
-                            editor.commit();
-                        }
+                           ContentValues cv = new ContentValues();
+                           cv.put(Database.USER_FIELDS[8],"0");
+                           long check = WoyallaDriver.myDatabase.update(Database.Table_USER,cv,user_id);
+                           if(check!=-1){
+                               MainActivity.this.runOnUiThread(new Runnable() {
+                                   @Override
+                                   public void run() {
+                                       Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_availability_off),Toast.LENGTH_SHORT).show();
+                                   }
+                               });
+                           }
 
-                        /**
-                         * If we get error response
-                         *
-                         * */
-                        else if (myObject.get("status").toString().startsWith("error")) {
-                            MainActivity.this.runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_status_sent_error), Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
+                           MainActivity.this.runOnUiThread(new Runnable() {
+                               @Override
+                               public void run() {
+                                   Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_status_sent_ok), Toast.LENGTH_SHORT).show();
+                               }
+                           });
+                           SharedPreferences settings = getSharedPreferences(WoyallaDriver.PREFS_NAME, 0);
+                           SharedPreferences.Editor editor = settings.edit();
+                           editor.putInt("status",0);
+                           editor.commit();
+                       }
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    } catch(Exception e){
-                        MainActivity.this.runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.error_connection), Toast.LENGTH_SHORT).show();
-                            }
-                        });
-                        e.printStackTrace();
-                    }
-            }
-        };
-        sendStatusOff.start();
+                       /**
+                        * If we get error response
+                        *
+                        * */
+                       else if (myObject.get("status").toString().startsWith("error")) {
+                           //avaialbilitySwitch.setChecked(true);
+                           MainActivity.this.runOnUiThread(new Runnable() {
+                               @Override
+                               public void run() {
+                                  // avaialbilitySwitch.setChecked(true);
+                                   Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_status_sent_error), Toast.LENGTH_SHORT).show();
+                               }
+                           });
+                       }
+
+                   }  catch(Exception e){
+
+                       MainActivity.this.runOnUiThread(new Runnable() {
+                           @Override
+                           public void run() {
+                               avaialbilitySwitch.setChecked(true);
+                               Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.error_connection), Toast.LENGTH_SHORT).show();
+                           }
+                       });
+                       e.printStackTrace();
+                   }
+               }
+           };
+           sendStatusOff.start();
+       }
+        else if(status==1){
+           Thread sendStatusOff = new Thread() {
+               @Override
+               public void run() {
+                   try {
+                       //make the http post request and get the server response
+                       Response response = client.newCall(request).execute();
+                       String responseBody = response.body().string().toString();
+                       Log.i("avaiabliltiyON", responseBody);
+                       //get the json response object
+                       JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();
+
+                       /**
+                        * If we get OK response
+                        *
+                        * */
+
+                       if (myObject.get("status").toString().startsWith("ok")) {
+                           ContentValues cv = new ContentValues();
+                           cv.put(Database.USER_FIELDS[8],"1");
+                           long check = WoyallaDriver.myDatabase.update(Database.Table_USER,cv,user_id);
+                           if(check!=-1){
+                               SharedPreferences settings = getSharedPreferences(WoyallaDriver.PREFS_NAME, 0);
+                               SharedPreferences.Editor editor = settings.edit();
+                               editor.putInt("status",1);
+                               editor.commit();
+                           }
+
+                           MainActivity.this.runOnUiThread(new Runnable() {
+                               @Override
+                               public void run() {
+                                   Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_availability_on),Toast.LENGTH_SHORT).show();
+                                   Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_status_sent_ok), Toast.LENGTH_SHORT).show();
+                               }
+                           });
+                           SharedPreferences settings = getSharedPreferences(WoyallaDriver.PREFS_NAME, 0);
+                           SharedPreferences.Editor editor = settings.edit();
+                           editor.putInt("status",1);
+                           editor.commit();
+                       }
+
+                       /**
+                        * If we get error response
+                        *
+                        * */
+                       else if (myObject.get("status").toString().startsWith("error")) {
+                           MainActivity.this.runOnUiThread(new Runnable() {
+                               @Override
+                               public void run() {
+                                   //avaialbilitySwitch.setChecked(false);
+                                   Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_status_sent_error), Toast.LENGTH_SHORT).show();
+                               }
+                           });
+                       }
+
+                   }  catch(Exception e){
+
+                       MainActivity.this.runOnUiThread(new Runnable() {
+                           @Override
+                           public void run() {
+                               avaialbilitySwitch.setChecked(false);
+                               Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.error_connection), Toast.LENGTH_SHORT).show();
+                           }
+                       });
+                       e.printStackTrace();
+                   }
+               }
+           };
+           sendStatusOff.start();
+       }
+
     }
 
     /**
@@ -435,32 +506,39 @@ public class MainActivity extends AppCompatActivity
      */
     public void reload() {
         if (mMap != null) {
-            //remove all clients
-            WoyallaDriver.myDatabase.Delete_All(Database.Table_CLIENT);
-            client_available.setVisibility(View.GONE);
-            int user_id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
-            int currentStatus = Integer.parseInt(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER, Database.USER_FIELDS[8]));
-            if (currentStatus > 1) {
-                if (avaialbilitySwitch.isChecked()) {
-                    //Change the client status to active
-                    ContentValues userStatus = new ContentValues();
-                    userStatus.put(Database.USER_FIELDS[8], "1");
-                    WoyallaDriver.myDatabase.update(Database.Table_USER, userStatus, user_id);
-                } else {
-                    //Change the client status to offline
-                    ContentValues userStatus = new ContentValues();
-                    userStatus.put(Database.USER_FIELDS[8], "0");
-                    WoyallaDriver.myDatabase.update(Database.Table_USER, userStatus, user_id);
+            if (checkGPS()) {
+                //remove all clients
+                WoyallaDriver.myDatabase.Delete_All(Database.Table_CLIENT);
+                client_available.setVisibility(View.GONE);
+                int user_id = WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
+                int currentStatus = Integer.parseInt(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER, Database.USER_FIELDS[8]));
+                if (currentStatus > 1) {
+                    if (avaialbilitySwitch.isChecked()) {
+                        //Change the client status to active
+                        ContentValues userStatus = new ContentValues();
+                        userStatus.put(Database.USER_FIELDS[8], "1");
+                        WoyallaDriver.myDatabase.update(Database.Table_USER, userStatus, user_id);
+                        sendStatus(1);
+                    } else {
+                        //Change the client status to offline
+                        ContentValues userStatus = new ContentValues();
+                        userStatus.put(Database.USER_FIELDS[8], "0");
+                        WoyallaDriver.myDatabase.update(Database.Table_USER, userStatus, user_id);
+                        sendStatus(0);
+                    }
                 }
-            }
 
-            mMap.clear();   //clear the client marker from the map
-            /**
-             * First get the location data from the database.
-             * then view it on the map
-             */
-            moveMap(MainActivity.this.getResources().getString(R.string.my_location));
-            Toast.makeText(MainActivity.this, MainActivity.this.getResources().getString(R.string.toast_reload), Toast.LENGTH_LONG).show();
+                mMap.clear();   //clear the client marker from the map
+                /**
+                 * First get the location data from the database.
+                 * then view it on the map
+                 */
+                moveMap(MainActivity.this.getResources().getString(R.string.my_location));
+                Toast.makeText(MainActivity.this, MainActivity.this.getResources().getString(R.string.toast_reload), Toast.LENGTH_LONG).show();
+            }
+            else{
+               ShowDialog(MainActivity.this.getString(R.string.error_general));
+            }
         }
     }
 

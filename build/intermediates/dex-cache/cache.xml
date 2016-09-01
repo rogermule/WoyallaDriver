@@ -1,3 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
 
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-maps\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="a819aae4f0c711e50b4fd633922a3c1a176cb51e">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-maps-9.0.0_e3ed5e523f60fbafe3faddfd5fd41b6eab169ce3.jar" />
+    </item>
+    <item
+        jar="C:\Users\Roger\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.4.1\c7c4f9e35c2fd5900da24f9872e3971801f08ce0\okhttp-3.4.1.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="c7c4f9e35c2fd5900da24f9872e3971801f08ce0">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\okhttp-3.4.1_86cf7b0b948de01c5ff9b4bdc197c28c830e6e55.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-location\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="59cca9b91688dc2467754d36793b3d23bebd21a9">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-location-9.0.0_9a2aa67393c42a81c88c0b1fc6344199cd044afc.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.android.support\animated-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.android.support-animated-vector-drawable-23.4.0_09ea564edee32038bb27a82927f479f32c4ad97b.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.android.support-support-v4-23.4.0_51cca244090632a638785ad3357582e086c347dd.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.4.0\jars\libs\internal_impl-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\internal_impl-23.4.0_9d3cb8a44b3690ba0409406d5c653040fc4cf72d.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.android.support\recyclerview-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.android.support-recyclerview-v7-23.4.0_b7db35d36a7f171a053793d9f5d1f83615d58597.jar" />
+    </item>
+    <item
+        jar="C:\Users\Roger\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.4.0\support-annotations-23.4.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\support-annotations-23.4.0_10906ae5d00070842b211b0f99087183b7648a62.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.android.support\design\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.android.support-design-23.4.0_80f27d930a39613b32b443d2008e80636dde07da.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.android.support\support-vector-drawable\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.android.support-support-vector-drawable-23.4.0_26673ec0ccfb105f0ac8ede2b6198acaa450d58e.jar" />
+    </item>
+    <item
+        jar="C:\Users\Roger\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.9.0\f824591a0016efbaeddb8300bee54832a1398cfa\okio-1.9.0.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="f824591a0016efbaeddb8300bee54832a1398cfa">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\okio-1.9.0_8fe99d3932288cd30547fac5c1ad98e741b8aa5f.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="1941832901fc4e7a93300b53762e9f65d7650b99">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-tasks-9.0.0_729cc3c2b020ee29a15771e1f5a3415ea918ec4c.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="6f65c144283b31b4b9a70e6e7aa4c4a1c897d4b8">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-base-9.0.0_f96b0cb0f2af33d168650ad6097657a9999d9708.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.android.support\cardview-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="d9ecde39b460470e655de6e47c05573d2d5a8bfb">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.android.support-cardview-v7-23.4.0_d95af00dcb41185fbb9be630804f5586513a4c88.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\me.tatarka.support\jobscheduler\0.1.1\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="8d5fa4ca32cbbd491d4e027d16f02e897dfed0f2">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\me.tatarka.support-jobscheduler-0.1.1_73e3cce10974a7d58ecc9f0233af558b1f7e5afe.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.4.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.android.support-appcompat-v7-23.4.0_ae07143395aaeb74d040d3b1ef327403b1f3a6b2.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="42df48c7305b08b14fa0e84561091b0c24d70d26">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.google.firebase-firebase-common-9.0.0_6b2e75a83deaf0aaeb6c5791620c690d47b599ba.jar" />
+    </item>
+    <item
+        jar="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\9.0.0\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.3"
+        sha1="cc178928721f3222b3b06bdfbd9497378ccb9792">
+        <dex dex="E:\Projects\BrainUpTech\App\WoyallaDriver\app\build\intermediates\pre-dexed\release\com.google.android.gms-play-services-basement-9.0.0_cb0e198fbf491cece2f5463101eb87b47b38d9b3.jar" />
+    </item>
+
+</items>

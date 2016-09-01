@@ -19,7 +19,7 @@
     <string name="hint_plate_number">Enter Plate Number</string>
     <string name="hint_station">Enter Default Station</string>
     <string name="call">Call to get Taxi</string>
-    <string name="show_map">Show Client Location</string>
+    <string name="show_map">Show Client</string>
     <string name="change_map_type">Change Map Type</string>
     <string name="comment">Send Comment</string>
     <string name="comment_your">Your Comment</string>
@@ -27,7 +27,10 @@
     <string name="comment_sending">Sending the comment ...</string>
     <string name="register_owner">Are you the car owner?</string>
     <string name="register_roof_rack">Does the car have roof rack?</string>
+
     <string name="about">Weyala is a platform that connects clients (taxi users) with taxi drivers easily.</string>
+    <string name="about_developer">Developed By Brain Up Tech</string>
+
     <string name="yes">Yes </string>
     <string name="no">No</string>
     <string name="ok">Ok</string>

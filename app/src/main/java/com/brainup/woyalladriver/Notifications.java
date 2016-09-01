@@ -30,7 +30,7 @@ public class Notifications {
         notificationIntent.putExtras(b);
 
         PendingIntent pi = PendingIntent.getActivity(context, 0, notificationIntent, PendingIntent.FLAG_ONE_SHOT);
-        Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.ringtone);
+        //Uri uri = Uri.parse("android.resource://" + context.getPackageName() + "/" + R.raw.ringtone);
         Notification.Builder builder = new Notification.Builder(context)
                 .setContentTitle("You have new Client")
                 .setContentIntent(pi)
@@ -38,7 +38,6 @@ public class Notifications {
                 .setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_VIBRATE)
                 .setWhen(System.currentTimeMillis())
-                .setSound(uri)
                 .setSmallIcon(R.drawable.ic_client_map);
 
         Notification notification = builder.build();
