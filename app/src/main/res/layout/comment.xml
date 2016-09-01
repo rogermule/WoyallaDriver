@@ -115,16 +115,19 @@
                             android:id="@+id/comment_txtinput"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
+
                             <EditText
                                 android:id="@+id/et_comment"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="25dp"
+                                android:clickable="true"
                                 android:textSize="16dp"
-                                android:lines="7"
+                                android:lines="3"
                                 android:maxLines="13"
                                 android:hint="@string/comment_write"
                                 android:text=""/>
+
                             </android.support.design.widget.TextInputLayout>
 
                         </LinearLayout>

@@ -90,39 +90,10 @@ public class GPSTrackerService extends JobService {
                 sendCurrentStatus();
             }
 
-            else{
- /*               settings = getSharedPreferences(WoyallaDriver.PREFS_NAME, 0);
-                SharedPreferences.Editor editor = settings.edit();
-                int count = settings.getInt("ConnectionCount", 0);
-
-                if(count>4){
-                    int status = settings.getInt("status",0);
-                    if(status>0){
-                        ContentValues cv = new ContentValues();
-                        cv.put(Database.USER_FIELDS[8],"0");
-                        WoyallaDriver.myDatabase.update(Database.Table_USER,cv,user_id);
-                        sendStatusOff(phone,0);
-                    }
-                }
-                else if (count== 0) {
-                    editor.putInt("ConnectionCount", 1);
-                    editor.commit();
-                    Log.i("Offline","Count is made 1");
-                } else {
-                    editor.putInt("ConnectionCount", count+1);
-                    editor.commit();
-                    Log.i("Offline","Count is " + count);
-                }*/
-
-            }
 
         }
         return false;
     }
-
-
-
-
 
     public void sendCurrentStatus(){
 
@@ -199,7 +170,7 @@ public class GPSTrackerService extends JobService {
                                     WoyallaDriver.myDatabase.update(Database.Table_USER, userStatus, user_id);
 
                                     //Send notification to the user that a client exists
-                                    Notifications notifications = new Notifications(getApplicationContext(), (int) check);
+                                    Notifications notifications = new Notifications(getApplicationContext(), 1);
                                     notifications.buildNotification();
                                     Log.i("client", "Client Successfully added");
                                 } else {
@@ -267,10 +238,6 @@ public class GPSTrackerService extends JobService {
                     response = client.newCall(request).execute();
                     String responseBody = response.body().string().toString();
                     Log.i("avaiabliltiyOFF", responseBody);
-
-                    SharedPreferences.Editor editor2 = settings.edit();
-                    editor2.putInt("status",0);
-                    editor2.commit();
 
                     //get the json response object
                     JSONObject myObject = (JSONObject) new JSONTokener(responseBody).nextValue();

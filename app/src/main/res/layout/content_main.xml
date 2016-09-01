@@ -43,7 +43,7 @@
                     android:layout_gravity="left|center_vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:padding="15dp"
+                    android:padding="10dp"
                     android:background="@color/colorPrimary"
                     android:textColor="@color/white"
                     android:text="@string/show_map"/>
@@ -54,7 +54,6 @@
                 android:layout_gravity="right|center_vertical"
                 android:gravity="right|center_vertical">
                 <Switch
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"

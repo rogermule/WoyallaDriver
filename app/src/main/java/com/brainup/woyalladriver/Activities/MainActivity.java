@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity
 
             if(mMap != null) {
                 if (mMap.getMapType() == GoogleMap.MAP_TYPE_NORMAL) {
-                    mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                    mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
                 } else if (mMap.getMapType() == GoogleMap.MAP_TYPE_SATELLITE) {
                     mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 }
@@ -471,6 +471,11 @@ public class MainActivity extends AppCompatActivity
                 switch (which){
                     case DialogInterface.BUTTON_POSITIVE:
                         //Yes button clicked
+                        SharedPreferences settings = getSharedPreferences(WoyallaDriver.PREFS_NAME, 0);
+                        SharedPreferences.Editor editor = settings.edit();
+                        editor.putInt("status",0);
+                        editor.commit();
+
                         WoyallaDriver.myDatabase.Delete_All(Database.Table_USER);
                         Intent intent = new Intent(MainActivity.this,Register.class);
                         startActivity(intent);
