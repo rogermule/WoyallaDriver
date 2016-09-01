@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
+import com.brainup.woyalladriver.Checkups;
 import com.brainup.woyalladriver.Database.Database;
 import com.brainup.woyalladriver.R;
 import com.brainup.woyalladriver.WoyallaDriver;
@@ -119,6 +120,7 @@ public class Comment extends AppCompatActivity {
         myDialog = new ProgressDialog(this);
         myDialog.setTitle(R.string.app_name);
         myDialog.setMessage("Sending the comment ...");
+        myDialog.setCancelable(false);
         myDialog.show();
 
         //start a thread different from the main thread to handle http requests
@@ -199,9 +201,21 @@ public class Comment extends AppCompatActivity {
             }
         } catch (JSONException e) {
             myDialog.dismiss();
+            Comment.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Checkups.showDialog(Comment.this.getString(R.string.toast_comment_error),Comment.this);
+                }
+            });
             e.printStackTrace();
         } catch (IOException e) {
             myDialog.dismiss();
+            Comment.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Checkups.showDialog(Comment.this.getString(R.string.toast_comment_error),Comment.this);
+                }
+            });
             e.printStackTrace();
         }
 

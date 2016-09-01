@@ -201,6 +201,10 @@ public class MainActivity extends AppCompatActivity
                         long check = WoyallaDriver.myDatabase.update(Database.Table_USER,cv,id);
                         if(check!=-1){
                             Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_availability_on),Toast.LENGTH_SHORT).show();
+                            SharedPreferences settings = getSharedPreferences(WoyallaDriver.PREFS_NAME, 0);
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putInt("status",1);
+                            editor.commit();
                         }
                     }
                     else{
@@ -223,7 +227,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void sendStatusOff(final String phone, final int status) {
-        final OkHttpClient client = new OkHttpClient();;    //this object will handle http requests
+        final OkHttpClient client = new OkHttpClient();    //this object will handle http requests
         final MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
         final RequestBody body = RequestBody.create(mediaType,
                 "phoneNumber=" + phone +
@@ -256,12 +260,17 @@ public class MainActivity extends AppCompatActivity
                          * */
 
                         if (myObject.get("status").toString().startsWith("ok")) {
+
                             MainActivity.this.runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
                                     Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.toast_status_sent_ok), Toast.LENGTH_SHORT).show();
                                 }
                             });
+                            SharedPreferences settings = getSharedPreferences(WoyallaDriver.PREFS_NAME, 0);
+                            SharedPreferences.Editor editor = settings.edit();
+                            editor.putInt("status",0);
+                            editor.commit();
                         }
 
                         /**
@@ -282,6 +291,12 @@ public class MainActivity extends AppCompatActivity
                     } catch (IOException e) {
                         e.printStackTrace();
                     } catch(Exception e){
+                        MainActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(MainActivity.this,MainActivity.this.getResources().getString(R.string.error_connection), Toast.LENGTH_SHORT).show();
+                            }
+                        });
                         e.printStackTrace();
                     }
             }
