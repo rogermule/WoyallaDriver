@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity
         String status = WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER,Database.USER_FIELDS[8]);
         Log.i("LocalStatus",status);
 
-        if(status.startsWith("1") && status.startsWith("2")){
+        if(status.startsWith("1") || status.startsWith("2")){
                 avaialbilitySwitch.setChecked(true);
         }
         else if (status.startsWith("0")){
