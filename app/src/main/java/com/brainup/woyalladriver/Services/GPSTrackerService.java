@@ -67,7 +67,13 @@ public class GPSTrackerService extends JobService {
             status = 0;   //initialize the user to be offline just in case
             hasUser = true;
             user_id =WoyallaDriver.myDatabase.get_Top_ID(Database.Table_USER);
-            status = Integer.parseInt(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER, Database.USER_FIELDS[8]));
+
+            try {
+                status = Integer.parseInt(WoyallaDriver.myDatabase.get_Value_At_Top(Database.Table_USER, Database.USER_FIELDS[8]));
+
+            } catch (Exception e){
+
+            }
             if (status >= 1) {
                 userActive = true;
             }
